@@ -12,7 +12,7 @@
 
 
   {{-- Insert Modal --}}
-  <x-modals.insert size="modal-xl" formId="productForm">
+  <x-admin.insert size="modal-xl" formId="productForm">
     <x-slot name="content">
       <div class="row">
         {{-- Name --}}
@@ -72,10 +72,10 @@
         </div>
       </div>
     </x-slot>
-  </x-modals.insert>
+  </x-admin.insert>
 
   {{-- Delete Modal --}}
-  <x-modals.delete title="آیا مایل هستید محصول خود را حذف کنید؟" />
+  <x-admin.delete title="آیا مایل هستید محصول خود را حذف کنید؟" />
 
   {{-- Images And Videos --}}
   <div class="col-md-12 mt-3">

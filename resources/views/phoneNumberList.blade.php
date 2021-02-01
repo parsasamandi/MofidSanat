@@ -11,7 +11,7 @@
   </x-header>
 
   {{-- Insert Modal --}}
-  <x-modals.insert size="modal-l" formId="phoneForm">
+  <x-admin.insert size="modal-l" formId="phoneForm">
     <x-slot name="content">
       <div class="row">
         <div class="col-md-12 mb-3">
@@ -30,10 +30,10 @@
         </div>
       </div>
     </x-slot>
-  </x-modals.insert>
+  </x-admin.insert>
 
   {{-- Delete Modal --}}
-  <x-modals.delete title="آیا مایل هستید که شماره تلفن خود را حذف کنید؟" />
+  <x-admin.delete title="آیا مایل هستید که شماره تلفن خود را حذف کنید؟" />
   
 @endsection
 

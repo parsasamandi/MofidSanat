@@ -4,19 +4,21 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class insert extends Component
+class urlAddress extends Component
 {
-    public $size;
-    public $formId;
+    public $route;
+    public $fontAwsome;
+    public $text;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($size,$formId)
+    public function __construct($title, $description, $fontAwesome)
     {
-        $this->size = $size;
-        $this->formId = $formId;
+        $this->route = $route;
+        $this->fontAwesome = $fontAwesome;
+        $this->text = $text;
     }
 
     /**
@@ -26,6 +28,6 @@ class insert extends Component
      */
     public function render()
     {
-        return view('components.insert');
+        return view('components.admin.urlAddress');
     }
 }

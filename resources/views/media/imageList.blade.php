@@ -11,7 +11,7 @@
   </x-header>
 
   {{-- Insert Modal --}}
-  <x-modals.insert size="modal-lg" formId="imageForm">
+  <x-admin.insert size="modal-lg" formId="imageForm">
     <x-slot name="content">
       <div class="row rtl">
         {{-- Product --}}
@@ -31,10 +31,10 @@
         </div>
       </div>
     </x-slot>
-  </x-modals.insert>
+  </x-admin.insert>
 
   {{-- Delete Modal --}}
-  <x-modals.delete title="آیا از حذف تصویر یا ویدئو آپارات مطمئن هستید؟"/>
+  <x-admin.delete title="آیا از حذف تصویر یا ویدئو آپارات مطمئن هستید؟"/>
 
 @endsection
 

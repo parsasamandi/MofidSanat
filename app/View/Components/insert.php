@@ -4,17 +4,19 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class delete extends Component
+class insert extends Component
 {
-    public $title;
+    public $size;
+    public $formId;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($title)
+    public function __construct($size,$formId)
     {
-        $this->title = $title;
+        $this->size = $size;
+        $this->formId = $formId;
     }
 
     /**
@@ -24,6 +26,6 @@ class delete extends Component
      */
     public function render()
     {
-        return view('components.modals.delete');
+        return view('components.admin.insert');
     }
 }

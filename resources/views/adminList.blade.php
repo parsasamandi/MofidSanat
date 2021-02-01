@@ -11,7 +11,7 @@
 
 
   {{-- Insert Modal --}}
-  <x-modals.insert size="modal-l" formId="adminForm">
+  <x-admin.insert size="modal-l" formId="adminForm">
     <x-slot name="content">
       {{-- Name --}}
       <div class="row">
@@ -35,10 +35,10 @@
         </div>
       </div>
     </x-slot>
-  </x-modals.insert>
+  </x-admin.insert>
 
   {{-- Delete Modal --}}
-  <x-modals.delete title="آیا از حذف ادمین مطمئن هستید؟"/>
+  <x-admin.delete title="آیا از حذف ادمین مطمئن هستید؟"/>
 
 @endsection
 

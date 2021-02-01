@@ -33,17 +33,6 @@
                     </div>
                 </li>
             </ul>
-            <!---------------------------------- SEARCH FORM ---------------------------------->
-            {{-- <form class="form-inline ml-3">
-                <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="جستجو...." aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar" type="submit">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form> --}}
         </nav>
 
         <!-- Main Sidebar Container -->
@@ -60,41 +49,13 @@
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                             {{-- Products --}}
-                            <li class="nav-item">
-                                <a href="{{ route('product.list') }}" class="nav-link">
-                                    <i class="fa fa-shopping-cart"></i>
-                                    <p class="mr-1">
-                                        محصولات
-                                    </p>
-                                </a>
-                            </li>
+                            <x-admin.urlAddress text="محصولات" fontAwesome="fa fa-shopping-cart" route="{{ route('team.list') }}" />
                             {{-- Team --}}
-                            <li class="nav-item">
-                                <a href="{{ route('team.list') }}" class="nav-link">
-                                    <i class="fas fa-user-friends"></i>
-                                    <p class="mr-1">
-                                        تیم
-                                    </p>
-                                </a>
-                            </li>
-                             {{-- Phone Number --}}
-                             <li class="nav-item">
-                                <a href="{{ route('phoneNumber.list') }}" class="nav-link">
-                                    <i class="fas fa-phone"></i>
-                                    <p class="mr-1">
-                                        شماره همراه
-                                    </p>
-                                </a>
-                            </li>
-                             {{-- Admin --}}
-                            <li class="nav-item">
-                                <a href="{{ route('admin.list') }}" class="nav-link">
-                                    <i class="fa fa-users"></i>
-                                    <p class="mr-1">
-                                        ادمین
-                                    </p>
-                                </a>
-                            </li>
+                            <x-admin.urlAddress text="تیم" fontAwesome="fas fa-user-friends" route="{{ route('team.list') }}" />
+                            {{-- Phone Number --}}
+                            <x-admin.urlAddress text="شماره همراه" fontAwesome="fas fa-phone" route="{{ route('phoneNumber.list') }}" />
+                            {{-- Admin --}}
+                            <x-admin.urlAddress text="ادمین" fontAwesome="fa fa-users" route="{{ route('admin.list') }}" />
                             {{-- Categories --}}
                             <li class="nav-item has-treeview menu-open">
                                 <a class="nav-link">
@@ -106,19 +67,9 @@
                                  </a>
                                  <ul class="nav nav-treeview">
                                      {{-- Categories --}}
-                                     <li class="nav-item">
-                                        <a href="{{ route('category.list') }}" class="nav-link">
-                                            <i class="fa fa-circle-o nav-icon"></i>
-                                            <p>دسته بندی سطح ۱</p>
-                                        </a>
-                                     </li>
+                                    <x-admin.urlAddress text="دسته بندی سطح-۱" fontAwesome="null" route="{{ route('category.list') }}" />
                                      {{-- Sub Categories --}}
-                                     <li class="nav-item">
-                                        <a href="{{ route('subCategory.list') }}" class="nav-link">
-                                            <i class="fa fa-circle-o nav-icon"></i>
-                                            <p>دسته بندی سطح ۲</p>
-                                        </a>
-                                     </li>
+                                    <x-admin.urlAddress text="دسته بندی سطح-۲" fontAwesome="null" route="{{ route('subCategory.list') }}" />
                                 </ul>
                             </li>
                             {{-- Media --}}
@@ -133,15 +84,9 @@
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
                                         {{-- Aparat --}}
-                                        <a href="{{ route('aparat.list') }}" class="nav-link">
-                                            <i class="fa fa-circle-o nav-icon"></i>
-                                            <p>صفحه آپارات</p>
-                                        </a>
+                                        <x-admin.urlAddress text="آپارت" fontAwesome="null" route="{{ route('aparat.list') }}" />
                                         {{-- Images --}}
-                                        <a href="{{ route('image.list') }}" class="nav-link">
-                                            <i class="fa fa-circle-o nav-icon"></i>
-                                            <p>صفحه عکس</p>
-                                        </a>
+                                        <x-admin.urlAddress text="عکس" fontAwesome="null" route="{{ route('image.list') }}" />
                                     </li>
                                 </ul>
                             </li>
@@ -156,19 +101,9 @@
                                  </a>
                                  <ul class="nav nav-treeview">
                                      {{-- Home Setting --}}
-                                     <li class="nav-item">
-                                        <a href="{{ route('setting.homeSetting') }}" class="nav-link">
-                                            <i class="fa fa-circle-o nav-icon"></i>
-                                            <p>تنظیمات صفحه اصلی</p>
-                                        </a>
-                                     </li>
+                                     <x-admin.urlAddress text="تنظیمات صفحه اصلی" fontAwesome="null" route="{{ route('setting.homeSetting') }}" />
                                      {{-- Product Setting --}}
-                                     <li class="nav-item">
-                                        <a href="{{ route('setting.productSetting') }}" class="nav-link">
-                                            <i class="fa fa-circle-o nav-icon"></i>
-                                            <p>تنظیمات صفحه محصولات</p>
-                                        </a>
-                                     </li>
+                                     <x-admin.urlAddress text="تنظیمات صفحه محصولات" fontAwesome="null" route="{{ route('setting.productSetting') }}" />
                                 </ul>
                             </li>
                         </ul>
@@ -184,15 +119,6 @@
                 @yield('content')
             </div>
         </div>
-
-        <!-- Control Sidebar -->
-        <aside class="control-sidebar control-sidebar-dark">
-            <!-- Control sidebar content goes here -->
-            <div class="p-3">
-                <h5>Title</h5>
-                <p>Sidebar content</p>
-            </div>
-        </aside>
 
         <!-- Main Footer -->
         <footer class="main-footer">

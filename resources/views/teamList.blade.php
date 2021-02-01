@@ -10,7 +10,7 @@
   </x-header>
 
   {{-- Insert Modal --}}
-  <x-modals.insert size="modal-l" formId="teamForm">
+  <x-admin.insert size="modal-l" formId="teamForm">
     <x-slot name="content">
       <div class="col-md-12 mb-3">
         <label for="name">نام:</label>
@@ -34,10 +34,10 @@
         <input type="text" class="form-control mt-2" id="size" name="size" placeholder="اندازه"/>
       </div>
     </x-slot>
-  </x-modals.insert>
+  </x-admin.insert>
 
   {{-- Delete Modal --}}
-  <x-modals.delete title="آیا مایل به حذف عضو تیم هستید؟" />
+  <x-admin.delete title="آیا مایل به حذف عضو تیم هستید؟" />
 
 @endsection
 

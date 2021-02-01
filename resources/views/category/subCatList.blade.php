@@ -10,7 +10,7 @@
   </x-header>
 
   {{-- Insert Modal --}}
-  <x-modals.insert size="modal-lg" formId="subCatForm">
+  <x-admin.insert size="modal-lg" formId="subCatForm">
     <x-slot name="content">
       <div class="row rtl">
         {{-- Name --}}
@@ -37,10 +37,10 @@
         </div>
       </div>
     </x-slot>
-  </x-modals.insert>
+  </x-admin.insert>
 
   {{-- Delete Modal --}}
-  <x-modals.delete title="آیا مایل به حذف دسته بندی یک هستید؟" />
+  <x-admin.delete title="آیا مایل به حذف دسته بندی یک هستید؟" />
 
 @endsection
 

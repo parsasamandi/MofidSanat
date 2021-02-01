@@ -6,6 +6,7 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body text-right">
+        {{-- Form --}}
         <form id="{{ $formId }}" class="form-horizontal" enctype="multipart/form-data">
           <span id="form_output"></span>
           {{csrf_field()}}
@@ -13,6 +14,7 @@
             {{ $content }}
           @endif
           <br />
+          {{-- Buttons --}}
           <div class="form-group" align="center">
             <input type="hidden" name="id" id="id" value="" />
             <input type="hidden" name="button_action" id="button_action" value="insert" />
