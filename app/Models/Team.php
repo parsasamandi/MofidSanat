@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Team extends Model
 {
-    public $tmp = false;
+    public $timestamps = false;
     /**
      * The table associated with the model.
      * 

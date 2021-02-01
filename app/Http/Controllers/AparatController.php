@@ -5,12 +5,14 @@ use App\DataTables\AparatDataTable;
 use App\Providers\SuccessMessages;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreAparatRequest;
+use App\Providers\Action;
 use App\Models\Media;
 use Illuminate\Http\Request;
 
 class AparatController extends Controller
 {
-    // List
+    public $media = '\App\Models\Media';
+    // DataTable to blade
     public function list() {
         $dataTable = new AparatDataTable;
 
@@ -59,20 +61,12 @@ class AparatController extends Controller
     }
 
     // Delete
-    public function delete(Request $request, $id) {
-        $media = Media::find($id);
-        if($media) {
-            $media->delete();
-        }
-        else {
-            return response()->json([], 404);
-        }
-        return response()->json([],200);
+    public function delete(Action $action, $id) {
+        return $action->delete($this->media,$id);
     }
 
     // Edit
-    public function edit(Request $request) {
-        $media = Media::find($request->get('id'));
-        return json_encode($media);
+    public function edit(Action $action,Request $request) {
+        return $action->edit($this->media,$request->get('id'));
     }
 }

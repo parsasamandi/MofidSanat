@@ -47,9 +47,7 @@ class ProductSettingController extends Controller
         $success_output = '';
         $success_output = $message->getInsert();
 
-        $output = array(
-            'success' => $success_output
-        );
+        $output = array('success' => $success_output);
 
         return json_encode($output);
     }

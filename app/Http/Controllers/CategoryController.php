@@ -12,10 +12,13 @@ use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Illuminate\Support\Facades\URL;
 use Yajra\DataTables\Services\DataTable;
+use App\Providers\Action;
 use App\Http\Requests\StoreCategoryRequest;
 
 class CategoryController extends Controller
 {
+    public $category = '\App\Models\Cat';
+
     // DataTable to blade
     public function list(Request $request) {
         $dataTable = new CategoryDataTable;
@@ -62,19 +65,12 @@ class CategoryController extends Controller
     }
 
     // Edit
-    public function edit(Request $request) {
-        $category = Cat::find($request->get('id'));
-        return json_encode($category);
+    public function edit(Action $action,Request $request) {
+        return $action->edit($this->category,$request->get('id'));
     }
 
     // Delete
-    public function delete(Request $request, $id) {
-        $category = Cat::find($id);
-        if ($category) {
-            $category->delete();
-        } else {
-            return response()->json([], 404);
-        }
-        return response()->json([], 200);
+    public function delete(Action $action,$id) {
+        return $action->delete($this->category,$id);
     }
 }

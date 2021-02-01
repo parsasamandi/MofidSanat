@@ -10,6 +10,7 @@ use App\Http\Requests\StoreProductRequest;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Providers\Action;
 use App\Models\Product;
 use App\Models\Cat;
 use App\Models\SubCat;
@@ -21,6 +22,7 @@ use Redirect;
 
 class ProductController extends Controller
 {
+    public $product = '\App\Models\Product';
     // List
     public function list(Request $request) {
         // Categories and SubCategories
@@ -120,9 +122,13 @@ class ProductController extends Controller
     }
 
     // Edit Data
-    public function edit(Request $request) {   
-        $product = Product::find($request->get('id'))->first();
-        return json_encode($product);
+    public function edit(Action $action,Request $request) {   
+        return $action->edit($this->product,$request->get('id'));
+    }
+
+    // Delete Each Product
+    public function delete(Action $action, $id) {
+        return $action->delete($this->product,$id);
     }
     
     // Each Data for displaying
@@ -189,17 +195,6 @@ class ProductController extends Controller
         else {
             return Redirect('/product/products')->with('faliure','لطفا نوشته مورد نظر خود را جستجو کنید');
         }
-    }
-
-    // Delete Each Product
-    public function delete(Request $request, $id) {
-        $product = Product::find($id);
-        if($product) {
-            $product->delete();
-        } else {
-            return response()->json([], 404);
-        }
-        return response()->json([], 200);
     }
 }
 

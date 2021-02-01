@@ -128,7 +128,7 @@
             var data = JSON.parse(data.responseText);
             // Error
             error_html = '';
-            for(var all in error_html) {
+            for(var all in data.errors) {
               error_html += '<div class="alert alert-danger">' + data.errors[all] + '</div>';
             }
             $('#form_output').html(error_html);

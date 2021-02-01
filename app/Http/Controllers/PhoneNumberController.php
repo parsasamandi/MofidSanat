@@ -7,10 +7,12 @@ use App\Models\PhoneNumber;
 use App\Models\Product;
 use App\Http\Requests\StorePhoneNumberRequest;
 use Illuminate\Support\Facades\Validator;
+use App\Providers\Action;
 use Illuminate\Http\Request;
 
 class PhoneNumberController extends Controller
 {
+    public $phoneNumber = 'App\Models\PhoneNumber';
     // get Phone Number
     public function list(Request $request) {
         $dataTable = new PhoneNumberDataTable;
@@ -45,7 +47,7 @@ class PhoneNumberController extends Controller
 
     public function addPhoneNumber($request) {
         // Update
-        $phoneNumbr = PhoneNumber::find($request->get('id'));
+        $phoneNumber = PhoneNumber::find($request->get('id'));
         // Insert
         if(!$phoneNumber) {
             $phoneNumber = new PhoneNumber();
@@ -57,7 +59,7 @@ class PhoneNumberController extends Controller
     }
 
     // Convertion
-    function convertToEnglish($number) {
+    function convertToEnglish($string) {
         $newNumbers = range(0,9);
         // 1. Persian HTML Decimal
         $persianDecimal = array('&#1776;', '&#1777;', '&#1778;', '&#1779;', '&#1780;', '&#1781;', '&#1782;', '&#1783;', '&#1784;', '&#1785;');
@@ -76,20 +78,13 @@ class PhoneNumberController extends Controller
     }
 
     // Edit
-    public function edit(Request $request) {
-        $phoneNumber = PhoneNumber::find($request->get('id'));
-        return json_encode($phoneNumber->toArray());
+    public function edit(Action $action,Request $request) {
+        return $action->edit($this->phoneNumber,$request->get('id'));
     }
 
     // Delete
-    public function delete(Request $request, $id) {
-        $phoneNumber = PhoneNumber::find($id);
-        if($phoneNumber) {
-            $phoneNumber->delete();
-        } else {
-            return response()->json([], 400);
-        }
-        return response()->json([], 200);
+    public function delete(Action $action, $id) {
+        return $action->delete($this->phoneNumber,$id);
 
     }
 }

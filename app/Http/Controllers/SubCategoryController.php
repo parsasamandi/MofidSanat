@@ -9,20 +9,20 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Database\Eloquent\Model;
 use App\DataTables\SubCategoryDataTable;
 use App\Http\Requests\StoreSubCategoryRequest;
+use App\Providers\Action;
 use Illuminate\Http\Request;
 use App\Models\Cat;
 use App\Models\SubCat;
 use App\Models\Product;
 use App\Models\home_setting;
 use App\Models\Media;
-use DataTables;
 use Auth;
 use File;
 use Session;
-use DB;
 
 class SubCategoryController extends Controller
 {
+    public $subCategory = '\App\Models\SubCat';
     // get Category Data
     public function list(Request $request) {
         $datatable = new SubCategoryDataTable;
@@ -70,21 +70,14 @@ class SubCategoryController extends Controller
         $subCat->save();
     }
 
-    // Delete Each Category
-    public function delete(Request $request,$id) {
-        $subCat = SubCat::find($id);
-        if($subCat) {
-            $subCat->delete();
-        } else {
-            return response()->json([], 404);
-        }
-        return response()->json([], 200);
+    // Edit Sub Catgory Data
+    public function edit(Action $action,Request $request) {
+        return $action->edit($this->subCategory,$request->get('id'));
     }
 
-    // Edit Sub Catgory Data
-    public function edit(Request $request) {
-        $subCat = SubCat::find($request->get('id'));
-        return json_encode($subCat);
+    // Delete Each Category
+    public function delete(Action $action,$id) {
+        return $action->delete($this->subCategory,$id);
     }
 
 

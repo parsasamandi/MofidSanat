@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class PhoneNumber extends Model
 {
-    public $tmp = false;
+    public $timestamps = false;
     /**
      * The table associated with the model.
      * 

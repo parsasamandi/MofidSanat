@@ -16,8 +16,9 @@ class SubCat extends Model
 {
     const VISIBLE = 0;
     const HIDDEN = 1;
-    
-    public $tmp = false;
+
+    public $timestamps = false;
+
     /**
      * The table associated with the model.
      * 

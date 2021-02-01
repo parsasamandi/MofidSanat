@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use App\Providers\SuccessMessages;
+use App\Providers\Action;
 use App\Http\Requests\StoreTeamRequest;
 
 class TeamController extends Controller
@@ -83,8 +84,7 @@ class TeamController extends Controller
     }
 
     // Edit Team
-    public function edit(Request $request) {
-        $team = Team::find($request->get('id'));
-        return json_encode($team); 
+    public function edit(Action $action,Request $request) {
+        return $action->edit('\App\Modals\Team',$request->get('id')); 
     }
 }

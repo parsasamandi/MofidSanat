@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreAdminRequest;
+use App\Providers\Action;
 use App\Providers\SuccessMessages;
 use App\Models\Cat;
 use App\Models\User;
@@ -19,7 +20,9 @@ use DB;
 
 class AdminController extends Controller
 {
+    public $admin = '\App\Models\User';
 
+    // DataTable to blade
     public function list() {
         // dataTable
         $dataTable = new AdminDataTable();
@@ -38,38 +41,18 @@ class AdminController extends Controller
     // Store Admin
     public function store(StoreAdminRequest $request,SuccessMessages $message) {
 
-        $validation = Validator::make($request->all(), [
-            'name' => 'required',
-            'password' => 'nullable|min:6|',
-            'password2' => 'same:password',
-            'email' => 'email|unique:users,email,' . $request->get('id')
-        ]);
-        
-        $error_array = array();
-        $success_output = '';
-
-        if ($validation->fails()) {
-            foreach($validation->messages()->getMessages() as $field_name => $messages) {
-                $error_array[] = $messages;
-            }
+        // Insert
+        if($request->get('button_action') == "insert") {
+            $this->addAdmin($request);
+            $success_output = $message->getInsert();
         }
-        else {
-             // Insert
-            if($request->get('button_action') == "insert") {
-                $this->addAdmin($request);
-                $success_output = $message->getInsert();
-            }
-            // Update
-            else if($request->get('button_action') == 'update') {
-                $this->addAdmin($request);
-                $success_output = $message->getUpdate();
-            }
+        // Update
+        else if($request->get('button_action') == 'update') {
+            $this->addAdmin($request);
+            $success_output = $message->getUpdate();
         }
 
-        $output = array(
-            'error'     =>  $error_array,
-            'success'   =>  $success_output
-        );
+        $output = array('success' => $success_output);
 
         return json_encode($output);
     }
@@ -90,21 +73,13 @@ class AdminController extends Controller
         $admin->save();
     }
     // Delete Each Admin
-    public function delete(Request $request, $id) {
-        $admin = User::find($id);
-        if($admin) {
-            $admin->delete();
-        }
-        else {
-            return response()->json([], 404);
-        }
-        return response()->json([], 200);
+    public function delete(Action $action, $id) {
+        return $action->delete($this->admin,$id);
     }
 
     // Edit Data
-    public function edit(Request $request) {
-        $admin = User::find($request->get('id'));
-        return json_encode($admin);
+    public function edit(Action $action,Request $request) {
+        return $action->edit($this->admin,$request->get('id'));
     }
 
     // Admin Home

@@ -24,7 +24,10 @@ class Product extends Model
     const VISIBLE = 0;
     const HIDDEN = 1;
 
-    public $tmp = false;
+    const IMAGE = 0;
+    const VIDEO = 1;
+
+    public $timestamps = false;
     /**
      * The table associated with the model.
      * 

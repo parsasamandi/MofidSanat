@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\File;
 use App\Http\Requests\StoreImageRequest;
 use Illuminate\Http\Request;
 use App\DataTables\MediaDataTable;
+use App\Providers\Action;
 use App\Models\Product;
 use Response;
 
@@ -87,9 +88,8 @@ class ImageController extends Controller
         return response()->json([], 200);
     }
 
-    public function edit(Request $request) {
-        $media = Media::find($request->get('id'));
-        return json_encode($media);
+    public function edit(Action $action,Request $request) {
+        return $action->edit('\App\Models\Media',$requst->get('id'));
     }
 
 
