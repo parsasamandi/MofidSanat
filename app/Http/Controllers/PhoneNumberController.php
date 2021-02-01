@@ -5,6 +5,7 @@ use App\DataTables\PhoneNumberDataTable;
 use App\Providers\SuccessMessages;
 use App\Models\PhoneNumber;
 use App\Models\Product;
+use App\Http\Requests\StorePhoneNumberRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
@@ -26,38 +27,19 @@ class PhoneNumberController extends Controller
     }
 
     // Store Phone Number
-    public function store(Request $request,SuccessMessages $message) {
-        $persian = ['۰', '۱', '۲', '۳', '۴', '٤', '۵', '٥', '٦', '۶', '۷', '۸', '۹'];
-        $english = [ 0 ,  1 ,  2 ,  3 ,  4 ,  4 ,  5 ,  5 ,  6 ,  6 ,  7 ,  8 ,  9 ];
-
-        $validation = Validator::make($request->all(), [
-            'number' => 'required|int|digits:11',
-            'productSelect' => 'required'
-        ]);
-
-        $error_array = array();
-        $success_output = '';
-        if ($validation->fails()) {
-            foreach($validation->messages()->getMessages() as $field_name => $messages) {
-                $error_array[] = $messages;
-            }  
+    public function store(StorePhoneNumberRequest $request,SuccessMessages $message) {
+        // Insert
+        if($request->get('button_action') == "insert") {
+            $this->addPhoneNumber($request);
+            $success_output = $message->getInsert();
         }
-        else {
-            // Insert
-            if($request->get('button_action') == "insert") {
-                $this->addPhoneNumber($request);
-                $success_output = $message->getInsert();
-            }
-            // Update
-            else if($request->get('button_action') == "update") {
-                $this->addPhoneNumber($request);
-                $success_output = $message->getUpdate();
-            }
+        // Update
+        else if($request->get('button_action') == "update") {
+            $this->addPhoneNumber($request);
+            $success_output = $message->getUpdate();
         }
-        $output = array(
-            'error'     =>  $error_array,
-            'success'   =>  $success_output
-        );
+
+        $output = array('success' => $success_output);
         return json_encode($output);
     }
 

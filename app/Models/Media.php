@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Media extends Model
 {
+    public $timestamps = false;
     /**
      * The table associated with the model.
      * 

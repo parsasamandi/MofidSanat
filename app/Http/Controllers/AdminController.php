@@ -8,13 +8,10 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreAdminRequest;
+use App\Providers\SuccessMessages;
 use App\Models\Cat;
-use App\Models\subCat;
-use App\Models\Product;
-use App\Models\home_setting;
-use App\Models\Media;
 use App\Models\User;
-use DataTables;
 use File;
 use Session;
 use DB;
@@ -39,7 +36,7 @@ class AdminController extends Controller
     }
 
     // Store Admin
-    public function store(Request $request,SuccessMessages $message) {
+    public function store(StoreAdminRequest $request,SuccessMessages $message) {
 
         $validation = Validator::make($request->all(), [
             'name' => 'required',

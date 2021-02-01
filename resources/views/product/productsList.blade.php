@@ -118,19 +118,20 @@
           processing: true,
           dataType: "json",
           success: function (data) { 
-            if(data.error.length > 0) {
-              var error_html = '';
-              for (var count = 0; count < data.error.length; count++) {
-                error_html += '<div class="alert alert-danger">' + data.error[count] + '</div>';
-              }
-              $('#form_output').html(error_html);
+            $('#form_output').html(data.success);
+            $('#productForm')[0].reset();
+            $('#button_action').val('insert');
+            dt.draw(false);
+          },
+          error: function(data) {
+            // Parse To Json
+            var data = JSON.parse(data.responseText);
+            // Error
+            error_html = '';
+            for(var all in error_html) {
+              error_html += '<div class="alert alert-danger">' + data.errors[all] + '</div>';
             }
-            else {
-              $('#form_output').html(data.success);
-              $('#productForm')[0].reset();
-              $('#button_action').val('insert');
-              dt.draw(false);
-            }
+            $('#form_output').html(error_html);
           }
         })
       });
@@ -174,7 +175,7 @@
             $('#size').val(data.size);
             if(data.status == 0) 
               $('#status').val(0).trigger('change');
-            if(data.status == 1) 
+            else if(data.status == 1) 
               $('#status').val(1).trigger('change');
             $('#category_select').val(data.c_id).trigger('change');
             $('#subCategory').val(data.sc_id).trigger('change');

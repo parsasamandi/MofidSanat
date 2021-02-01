@@ -6,6 +6,7 @@ use App\Models\Media;
 use Illuminate\Support\Facades\Validator;
 use App\Providers\SuccessMessages;
 use Illuminate\Support\Facades\File;
+use App\Http\Requests\StoreImageRequest;
 use Illuminate\Http\Request;
 use App\DataTables\MediaDataTable;
 use App\Models\Product;
@@ -29,7 +30,7 @@ class ImageController extends Controller
     }
 
     // Store
-    public function store(Request $request,SuccessMessage $message) {
+    public function store(StoreImageRequest $request,SuccessMessages $message) {
 
         // Insert
         if($request->get('button_action') == 'insert') {

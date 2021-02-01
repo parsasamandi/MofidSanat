@@ -12,6 +12,7 @@ use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Illuminate\Support\Facades\URL;
 use Yajra\DataTables\Services\DataTable;
+use App\Http\Requests\StoreCategoryRequest;
 
 class CategoryController extends Controller
 {
@@ -30,36 +31,19 @@ class CategoryController extends Controller
     }
 
     // Store
-    public function store(Request $request,SuccessMessages $message) {
-        // Validation
-        $validation = Validator::make($request->all(), [
-            'name' => 'required|max:40',
-            'status' => 'int:0,1'
-        ]);
+    public function store(StoreCategoryRequest $request,SuccessMessages $message) {
+        // Insert
+        if($request->get('button_action') == "insert") {
+            $this->addCat($request);
+            $success_output = $message->getInsert();
+        }
+        // Update
+        else if($request->get('button_action') == "update") {
+            $this->addCat($request);
+            $success_output = $message->getUpdate();
+        }
 
-        $error_array = array();
-        $success_output = '';
-        if ($validation->fails()) {
-            foreach($validation->messages()->getMessages() as $field_name => $messages) {
-                $error_array[] = $messages;
-            }
-        }
-        else {
-            // Insert
-            if($request->get('button_action') == "insert") {
-                $this->addCat($request);
-                $success_output = $message->getInsert();
-            }
-            // Update
-            else if($request->get('button_action') == "update") {
-                $this->addCat($request);
-                $success_output = $message->getUpdate();
-            }
-        }
-        $output = array(
-            'error'     =>  $error_array,
-            'success'   =>  $success_output
-        );
+        $output = array('success'   =>  $success_output);
         return json_encode($output);
     }
 

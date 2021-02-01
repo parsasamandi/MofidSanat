@@ -8,6 +8,7 @@ use App\Providers\SuccessMessages;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Database\Eloquent\Model;
 use App\DataTables\SubCategoryDataTable;
+use App\Http\Requests\StoreSubCategoryRequest;
 use Illuminate\Http\Request;
 use App\Models\Cat;
 use App\Models\SubCat;
@@ -38,34 +39,19 @@ class SubCategoryController extends Controller
     }
 
     // Storing And Updating Category
-    public function store(Request $request,SuccessMessages $message) {
-        $validation = Validator::make($request->all(), [
-            'name' => 'required|max:40'
-        ]);
+    public function store(StoreSubCategoryRequest $request,SuccessMessages $message) {
+        // Insert
+        if($request->get('button_action') == "insert") {
+            $this->addSubCategory($request);
+            $success_output = $message->getInsert();
+        }
+        // Update
+        else if($request->get('button_action') == 'update') {
+            $this->addSubCategory($request);
+            $success_output = $message->getUpdate();
+        }
 
-        $error_array = array();
-        $success_output = '';
-        if ($validation->fails()) {
-            foreach($validation->messages()->getMessages() as $field_name => $messages) {
-                $error_array[] = $messages;
-            }
-        }
-        else {
-            // Insert
-            if($request->get('button_action') == "insert") {
-                $this->addSubCategory($request);
-                $success_output = $message->getInsert();
-            }
-            // Update
-            else if($request->get('button_action') == 'update') {
-                $this->addSubCategory($request);
-                $success_output = $message->getUpdate();
-            }
-        }
-        $output = array(
-            'error'     =>  $error_array,
-            'success'   =>  $success_output
-        );
+        $output = array('success'   =>  $success_output);
         return json_encode($output);
     }
 

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use App\Providers\SuccessMessages;
+use App\Http\Requests\StoreTeamRequest;
 
 class TeamController extends Controller
 {
@@ -26,39 +27,20 @@ class TeamController extends Controller
     }
 
     // Store Team
-    public function store(Request $request,SuccessMessages $message)
+    public function store(StoreTeamRequest $request,SuccessMessages $message)
     {
-        $validation = Validator::make($request->all(), [
-            'name' => 'required',
-            'responsibility' => 'required',
-            'size' => 'required|integer|between:1,12',
-            'image' => 'required'
-        ]);
+        // Insert
+        if($request->get('button_action') == "insert") {
+            $this->addTeam($request);
+            $success_output = $message->getInsert();
+        }
+        // Update
+        else if($request->get('button_action') == 'update') {
+            $this->addTeam($request);
+            $success_output = $message->getUpdate();
+        }
+        $output = array('success' => $success_output);
 
-        $error_array = array();
-        $success_output = '';
-        if($validation->fails()) {
-            foreach($validation->messages()->getMessages() as $field_name => $messages)
-            {
-                $error_array[] = $messages;
-            }
-        }
-        else {
-            // Insert
-            if($request->get('button_action') == "insert") {
-                $this->addTeam($request);
-                $success_output = $message->getInsert();
-            }
-            // Update
-            else if($request->get('button_action') == 'update') {
-                $this->addTeam($request);
-                $success_output = $message->getUpdate();
-            }
-        }
-        $output = array(
-            'error'     =>  $error_array,
-            'success'   =>  $success_output
-        );
         return json_encode($output);
     }
 

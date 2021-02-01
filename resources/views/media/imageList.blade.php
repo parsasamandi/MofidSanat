@@ -13,13 +13,13 @@
   {{-- Insert Modal --}}
   <x-modals.insert size="modal-lg" formId="imageForm">
     <x-slot name="content">
-      <div class="row rtl text-right">
+      <div class="row rtl">
         {{-- Product --}}
         <div class="col-md-6">
           <label for="productSelect">انتخاب محصول مرتبط:</label>
           <select name="productSelect" id="productSelect" class="browser-default custom-select">
             @foreach($products as $product)
-              <option name="product" value="{{ $product->id }}" required>{{ $product->name }}</option>
+              <option name="product" value="{{ $product->id }}">{{ $product->name }}</option>
             @endforeach
           </select>
         </div>
@@ -103,6 +103,16 @@
             $('#id').val(id);
             $('#button_action').val('update');
             $('#productSelect').val(data.product_id).trigger('change');
+          },
+          error: function(data) {
+            // Parse To Json
+            var data = JSON.parse(data.responseText);
+            // Error
+            error_html = '';
+            for(var all in data.errors) {
+              error_html += '<div class="alert alert-danger">' + data.errors[all] + '</div>';
+            }
+            $('#form_output').html(error_html);
           }
         })
       }

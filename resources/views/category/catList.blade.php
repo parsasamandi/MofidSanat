@@ -60,19 +60,20 @@
                     data: form_data,
                     dataType: "json",
                     success: function(data) {
-                        if(data.error.length > 0) {
-                            var error_html = '';
-                            for(var count = 0;count < data.error.length; count++) {
-                                error_html += '<div class="alert alert-danger">' + data.error[count] + '</div>';
-                            }
-                            $('#form_output').html(error_html);
+                        $('#form_output').html(data.success);
+                        $('#catForm')[0].reset();
+                        $('#button_action').val('insert');
+                        dt.draw(false);
+                    },
+                    error: function(data) {
+                        // Parse To Json
+                        var data = JSON.parse(data.responseText);
+                        // Error
+                        error_html = '';
+                        for(var all in data.errors) {
+                            error_html += '<div class="alert alert-danger">' + data.errors[all] + '</div>';
                         }
-                        else {
-                            $('#form_output').html(data.success);
-                            $('#catForm')[0].reset();
-                            $('#button_action').val('insert');
-                            dt.draw(false);
-                        }
+                        $('#form_output').html(error_html);
                     }
                 })
             });

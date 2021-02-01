@@ -6,7 +6,7 @@ use App\DataTables\ProductDataTable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use App\Providers\SuccessMessages;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use App\Http\Requests\StoreProductRequest;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -14,11 +14,9 @@ use App\Models\Product;
 use App\Models\Cat;
 use App\Models\SubCat;
 use App\Models\ProductSetting;
-use App\Models\Media;
 use Response;
 use File;
 use Redirect;
-use Session;
 
 
 class ProductController extends Controller
@@ -49,38 +47,20 @@ class ProductController extends Controller
     }
 
     // Store Admin
-    public function store(Request $request,SuccessMessages $message) {
+    public function store(StoreProductRequest $request,SuccessMessages $message) {
 
-        $validation = Validator::make($request->all(), [
-            'name' => 'required',
-            'description' => 'required',
-            'price' => 'required',
-            'size' => 'required|between:1,12'
-        ]);
+        if($request->get('button_action') == "insert") {
+            // Insert
+            $this->addProduct($request);
+            $success_output = $message->getInsert();
+        }
+        else if($request->get('button_action') == "update") {
+            // Update
+            $this->addProduct($request);
+            $success_output = $message->getUpdate();
+        }
 
-        $error_array = array();
-        $success_output = '';
-        if ($validation->fails()) {
-            foreach($validation->messages()->getMessages() as $field_name => $messages) {
-                $error_array[] = $messages;
-            }
-        }
-        else {
-            if($request->get('button_action') == "insert") {
-                // Insert
-                $this->addProduct($request);
-                $success_output = $message->getInsert();
-            }
-            else if($request->get('button_action') == "update") {
-                // Update
-                $this->addProduct($request);
-                $success_output = $message->getUpdate();
-            }
-        }
-        $output = array(
-            'error'     =>  $error_array,
-            'success'   =>  $success_output
-        );
+        $output = array('success'   =>  $success_output );
         return json_encode($output);
     }
 

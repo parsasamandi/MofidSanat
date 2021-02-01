@@ -14,6 +14,9 @@ use Illuminate\Database\Eloquent\Model;
  */
 class SubCat extends Model
 {
+    const VISIBLE = 0;
+    const HIDDEN = 1;
+    
     public $tmp = false;
     /**
      * The table associated with the model.

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\DataTables\AparatDataTable;
 use App\Providers\SuccessMessages;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\StoreAparatRequest;
 use App\Models\Media;
 use Illuminate\Http\Request;
 
@@ -24,38 +25,20 @@ class AparatController extends Controller
     }
 
     // Insert
-    public function store(Request $request,SuccessMessages $message) {
+    public function store(StoreAparatRequest $request,SuccessMessages $message) {
 
-        $validation = Validator::make($request->all(), [
-            'aparat_url' => 'required',
-            'productSelect' => 'required'
-        ]);
-
-        $error_array = array();
-        $success_output = '';
-
-        if($validation->fails()) {
-            foreach($validation->messages()->getMessages() as $field_name => $messages) {
-                $error_array[] = $messages;
-            }
+        // Insert
+        if($request->get('button_action') == 'insert') {
+            $this->addAparat($request);
+            $success_output = $message->getInsert();
         }
-        else {
-            // Insert
-            if($request->get('button_action') == 'insert') {
-                $this->addAparat($request);
-                $success_output = $message->getInsert();
-            }
-            // Update
-            else if($request->get('button_action') == 'update') {
-                $this->addAparat($request);
-                $success_output = $message->getUpdate();
-            }
+        // Update
+        else if($request->get('button_action') == 'update') {
+            $this->addAparat($request);
+            $success_output = $message->getUpdate();
         }
 
-        $output = array(
-            'error' => $error_array,
-            'success' => $success_output
-        );
+        $output = array('success' => $success_output);
 
         return json_encode($output);
 
