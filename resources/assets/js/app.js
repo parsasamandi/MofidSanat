@@ -5,6 +5,7 @@
 */
 // Axios
 // require('./bootstrap');
+
 // Bootstrap
 require('bootstrap/dist/js/bootstrap.bundle');
 require('bootstrap');
@@ -27,3 +28,5 @@ window.dt = require('datatables.net');
 require('datatables.net-responsive');
 // Filepond
 window.FilePond = require('filepond/dist/filepond.min');
+// Admin
+require('./admin');
