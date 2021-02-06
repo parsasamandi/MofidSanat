@@ -11,6 +11,8 @@
 
 body {
     font-family: 'shabnam' !important;
+    text-align: right;
+    direction: rtl;
 }
 
 .ltr {
@@ -260,6 +262,7 @@ select {
     padding: 10px;
     border-radius: 5px;
     font-size: 15px;
+    color: #FFF;
 }
 
 .dt_responsive {

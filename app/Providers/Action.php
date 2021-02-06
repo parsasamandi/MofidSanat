@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Providers;
+use File;
 
 class Action {
     /**
@@ -37,7 +38,27 @@ class Action {
         } catch (Throwable $e) {
             return response()->json($e);
         }
+    }
 
+    /**
+     * Delete With Image
+     * 
+     * @return json_encode
+     */
+    public function deleteWithImage($model,$id,$column) {
+        try {
+            $modelImage = $model::find($id);
+            if($modelImage) {
+                $imageDelete = public_path("images/$modelImage->column");
+                if($imageDelete) {
+                    File::delete($imageDelete); 
+                }
+                $modelImage->delete();
+            }
+        } catch(Throwable $e) {
+            return response()->json($e);
+        }
+        return response()->json([],200);
     }
 
 }

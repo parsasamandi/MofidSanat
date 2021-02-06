@@ -94,6 +94,7 @@
       function editTeam($url) {
         var id = $url;
         $('#formModal').modal('show');
+        $('#form_output').html('');
         $.ajax({
           url: "{{ route('team.edit') }}",
           method: "get",
@@ -105,8 +106,8 @@
             $('#linkedin').val(data.linkedin_address);
             $('#size').val(data.size);
             $('#id').val(id);
-            $('#action').val('update');
-            $('#button_action').val('ویرایش');
+            $('#action').val('ویرایش');
+            $('#button_action').val('update');
           }
         })
       }

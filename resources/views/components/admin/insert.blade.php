@@ -5,17 +5,20 @@
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
+
       <div class="modal-body text-right">
         {{-- Form --}}
         <form id="{{ $formId }}" class="form-horizontal" enctype="multipart/form-data">
-          <span id="form_output"></span>
           {{csrf_field()}}
+          <span id="form_output"></span>
+
           @if(isset($content))
             {{ $content }}
           @endif
+
           <br />
           {{-- Buttons --}}
-          <div class="form-group" align="center">
+          <div cl ass="form-group" align="center">
             <input type="hidden" name="id" id="id" value="" />
             <input type="hidden" name="button_action" id="button_action" value="insert" />
             <input type="submit" name="submit" id="action" value="تایید" class="btn btn-primary" />
@@ -26,3 +29,5 @@
     </div>
   </div>
 </div>
+
+

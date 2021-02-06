@@ -12,13 +12,13 @@
     {{-- App --}}
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     {{-- Bootstrap rtl --}}
-    <link href="{{ asset('css/bootstrap-rtl.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('css/bootstrap-rtl.css') }}" rel="stylesheet"> --}}
 @show
 
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+        <nav class="main-header navbar navbar-expand navbar-light border-bottom">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -34,13 +34,12 @@
                 </li>
             </ul>
         </nav>
-
         <!-- Main Sidebar Container -->
-        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <aside class="main-sidebar sidebar-dark-primary">
             <!-- Brand Logo -->
             <a href="/" class="brand-link text-center">
-                <i class="fa fa-users"></i>
-                <span class="brand-text font-weight-light">مفید صنعت</span>
+                <i class="fa fa-user"></i>
+                <span class="brand-text font-weight-light">{{ Auth::user()->name }}</span>
             </a>
             <!-- Sidebar -->
             <div class="sidebar">
@@ -49,7 +48,7 @@
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                             {{-- Products --}}
-                            <x-admin.urlAddress text="محصولات" fontAwesome="fa fa-shopping-cart" route="{{ route('team.list') }}" />
+                            <x-admin.urlAddress text="محصولات" fontAwesome="fa fa-shopping-cart" route="{{ route('product.list') }}" />
                             {{-- Team --}}
                             <x-admin.urlAddress text="تیم" fontAwesome="fas fa-user-friends" route="{{ route('team.list') }}" />
                             {{-- Phone Number --}}

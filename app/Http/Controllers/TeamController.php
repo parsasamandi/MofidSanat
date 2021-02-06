@@ -13,6 +13,7 @@ use App\Http\Requests\StoreTeamRequest;
 
 class TeamController extends Controller
 {
+    public $team = 'App\Models\Team';
     // Get Team
     public function index(Request $request) {
         $dataTable = new TeamDataTable;
@@ -68,23 +69,13 @@ class TeamController extends Controller
     }
 
     // Delete Each Team
-    public function delete(Request $request,$id) {
-        $team = Team::find($request->input('id'));
-        if($team) {
-            $imageDelete = public_path("images/$team->image");
-            if($imageDelete) {
-                File::delete($imageDelete); 
-            }
-            $team->delete(); 
-        }
-        else {
-            return response()->json([], 404);
-        }
-        return response()->json([], 200);
+    public function delete(Action $action,$id) {
+        return $action->deleteWithImage($this->team,$id,'image');
+
     }
 
     // Edit Team
     public function edit(Action $action,Request $request) {
-        return $action->edit('\App\Modals\Team',$request->get('id')); 
+        return $action->edit($this->team,$request->get('id')); 
     }
 }

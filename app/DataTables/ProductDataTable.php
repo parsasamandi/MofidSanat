@@ -38,18 +38,6 @@ class ProductDataTable extends DataTable
                 }
                 
             })
-            ->editColumn('name', function(Product $product) {
-                return $product->name;
-            })
-            ->editColumn('model', function(Product $product) {
-                return $product->model;
-            })
-            ->editColumn('price', function(Product $product) {
-                return $product->price;
-            })
-            ->editColumn('desc', function(Product $product) {
-                return $product->desc;
-            })
             ->editColumn('sc_id', function(Product $product) {
                 return $product->sub_cat->name ?? '-';
             })
@@ -60,9 +48,6 @@ class ProductDataTable extends DataTable
                 if($product->status === Product::VISIBLE) return 'موجود';
                 else if($product->status === Product::HIDDEN) return 'غیر موجود';
                 else return '-';
-            })
-            ->editColumn('size', function(Product $product) {
-                return $product->size;
             })
             ->addColumn('action', function (Product $product) {
                 $deleteAddress = URL::signedRoute('product.delete', ['id' => $product->id]);

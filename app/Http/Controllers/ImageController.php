@@ -16,6 +16,7 @@ use Response;
 
 class ImageController extends Controller
 {
+    public $media = '\App\Models\Media';
     // DataTable To Blade
     public function list(Request $request) {
         $dataTable = new ImageDataTable;
@@ -74,22 +75,11 @@ class ImageController extends Controller
 
     // Edit
     public function delete(Request $request, $id) {
-        $media = Media::find($id);
-        if($media) {
-            $imageLocation = public_path("images/$media->media_url");
-            if($imageLocation) {
-                File::delete($imageLocation); 
-            }
-            $media->delete();
-        }
-        else {
-            return response()->json([], 404);
-        }
-        return response()->json([], 200);
+        return $action->deleteWithImage($this->media,$id,'media_url');
     }
 
     public function edit(Action $action,Request $request) {
-        return $action->edit('\App\Models\Media',$requst->get('id'));
+        return $action->edit($this->media,$requst->get('id'));
     }
 
 

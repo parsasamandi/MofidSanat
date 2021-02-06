@@ -36,12 +36,6 @@ class AdminDataTable extends DataTable
                             </a>
                         ATAG;
             })
-            ->editColumn('name', function (User $user){
-                return $user->name;
-            })
-            ->editColumn('email', function(User $user){
-                return $user->email;
-            })
             ->editColumn('created_at', function(User $user){
                 return $user->created_at;
             })

@@ -25,9 +25,6 @@ class PhoneNumberDataTable extends DataTable
             ->eloquent($query)
             ->addIndexColumn()
             ->rawColumns(['action'])
-            ->editColumn('number', function(PhoneNumber $phoneNumber) {
-                return $phoneNumber->number;
-            })
             ->editColumn('product_id', function (PhoneNumber $phoneNumber) {
                 return $phoneNumber->product->name;
             })

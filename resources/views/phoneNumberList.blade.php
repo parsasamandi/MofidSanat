@@ -119,20 +119,16 @@
         data: { id: id },
         dataType: 'json',
         success: function (data) {  
-          $('#number').val(data.number);
           $('#id').val(id);
-          $('#formModal').modal('show');
+          $('#number').val(data.number);
+          $('#button_action').val('update');
           $('#action').val('ویرایش');
-          $("#action").show();
           if(data.status == 0) 
               $('#status').val(0).trigger('change');
           else if(data.status == 1) 
             $('#status').val(1).trigger('change');
           else if(data.status == 2) 
             $('#status').val(2).trigger('change');
-          $('#button_action').val('update');
-          $('#action').val('ویرایش');
-
         }
       })
     }

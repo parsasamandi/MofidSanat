@@ -23,8 +23,10 @@ class CategoryDataTable extends DataTable
             ->eloquent($query)
             ->addIndexColumn()
             ->rawColumns(['action'])
-            ->editColumn('name', function (Cat $category) {
-                return $category->name;
+            ->editColumn('status', function (Cat $category) {
+                if($category->status === Cat::VISIBLE) return 'فعال';
+                else if($category->status === Cat::HIDDEN) return 'غیر فعال';
+                else return '-';
             })
             ->addColumn('action', function (Cat $category) {
                 return <<<ATAG
@@ -36,11 +38,6 @@ class CategoryDataTable extends DataTable
                                 <i class="fa fa-edit text-danger" aria-hidden="true"></i>
                             </a>
                         ATAG;      
-            })
-            ->editColumn('status', function (Cat $category) {
-                if($category->status === Cat::VISIBLE) return 'فعال';
-                else if($category->status === Cat::HIDDEN) return 'غیر فعال';
-                else return '-';
             });
     }
 

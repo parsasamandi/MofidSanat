@@ -2,7 +2,7 @@
 <html lang="en">    
     {{-- Header --}}
     @section('head')
-        <title>@yield('title')</title>
+        <title>{{ config('app.name', 'MofidSanat') }}</title>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta name="description" content="مفید صنعت، شرکتی پیشرو در زمینه لیبل زدن">
