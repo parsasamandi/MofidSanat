@@ -85,6 +85,5 @@ class PhoneNumberController extends Controller
     // Delete
     public function delete(Action $action, $id) {
         return $action->delete($this->phoneNumber,$id);
-
     }
 }
