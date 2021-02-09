@@ -57,29 +57,21 @@
                             <x-admin.urlAddress text="ادمین" fontAwesome="fa fa-users" route="{{ route('admin.list') }}" />
                             {{-- Categories --}}
                             <li class="nav-item has-treeview menu-open">
-                                <a class="nav-link">
-                                     <i class="fa fa-list"></i>
-                                     <p class="mr-1">
-                                         دسته بندی ها
-                                        <i class="right fa fa-angle-left"></i>
-                                     </p>
-                                 </a>
-                                 <ul class="nav nav-treeview">
-                                     {{-- Categories --}}
+                                {{-- This menu has sub menus --}}
+                                <x-admin.urlAddressParent text="دسته بندی ها" fontAwesome="fa fa-list" />
+
+                                <ul class="nav nav-treeview">
+                                    {{-- Categories --}}
                                     <x-admin.urlAddress text="دسته بندی سطح-۱" fontAwesome="null" route="{{ route('category.list') }}" />
-                                     {{-- Sub Categories --}}
+                                    {{-- Sub Categories --}}
                                     <x-admin.urlAddress text="دسته بندی سطح-۲" fontAwesome="null" route="{{ route('subCategory.list') }}" />
                                 </ul>
                             </li>
                             {{-- Media --}}
                             <li class="nav-item has-treeview menu-open">
-                                <a class="nav-link">
-                                    <i class="fas fa-image"></i>
-                                    <p class="mr-1">
-                                        تصاویر
-                                        <i class="right fa fa-angle-left"></i>
-                                    </p>
-                                </a>
+                                {{-- This menu has sub menus --}}
+                                <x-admin.urlAddressParent text="رسانه" fontAwesome="fas fa-image" />
+
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
                                         {{-- Aparat --}}
@@ -91,18 +83,14 @@
                             </li>
                             {{-- Setting --}}
                             <li class="nav-item has-treeview menu-open">
-                                <a class="nav-link">
-                                    <i class="fa fa-cog"></i>
-                                    <p class="mr-1">
-                                        تنظیمات
-                                        <i class="right fa fa-angle-left"></i>
-                                    </p>
-                                 </a>
+                                {{-- This menu has sub menus --}}
+                                <x-admin.urlAddressParent text="تنظیمات" fontAwesome="fa fa-cog" />
+
                                  <ul class="nav nav-treeview">
-                                     {{-- Home Setting --}}
-                                     <x-admin.urlAddress text="تنظیمات صفحه اصلی" fontAwesome="null" route="{{ route('setting.homeSetting') }}" />
-                                     {{-- Product Setting --}}
-                                     <x-admin.urlAddress text="تنظیمات صفحه محصولات" fontAwesome="null" route="{{ route('setting.productSetting') }}" />
+                                    {{-- Home Setting --}}
+                                    <x-admin.urlAddress text="تنظیمات صفحه اصلی" fontAwesome="null" route="{{ route('setting.homeSetting') }}" />
+                                    {{-- Product Setting --}}
+                                    <x-admin.urlAddress text="تنظیمات صفحه محصولات" fontAwesome="null" route="{{ route('setting.productSetting') }}" />
                                 </ul>
                             </li>
                         </ul>

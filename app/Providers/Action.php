@@ -5,11 +5,7 @@ use File;
 
 class Action {
     /**
-     * All Actions
-     * 
-     * Delete & Edit
-     * 
-     * @return void
+     * All Actions / Delete & Edit
      */
 
     /**
@@ -21,6 +17,7 @@ class Action {
         try {
             $values = $model::find($id);
             return json_encode($values);
+            
         } catch (Throwable $e) {
             return response()->json($e);
         }

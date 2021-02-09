@@ -22,6 +22,11 @@ class AdminController extends Controller
 {
     public $admin = '\App\Models\User';
 
+    // Admin Home
+    public function admin() {
+        return view('adminHome');
+    }
+
     // DataTable to blade
     public function list() {
         // dataTable
@@ -81,11 +86,4 @@ class AdminController extends Controller
     public function edit(Action $action,Request $request) {
         return $action->edit($this->admin,$request->get('id'));
     }
-
-    // Admin Home
-    public function admin() {
-        return view('adminHome');
-    }
-
-
 }
