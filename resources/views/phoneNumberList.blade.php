@@ -16,7 +16,7 @@
       <div class="row">
         <div class="col-md-12 mb-3">
           <label for="number">شماره همراه:</label>
-          <input name="number" id="number" type="text" class="form-control" placeholder="شماره همراه">
+          <input name="number" id="number" type="text" placeholder="شماره همراه">
         </div>
       </div>
       <div class="row">
@@ -113,6 +113,7 @@
       var id = $url;
       $('#form_output').html('');
       $('#formModal').modal('show');
+
       $.ajax({
         url: "{{ route('phoneNumber.edit') }}",
         method: 'get',

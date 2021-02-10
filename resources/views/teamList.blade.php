@@ -14,15 +14,15 @@
     <x-slot name="content">
       <div class="col-md-12 mb-3">
         <label for="name">نام:</label>
-        <input id="name" name="name" type="text" class="form-control" placeholder="نام">
+        <input id="name" name="name" type="text" placeholder="نام">
       </div>
       <div class="col-md-12 mb-3">
         <label for="responsibility">مسئولیت:</label>
-        <input id="responsibility" name="responsibility" type="text" class="form-control" placeholder="مسئولیت">
+        <input id="responsibility" name="responsibility" type="text" placeholder="مسئولیت">
       </div>
       <div class="col-md-12 mb-3">
         <label for="linkedin">آدرس لینکدین:</label>
-        <input id="linkedin" name="linkedin" type="url" class="form-control" placeholder="آدرس لینکدین">
+        <input id="linkedin" name="linkedin" type="url" placeholder="آدرس لینکدین">
       </div>
       <div class="col-md-12 mb-3">
         <label for="image">عکس:</label>
@@ -31,7 +31,7 @@
       </div>
       <div class="col-md-12 mb-3">
         <label for="size">اندازه:</label>
-        <input type="text" class="form-control mt-2" id="size" name="size" placeholder="اندازه"/>
+        <input type="text" id="size" name="size" placeholder="اندازه"/>
       </div>
     </x-slot>
   </x-admin.insert>

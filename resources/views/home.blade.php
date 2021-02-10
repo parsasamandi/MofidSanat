@@ -178,11 +178,6 @@
 			</div>
 			<div class="container mt-5">
 				<div class="row justify-content-center">
-					{{-- Google Map --}}
-					<div class="col-md-7">
-						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.089857237054!2d51.27116491525865!3d35.67478938019573!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDQwJzI5LjIiTiA1McKwMTYnMjQuMSJF!5e0!3m2!1sen!2sae!4v1604570716557!5m2!1sen!2sae"
-							height="380" width="100%" frameborder="0" allowfullscreen="true" aria-hidden="false" tabindex="0"></iframe>
-					</div>
 					{{-- Information --}}
 					<div class="col-md-4">
 						<div class="info">
@@ -204,6 +199,11 @@
 						<div class="social-links text-center">
 							<a href="/instagram.com/mofidsanat" class="instagram"><i class="fab fa-instagram"></i></a>
 						</div>
+					</div>
+					{{-- Google Map --}}
+					<div class="col-md-7">
+						<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3241.089857237054!2d51.27116491525865!3d35.67478938019573!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzXCsDQwJzI5LjIiTiA1McKwMTYnMjQuMSJF!5e0!3m2!1sen!2sae!4v1604570716557!5m2!1sen!2sae"
+							height="380" width="100%" frameborder="0" allowfullscreen="true" aria-hidden="false" tabindex="0"></iframe>
 					</div>
 				</div>
 			</div>

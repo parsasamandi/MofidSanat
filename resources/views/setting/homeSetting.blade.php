@@ -26,16 +26,13 @@
             </div>
             <div class="row">
                 <div class="col-md-4 mb-3">
-                    <input value="{{ $setting_header }}" type="text" class="form-control" name="header"
-                        class="custom-file-input" placeholder="تیتر">
+                    <input value="{{ $setting_header }}" type="text" name="header" placeholder="تیتر">
                 </div>
                 <div class="col-md-4 mb-3">
-                    <input value="{{ $setting_sub_header }}" type="text" class="form-control" name="sub_header"
-                        class="custom-file-input" placeholder="تیتر وسط">
+                    <input value="{{ $setting_sub_header }}" type="text" name="sub_header" placeholder="تیتر وسط">
                 </div>
                 <div class="col-md-4 mb-3">
-                    <input value="{{ $setting_header_button }}" type="text" class="form-control" name="header_button"
-                        class="custom-file-input" placeholder="متن دکمه">
+                    <input value="{{ $setting_header_button }}" type="text" name="header_button" placeholder="متن دکمه">
                 </div>
             </div>
             <!-- About Us -->
@@ -44,7 +41,7 @@
                     <h5>درباره ما</h5>
                     <hr>
                     <label for="about_us_headerText">نوشته اول بخش درباره ما</label>
-                    <textarea rows="2" type="text" class="form-control mb-2" name="about_us_headerText" class="custom-file-input"
+                    <textarea rows="2" type="text" name="about_us_headerText" class="form-control"
                         placeholder="نوشته اول بخش درباره ما">{{ $setting_about_us_headerText }}</textarea>
                 </div>
                 <div class="col-md-6 mb-3">
@@ -54,20 +51,20 @@
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="about_us_imageSize">اندازه عکس بخش درباره ما</label>
-                    <input value="{{ $setting_about_us_imageSize }}" Placeholder="اندازه عکس بخش درباره ما" name="about_us_imageSize" class="form-control"/>
+                    <input name="about_us_imageSize" type="text" value="{{ $setting_about_us_imageSize }}" Placeholder="اندازه عکس بخش درباره ما"/>
                 </div>
                 <div class="col-md-6 mb-2">
                     <label for="about_us_header">تیتر اول بخش درباره ما</label>
-                    <input value="{{ $setting_about_us_header }}" Placeholder="تیتر اول بخش درباره ما" name="about_us_header" class="form-control"/>
+                    <input name="about_us_header" type="text" value="{{ $setting_about_us_header }}" Placeholder="تیتر اول بخش درباره ما"/>
                 </div>
                 <div class="col-md-6 mb-2">
                     <label for="about_us_text">توضیح بخش اول درباره ما</label>
-                    <textarea rows="2" type="text" class="form-control mb-3" name="about_us_text"
+                    <textarea rows="2" type="text"  class="form-control mb-3" name="about_us_text"
                         placeholder="توضیح بخش اول درباره ما">{{ $setting_about_us_text }}</textarea>
                 </div>
                 <div class="col-md-6 mb-2">
                     <label for="about_us_header2">تیتر دوم بخش درباره ما</label>
-                    <input value="{{ $setting_about_us_header2 }}" Placeholder="تیتر دوم بخش درباره ما" name="about_us_header2" class="form-control"/>
+                    <input name="about_us_header2" type="text" value="{{ $setting_about_us_header2 }}" Placeholder="تیتر دوم بخش درباره ما"/>
                 </div>
                 <div class="col-md-6 mb-2">
                     <label for="about_us_text2">توضیح دوم بخش درباره ما</label>
@@ -76,7 +73,7 @@
                 </div>
                 <div class="col-md-6 mb-2">
                     <label for="about_us_header3">تیتر سوم بخش درباره ما</label>
-                    <input value="{{ $setting_about_us_header3 }}" Placeholder="تیتر سوم بخش درباره ما" name="about_us_header3" class="form-control"/>
+                    <input  name="about_us_header3" type="text" value="{{ $setting_about_us_header3 }}" Placeholder="تیتر سوم بخش درباره ما"/>
                 </div>
                 <div class="col-md-6 mb-2">
                     <label for="about_us_text3">توضیح سوم بخش درباره ما</label>
@@ -128,11 +125,11 @@
                 </div>
                 <div class="col-md-6 mb-2">
                     <label for="service_header3">تیتر سوم بخش خدمات</label>
-                    <input value="{{ $setting_service_header3 }}" Placeholder="تیتر سوم بخش خدمات" name="service_header3" class="form-control"/>
+                    <input name="service_header3" type="text" value="{{ $setting_service_header3 }}" Placeholder="تیتر سوم بخش خدمات"/>
                 </div>
                 <div class="col-md-6 mb-2">
                     <label for="service_text3">توضیح سوم بخش خدمات</label>
-                    <textarea rows="2" type="text" class="form-control mb-3" name="service_text3"
+                    <textarea rows="2" type="text" name="service_text3" class="form-control"
                         placeholder="توضیح سوم بخش خدمات">{{ $setting_service_text3 }}</textarea>
                 </div>
                 <div class="col-md-6 mb-2">
@@ -155,11 +152,11 @@
                 </div>
                 <div class="col-md-6 mb-2">
                     <label for="service_header6">تیتر ششم بخش خدمات</label>
-                    <input value="{{ $setting_service_header6 }}" Placeholder="تیتر ششم بخش خدمات" name="service_header6" class="form-control"/>
+                    <input name="service_header6" type="text" value="{{ $setting_service_header6 }}" Placeholder="تیتر ششم بخش خدمات"/>
                 </div>
                 <div class="col-md-6 mb-2">
                     <label for="service_text6">توضیح ششم بخش درباره ما</label>
-                    <textarea rows="2" type="text" class="form-control mb-3" name="service_text6"
+                    <textarea rows="2" type="text" class="form-control" name="service_text6"
                         placeholder="توضیح ششم بخش درباره ما">{{ $setting_service_text6 }}</textarea>
                 </div>
             </div>
@@ -175,11 +172,11 @@
                 </div>
                 <div class="col-md-6 mb-2">
                     <label for="email">ایمیل</label>
-                    <input value="{{ $setting_email_footer }}" Placeholder="ایمیل" name="email" class="form-control"/>
+                    <input name="email" type="email" value="{{ $setting_email_footer }}" Placeholder="ایمیل"/>
                 </div>
                 <div class="col-md-6 mb-2">
                     <label for="phone_number">تلفن همراه</label>
-                    <input value="{{ $setting_phone_number }}" Placeholder="تلفن همراه" name="phone_number" class="form-control"/>
+                    <input name="phone_number" type="text" value="{{ $setting_phone_number }}" Placeholder="تلفن همراه"/>
                 </div>
             </div>
             <div class="col-md-12 text-center">
