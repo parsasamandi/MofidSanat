@@ -17,7 +17,7 @@ class Cat extends Model
     const VISIBLE = 0;
     const HIDDEN = 1;
 
-    public static $tmp = null;
+    public $timestamps = null;
 
     /**
      * The table associated with the model.

@@ -46,16 +46,10 @@ class PhoneNumberController extends Controller
     }
 
     public function addPhoneNumber($request) {
-        // Update
-        $phoneNumber = PhoneNumber::find($request->get('id'));
-        // Insert
-        if(!$phoneNumber) {
-            $phoneNumber = new PhoneNumber();
-        }
-        $phoneNumber->number = $this->convertToEnglish($request->get('number'));
-        $phoneNumber->product_id = $request->get('productSelect');
-
-        $phoneNumber->save();
+        PhoneNumber::updateOrCreate(
+            ['id' => $request->get('id')],
+            ['number' => $request->get('number'), 'product_id' => $request->get('productSelect')]
+        );
     }
 
     // Convertion

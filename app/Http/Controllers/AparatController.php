@@ -48,16 +48,10 @@ class AparatController extends Controller
 
     //  Add Aparat
     public function addAparat(Request $request) {
-        // Update
-        $aparat = Media::find($request->get('id'));
-        if(!$aparat) {
-            $aparat = new Media;
-        }
-        $aparat->media_url = $request->get('aparat_url');
-        $aparat->product_id = $request->get('productSelect');
-        $aparat->type = 1;
-
-        $aparat->save();
+        Media::updateOrCreate(
+            ['id' => $request->get('id')],
+            ['media_url' => $request->get('aparat_url'), 'product_id' => $request->get('productSelect'), 'type' => 1]
+        );
     }
 
     // Delete

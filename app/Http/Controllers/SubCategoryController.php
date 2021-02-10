@@ -57,17 +57,11 @@ class SubCategoryController extends Controller
 
     // Add SUb Category
     public function addSubCategory($request) {
-        // Update
-        $subCat = SubCat::find($request->get('id'));
-        // Insert
-        if(!$subCat) {
-            $subCat = new SubCat();
-        }
-        $subCat->name = $request->get('name');
-        $subCat->status = $request->get('status');
-        $subCat->c_id = $request->get('category');
-
-        $subCat->save();
+        
+        SubCat::updateOrCreate(
+            ['id' => $request->get('id')],
+            ['name' => $request->get('name'), 'status' => $request->get('status'), 'c_id' => $request->get('c_id')]
+        );
     }
 
     // Edit Sub Catgory Data

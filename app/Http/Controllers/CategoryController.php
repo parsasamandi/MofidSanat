@@ -52,16 +52,10 @@ class CategoryController extends Controller
 
     // Store
     public function addCat($request) {
-        // Update
-        $cat = Cat::find($request->get('id'));
-        // Insert
-        if(!$cat) {
-            $cat = new Cat;
-        }
-        $cat->name = $request->get('name');
-        $cat->status = $request->get('status');
-
-        $cat->save();
+        Cat::updateOrCreate(
+            ['id' => $request->get('id')],
+            ['name' => $request->get('name'), 'status' => $request->get('status')]
+        );
     }
 
     // Edit

@@ -47,24 +47,20 @@ class TeamController extends Controller
     }
 
     public function addTeam($request) {
-        // Edit
-        $team = Team::find($request->get('id'));
-        // Insert
-        if(!$team) {
-            $team = new Team();
-        }
-        $team->name = $request->get('name');
-        $team->responsibility = $request->get('responsibility');
-        $team->linkedin_address = $request->get('linkedin');
+
         if($request->hasFile('image')) {
             $image = $request->file('image');
             $file = $image->getClientOriginalName();
             $image->move(public_path('images'), $file);
-            $team->image = $file;
         }
-        $team->size = $request->get('size');
-
-        $team->save();
+        
+        Team::updateOrCreate(
+            ['id' => $request->get('id')],
+            [
+                'name' => $request->get('name'), 'responsibility' => $request->get('responsibility'), 
+                'linkedin' => $request->get('linkedin'), 'image' => $file, 'size' => $request->get('size')
+            ]
+        );
 
     }
 

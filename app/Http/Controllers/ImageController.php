@@ -54,23 +54,16 @@ class ImageController extends Controller
 
     // Add Image
     public function addImage($request) {
-        $media = Media::find($request->get('id'));
-        if(!$media) {
-            $media = new Media;
-        }
-
         // If there were any picture
         if($request->hasFile('image')) {
             $image = $request->file('image');
             $file = $image->getClientOriginalName();
             $image->move(public_path('images'), $file);
-            $media->media_url = $file;
         }
-
-        $media->type = 0;
-        $media->product_id = $request->get('productSelect');
-
-        $media->save();
+        Media::updateOrCreate(
+            ['id' => $request->get('id')],
+            ['media_url' => $file, 'product_id' => $request->get('productSelect'), 'type' => 0]
+        );
     }
 
     // Edit
