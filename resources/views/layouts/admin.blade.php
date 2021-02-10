@@ -49,50 +49,45 @@
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                             {{-- Products --}}
                             <x-admin.urlAddress text="محصولات" fontAwesome="fa fa-shopping-cart" route="{{ route('product.list') }}" />
+
                             {{-- Team --}}
                             <x-admin.urlAddress text="تیم" fontAwesome="fas fa-user-friends" route="{{ route('team.list') }}" />
+
                             {{-- Phone Number --}}
                             <x-admin.urlAddress text="شماره همراه" fontAwesome="fas fa-phone" route="{{ route('phoneNumber.list') }}" />
+
                             {{-- Admin --}}
                             <x-admin.urlAddress text="ادمین" fontAwesome="fa fa-users" route="{{ route('admin.list') }}" />
-                            {{-- Categories --}}
-                            <li class="nav-item has-treeview menu-open">
-                                {{-- This menu has sub menus --}}
-                                <x-admin.urlAddressParent text="دسته بندی ها" fontAwesome="fa fa-list" />
 
-                                <ul class="nav nav-treeview">
+                            {{-- Categories --}}
+                            <x-admin.urlAddressParent text="دسته بندی ها" fontAwesome="fa fa-list">
+                                <x-slot name="content">
                                     {{-- Categories --}}
                                     <x-admin.urlAddress text="دسته بندی سطح-۱" fontAwesome="null" route="{{ route('category.list') }}" />
                                     {{-- Sub Categories --}}
                                     <x-admin.urlAddress text="دسته بندی سطح-۲" fontAwesome="null" route="{{ route('subCategory.list') }}" />
-                                </ul>
-                            </li>
+                                </x-slot>
+                            </x-admin.urlAddressParent>
+
                             {{-- Media --}}
-                            <li class="nav-item has-treeview menu-open">
-                                {{-- This menu has sub menus --}}
-                                <x-admin.urlAddressParent text="رسانه" fontAwesome="fas fa-image" />
+                            <x-admin.urlAddressParent text="رسانه" fontAwesome="fas fa-image">
+                                <x-slot name="content">
+                                    {{-- Aparat --}}
+                                    <x-admin.urlAddress text="آپارت" fontAwesome="null" route="{{ route('aparat.list') }}" />
+                                    {{-- Images --}}
+                                    <x-admin.urlAddress text="عکس" fontAwesome="null" route="{{ route('image.list') }}" />
+                                </x-slot>
+                            </x-admin.urlAddressParent>
 
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        {{-- Aparat --}}
-                                        <x-admin.urlAddress text="آپارت" fontAwesome="null" route="{{ route('aparat.list') }}" />
-                                        {{-- Images --}}
-                                        <x-admin.urlAddress text="عکس" fontAwesome="null" route="{{ route('image.list') }}" />
-                                    </li>
-                                </ul>
-                            </li>
                             {{-- Setting --}}
-                            <li class="nav-item has-treeview menu-open">
-                                {{-- This menu has sub menus --}}
-                                <x-admin.urlAddressParent text="تنظیمات" fontAwesome="fa fa-cog" />
-
-                                 <ul class="nav nav-treeview">
+                            <x-admin.urlAddressParent text="تنظیمات" fontAwesome="fa fa-cog">
+                                <x-slot name="content">
                                     {{-- Home Setting --}}
                                     <x-admin.urlAddress text="تنظیمات صفحه اصلی" fontAwesome="null" route="{{ route('setting.homeSetting') }}" />
                                     {{-- Product Setting --}}
                                     <x-admin.urlAddress text="تنظیمات صفحه محصولات" fontAwesome="null" route="{{ route('setting.productSetting') }}" />
-                                </ul>
-                            </li>
+                                </x-slot>
+                            </x-admin.urlAddressParent>
                         </ul>
                     </nav>
                 </div>
