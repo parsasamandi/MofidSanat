@@ -9,6 +9,8 @@ use Yajra\DataTables\Services\DataTable;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Html\Editor\Editor;
 use Illuminate\Support\Facades\URL;
+use Morilog\Jalali\Jalalian;
+use Carbon\Carbon;
 
 
 class AdminDataTable extends DataTable
@@ -25,6 +27,13 @@ class AdminDataTable extends DataTable
             ->eloquent($query)
             ->addIndexColumn()
             ->rawColumns(['action'])
+            ->editColumn('created_at', function(User $user){
+                date_default_timezone_set('Asia/Tehran');
+                return Jalalian::forge($user->created_at)->format('%A, %d %B %y');
+            })
+            ->editColumn('updated_at', function(User $user){
+                return Jalalian::forge($user->updated_at)->format('%A, %d %B %y');
+            })
             ->addColumn('action', function (User $user){
                 return <<<ATAG
                             <a onclick="showConfirmationModal('{$user->id}')">
@@ -35,14 +44,9 @@ class AdminDataTable extends DataTable
                                 <i class="fa fa-edit text-danger" aria-hidden="true"></i>
                             </a>
                         ATAG;
-            })
-            ->editColumn('created_at', function(User $user){
-                return $user->created_at;
-            })
-            ->editColumn('updated_at', function(User $user){
-                return $user->updated_at;
             });
     }
+    
 
     /**
      * Get query source of dataTable.

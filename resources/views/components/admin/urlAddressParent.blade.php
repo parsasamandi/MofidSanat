@@ -1,6 +1,3 @@
-
-
-
 <li class="nav-item has-treeview menu-open">
     {{-- Has sub menus --}}
     <a class="nav-link">

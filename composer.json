@@ -13,6 +13,7 @@
         "laravel/framework": "^8.12",
         "laravel/telescope": "^4.4",
         "laravel/tinker": "^2.5",
+        "morilog/jalali": "3.*",
         "sopamo/laravel-filepond": "^0.5.0",
         "yajra/laravel-datatables": "^1.5",
         "yajra/laravel-datatables-buttons": "^4.0",
