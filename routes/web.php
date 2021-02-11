@@ -45,7 +45,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('delete/{id}','ProductController@delete')->name('delete');
     });
     // Categorieslss
-    Route::get('/ajax-subcat', 'ProductController@ajax_subcat');
+    Route::get('/subCategory', 'ProductController@ajax_subCategory');
     Route::group(['prefix' => 'category', 'as' => 'category.'], function () {
         Route::get('list','CategoryController@list')->name('list');
         Route::get('table/list','CategoryController@categoryTable')->name('list.table');

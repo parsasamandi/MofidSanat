@@ -26,7 +26,7 @@ class StoreAdminRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'password' => 'nullable|min:6|',
+            'password' => 'nullable|min:6',
             'password2' => 'same:password',
             'email' => 'email|unique:users,email,' . $request->get('id')
         ];

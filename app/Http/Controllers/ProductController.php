@@ -41,13 +41,6 @@ class ProductController extends Controller
         return $datatable->render('product.productsList');
     }
 
-    // Sub Categories to be filled based on Categories(Ajax) Section
-    public function ajax_subcat(Request $request) {
-        $c_id = $request->get('c_id');
-        $subCategories = SubCat::where('c_id',$c_id)->get();
-        return Response::json($subCategories);
-    }
-
     // Store Admin
     public function store(StoreProductRequest $request,SuccessMessages $message) {
 
@@ -81,9 +74,9 @@ class ProductController extends Controller
         $product->desc = $request->get('description');
 
         // Category
-        $product->c_id = $this->subSet($request->get('category_select'));
+        $product->c_id = $this->subSet($request->get('categories'));
         // Sub Category
-        $product->sc_id = $this->subSet($request->get('subCategory'));
+        $product->sc_id = $this->subSet($request->get('subCategories'));
 
         // Status
         $request->get('status') == 1 ? $product->status = 1 : ($request->get('status') == 0 ? $product->status = 0 : ($product->status = null));
@@ -106,18 +99,9 @@ class ProductController extends Controller
     // Convertion
     function convertToEnglish($number) {
         $newNumbers = range(0, 9);
-        // 1. Persian HTML decimal
-        $persianDecimal = array('&#1776;', '&#1777;', '&#1778;', '&#1779;', '&#1780;', '&#1781;', '&#1782;', '&#1783;', '&#1784;', '&#1785;');
-        // 2. Arabic HTML decimal
-        $arabicDecimal = array('&#1632;', '&#1633;', '&#1634;', '&#1635;', '&#1636;', '&#1637;', '&#1638;', '&#1639;', '&#1640;', '&#1641;');
-        // 3. Arabic Numeric
-        $arabic = array('٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩');
-        // 4. Persian Numeric
+        // 1. Persian Numeric
         $persian = array('۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹');
-    
-        $string =  str_replace($persianDecimal, $newNumbers, $number);
-        $string =  str_replace($arabicDecimal, $newNumbers, $number);
-        $string =  str_replace($arabic, $newNumbers, $number);
+
         return str_replace($persian, $newNumbers, $number);
     }
 
@@ -129,6 +113,14 @@ class ProductController extends Controller
     // Delete Each Product
     public function delete(Action $action, $id) {
         return $action->delete($this->product,$id);
+    }
+
+    // Sub Categories to be filled based on Categories(Ajax) Section
+    public function ajax_subCategory(Request $request) {
+        $c_id = $request->get('c_id');
+        $subCategories = SubCat::where('c_id',$c_id)->get();
+        
+        return Response::json($subCategories);
     }
     
     // Each Data for displaying

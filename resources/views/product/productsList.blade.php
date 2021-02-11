@@ -46,7 +46,7 @@
         {{-- Category --}}
         <div class="col-md-6 mb-3">
           <label for="category_select">دسته بندی سطح-۱:</label>
-          <select class="browser-default custom-select" name="category_select" id="category_select">
+          <select class="browser-default custom-select" name="categories" id="categories">
             <option value="">دسته بندی سطح-۱</option>
             @foreach($cats as $cat)
               <option value="{{ $cat->id }}" required> {{ $cat->name }}</option>
@@ -56,7 +56,7 @@
         {{-- Sub Category --}}
         <div class="col-md-6 mb-3 ltr">
           <label for="subCategory">:دسته بندی سطح-۲</label>
-          <select class="browser-default custom-select" name="subCategory" id="subCategory">
+          <select class="browser-default custom-select" name="subCategories" id="subCategories">
             <option value="">دسته بندی سطح-۲</option>
             @foreach($subCats as $subCat)
               <option value="{{ $subCat->id }}"> {{ $subCat->name }}</option>
@@ -185,17 +185,17 @@
         })
       }
       // Ajax/ Category Based on Sub Category
-      $('#category_select').on('change', function (e) {
-        console.log(e.target.value);
+      $('#categories').on('change', function (e) {
         var c_id = e.target.value;
-        $.get('/ajax-subcat?c_id=' + c_id, function (data) {
-          $('#subCategory').empty();
-          $("#subCategory").append('<option value="">دسته بندی سطح-۲</option>');
+        $.get('/subCategory?c_id=' + c_id, function (data) {
+          $('#subCategories').empty();
+          $("#subCategories").append('<option value="">دسته بندی سطح-۲</option>');
           $.each(data, function (index, subCat) {
-            $("#subCategory").append('<option value="' + subCat.id + '">' + subCat.name + '</option>');
+            $("#subCategories").append('<option value="' + subCat.id + '">' + subCat.name + '</option>');
           });
         });
       });
+      
     });
   </script>
 @endsection
