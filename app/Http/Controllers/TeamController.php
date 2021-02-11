@@ -13,7 +13,6 @@ use App\Http\Requests\StoreTeamRequest;
 
 class TeamController extends Controller
 {
-    public $team = 'App\Models\Team';
     // Get Team
     public function index(Request $request) {
         $dataTable = new TeamDataTable;
@@ -66,12 +65,12 @@ class TeamController extends Controller
 
     // Delete Each Team
     public function delete(Action $action,$id) {
-        return $action->deleteWithImage($this->team,$id,'image');
+        return $action->deleteWithImage(Team::class,$id,'image');
 
     }
 
     // Edit Team
     public function edit(Action $action,Request $request) {
-        return $action->edit($this->team,$request->get('id')); 
+        return $action->edit(Team::class,$request->get('id')); 
     }
 }

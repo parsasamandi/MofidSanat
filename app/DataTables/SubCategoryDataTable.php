@@ -31,7 +31,7 @@ class SubCategoryDataTable extends DataTable
                 else if($subCat->status === SubCat::HIDDEN) return 'غیر فعال';
             })
             ->addColumn('c_id', function (SubCat $subCat) {
-                return $subCat->cat->name;
+                return optional($subCat->cat)->name;
             })
             ->addColumn('action', function (SubCat $subCat) {
                 return <<<ATAG
@@ -49,7 +49,7 @@ class SubCategoryDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\SubCategory $model
+     * @param \App\Models\SubCat $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(SubCat $model)

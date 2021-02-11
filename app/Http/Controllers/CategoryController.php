@@ -17,20 +17,18 @@ use App\Http\Requests\StoreCategoryRequest;
 
 class CategoryController extends Controller
 {
-    public $category = '\App\Models\Cat';
-
     // DataTable to blade
     public function list(Request $request) {
         $dataTable = new CategoryDataTable;
 
         $vars['categoryTable'] = $dataTable->html();
 
-        return view('category.catList', $vars);
+        return view('category.categoryList', $vars);
     }
 
     // Rendering DataTable
     public function categoryTable(CategoryDataTable $dataTable) {
-        return $dataTable->render('category.catList');
+        return $dataTable->render('category.categoryList');
     }
 
     // Store
@@ -60,11 +58,11 @@ class CategoryController extends Controller
 
     // Edit
     public function edit(Action $action,Request $request) {
-        return $action->edit($this->category,$request->get('id'));
+        return $action->edit(Category::class,$request->get('id'));
     }
 
     // Delete
     public function delete(Action $action,$id) {
-        return $action->delete($this->category,$id);
+        return $action->delete(Category::class,$id);
     }
 }

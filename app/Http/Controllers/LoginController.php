@@ -39,6 +39,7 @@ class LoginController extends Controller
         }
         return back()->with('faliure', 'رمز عبور یا ایمیل شما نادرست است');
     }
+    
     //logout
     public function logout(Request $request) {
         Auth::logout();

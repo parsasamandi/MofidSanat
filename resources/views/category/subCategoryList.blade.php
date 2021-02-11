@@ -16,7 +16,7 @@
         {{-- Name --}}
         <div class="col-md-6">
           <label for="name">نام:</label>
-          <input name="name" id="name" type="text" class="form-control" placeholder="نام">
+          <input name="name" id="name" type="text" placeholder="نام">
         </div>
         {{-- Category --}}
         <div class="col-md-6 mb-1 lrt">
@@ -102,16 +102,11 @@
           dataType: "json",
           success: function(data) {
             $('#id').val(data.id);
-            $('#name').val(data.name);
-            if(data.status == 0) 
-              $('#status').val(0).trigger('change');
-            if(data.status == 1) 
-              $('#status').val(1).trigger('change');
-            $('#category').val(data.c_id).trigger('change');
-            $('#formModal').modal('show');
-            $('#action').val('ویرایش');
-            $('#action').show();
             $('#button_action').val('update');
+            $('#action').val('ویرایش');
+            $('#name').val(data.name);
+            $('#status').val(data.status).trigger('change');
+            $('#category').val(data.c_id).trigger('change');
           }
         })
       }

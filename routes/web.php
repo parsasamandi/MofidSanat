@@ -44,7 +44,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit', 'ProductController@edit')->name('edit');
         Route::get('delete/{id}','ProductController@delete')->name('delete');
     });
-    // Categorieslss
+    // Categories
     Route::get('/subCategory', 'ProductController@ajax_subCategory');
     Route::group(['prefix' => 'category', 'as' => 'category.'], function () {
         Route::get('list','CategoryController@list')->name('list');

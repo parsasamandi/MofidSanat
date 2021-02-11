@@ -4,9 +4,6 @@ namespace App\Providers;
 use File;
 
 class Action {
-    /**
-     * All Actions / Delete & Edit
-     */
 
     /**
      * Edit

@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class AparatController extends Controller
 {
-    public $media = '\App\Models\Media';
+
     // DataTable to blade
     public function list() {
         $dataTable = new AparatDataTable;
@@ -56,11 +56,11 @@ class AparatController extends Controller
 
     // Delete
     public function delete(Action $action, $id) {
-        return $action->delete($this->media,$id);
+        return $action->delete(Media::class,$id);
     }
 
     // Edit
     public function edit(Action $action,Request $request) {
-        return $action->edit($this->media,$request->get('id'));
+        return $action->edit(Media::class,$request->get('id'));
     }
 }

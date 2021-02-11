@@ -22,18 +22,17 @@ use Redirect;
 
 class ProductController extends Controller
 {
-    public $product = '\App\Models\Product';
     // List
     public function list(Request $request) {
         // Categories and SubCategories
-        $cats = Cat::select('name','id')->get();
-        $subCats = SubCat::select('name','id')->get();
+        $vars['cats'] = Cat::select('name','id')->get();
+        $vars['subCats'] = SubCat::select('name','id')->get();
         
         $dataTable = new ProductDataTable;
 
         $vars['productTable'] = $dataTable->html();
         
-        return view('product.productsList', $vars , compact('cats','subCats'));
+        return view('product.productsList', $vars);
     }
 
     // Rendering DataTable
@@ -107,19 +106,19 @@ class ProductController extends Controller
 
     // Edit Data
     public function edit(Action $action,Request $request) {   
-        return $action->edit($this->product,$request->get('id'));
+        return $action->edit(Product::class,$request->get('id'));
     }
 
     // Delete Each Product
     public function delete(Action $action, $id) {
-        return $action->delete($this->product,$id);
+        return $action->delete(Product::class,$id);
     }
 
     // Sub Categories to be filled based on Categories(Ajax) Section
     public function ajax_subCategory(Request $request) {
         $c_id = $request->get('c_id');
         $subCategories = SubCat::where('c_id',$c_id)->get();
-        
+
         return Response::json($subCategories);
     }
     

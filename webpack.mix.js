@@ -25,6 +25,8 @@ mix.js('resources/assets/js/app.js',  'public/js')
 
 // Images
 mix.copy('resources/assets/images', 'public/images');
+// Ajax Request Handler
+mix.copy('resources/assets/js/requestHandler.js', 'public/js/requestHandler.js');
 // Fonts
 mix.copy('resources/assets/fonts','public/fonts');
 

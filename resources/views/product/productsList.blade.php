@@ -172,10 +172,7 @@
             $('#description').val(data.desc);
             $('#price').val(data.price);
             $('#size').val(data.size);
-            if(data.status == 0) 
-              $('#status').val(0).trigger('change');
-            else if(data.status == 1) 
-              $('#status').val(1).trigger('change');
+            $('#status').val(data.status).trigger('change');
             $('#category_select').val(data.c_id).trigger('change');
             $('#subCategory').val(data.sc_id).trigger('change');
             $('#button_action').val('update');
@@ -184,7 +181,7 @@
           }
         })
       }
-      // Ajax/ Category Based on Sub Category
+      // Ajax Category Based on Sub Category
       $('#categories').on('change', function (e) {
         var c_id = e.target.value;
         $.get('/subCategory?c_id=' + c_id, function (data) {
@@ -195,7 +192,7 @@
           });
         });
       });
-      
+
     });
   </script>
 @endsection

@@ -2,40 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use App\Providers\SuccessMessages;
-use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Database\Eloquent\Model;
+use App\Providers\SuccessMessages;
 use App\DataTables\SubCategoryDataTable;
 use App\Http\Requests\StoreSubCategoryRequest;
 use App\Providers\Action;
 use Illuminate\Http\Request;
 use App\Models\Cat;
 use App\Models\SubCat;
-use App\Models\Product;
-use App\Models\home_setting;
-use App\Models\Media;
 use Auth;
 use File;
-use Session;
+
 
 class SubCategoryController extends Controller
 {
-    public $subCategory = '\App\Models\SubCat';
     // get Category Data
     public function list(Request $request) {
-        $datatable = new SubCategoryDataTable;
 
+        $datatable = new SubCategoryDataTable;
         $vars['subCategoryTable'] = $datatable->html();
 
+        // Categories
         $cats = Cat::select('name','id')->get();
-        return view('category.subCatList', $vars , compact($cats));
+
+        return view('category.subCategoryList', $vars , compact($cats));
     }
 
     // Render Datatable
     public function subCategoryTable(SubCategoryDataTable $datatable) {
-        return $datatable->render('category.subCatList');
+        return $datatable->render('category.subCategoryList');
     }
 
     // Storing And Updating Category
@@ -60,18 +55,18 @@ class SubCategoryController extends Controller
         
         SubCat::updateOrCreate(
             ['id' => $request->get('id')],
-            ['name' => $request->get('name'), 'status' => $request->get('status'), 'c_id' => $request->get('c_id')]
+            ['name' => $request->get('name'), 'status' => $request->get('status'), 'c_id' => $request->get('category')]
         );
     }
 
     // Edit Sub Catgory Data
     public function edit(Action $action,Request $request) {
-        return $action->edit($this->subCategory,$request->get('id'));
+        return $action->edit(SubCat::class,$request->get('id'));
     }
 
     // Delete Each Category
     public function delete(Action $action,$id) {
-        return $action->delete($this->subCategory,$id);
+        return $action->delete(SubCat::class,$id);
     }
 
 

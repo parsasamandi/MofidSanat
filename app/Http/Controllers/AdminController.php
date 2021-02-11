@@ -20,7 +20,6 @@ use DB;
 
 class AdminController extends Controller
 {
-    public $admin = '\App\Models\User';
 
     // Admin Home
     public function admin() {
@@ -64,7 +63,7 @@ class AdminController extends Controller
 
     // Add Or Update Admin
     public function addAdmin($request) {
-        
+
         if($request->get('password') != 'رمز عبور جدید' and $request->get('password') != 'تکرار رمز عبور جدید') {
             $password = Hash::make($request->get('password'));
             User::updateOrCreate(
@@ -75,11 +74,11 @@ class AdminController extends Controller
     }
     // Delete Each Admin
     public function delete(Action $action, $id) {
-        return $action->delete($this->admin,$id);
+        return $action->delete(User::class,$id);
     }
 
     // Edit Data
     public function edit(Action $action,Request $request) {
-        return $action->edit($this->admin,$request->get('id'));
+        return $action->edit(User::class,$request->get('id'));
     }
 }
