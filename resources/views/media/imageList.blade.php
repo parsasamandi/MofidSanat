@@ -16,10 +16,10 @@
       <div class="row rtl">
         {{-- Product --}}
         <div class="col-md-6">
-          <label for="productSelect">انتخاب محصول مرتبط:</label>
-          <select name="products[]" id="productSelect" class="browser-default custom-select">
+          <label for="products">انتخاب محصول مرتبط:</label>
+          <select name="products[]" id="products" class="browser-default custom-select">
             @foreach($products as $product)
-              <option name="product" value="{{ $product->id }}">{{ $product->name }}</option>
+              <option name="product" value="{{ $product->id }}" multiple>{{ $product->name }}</option>
             @endforeach
           </select>
         </div>
@@ -48,7 +48,7 @@
       // Image DataTable
       let dt = window.LaravelDataTables['imageTable'];
       // Product Select2
-      $('#productSelect').select2({tags: true, width: "100%"});
+      $('#products').select2({tags: true, width: "100%"});
 
       // ----------------------- Filepond  -----------------------
       // const inputElement = document.querySelector('input[type="file"]');
@@ -102,7 +102,7 @@
           success: function(data) {
             $('#id').val(id);
             $('#button_action').val('update');
-            $('#productSelect').val(data.product_id).trigger('change');
+            $('#products').val(data.product_id).trigger('change');
           },
           error: function(data) {
             // Parse To Json

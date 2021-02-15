@@ -25,7 +25,7 @@ class StoreAparatRequest extends FormRequest
     {
         return [
             'aparat_url' => 'required',
-            'productSelect' => 'required'
+            'products' => 'required'
         ];
     }
 }
