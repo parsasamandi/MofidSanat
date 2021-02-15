@@ -114,14 +114,6 @@ class ProductController extends Controller
         return $action->delete(Product::class,$id);
     }
 
-    // Sub Categories to be filled based on Categories(Ajax) Section
-    public function ajax_subCategory(Request $request) {
-        $c_id = $request->get('c_id');
-        $subCategories = SubCat::where('c_id',$c_id)->get();
-
-        return Response::json($subCategories);
-    }
-    
     // Each Data for displaying
     public function each($id) {
         $product = Product::find($id);

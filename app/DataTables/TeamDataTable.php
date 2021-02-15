@@ -23,17 +23,6 @@ class TeamDataTable extends DataTable
             ->eloquent($query)
             ->addIndexColumn()
             ->rawColumns(['action','image','linkedin_address'])
-            ->addColumn('action', function (Team $team){
-                return <<<ATAG
-                            <a onclick="showConfirmationModal('{$team->id}')">
-                                <i class="fa fa-trash text-danger" aria-hidden="true"></i>
-                            </a>
-                            &nbsp;
-                            <a onclick="showEditModal('{$team->id}')">
-                                <i class="fa fa-edit text-danger" aria-hidden="true"></i>
-                            </a>
-                        ATAG;
-            })
             ->editColumn('name', function (Team $team){
                 return $team->name;
             })
@@ -50,6 +39,17 @@ class TeamDataTable extends DataTable
             })
             ->editColumn('image', function(Team $team){
                 return "<img src=/images/" . $team->image . " height='auto' width='100px' />";
+            })
+            ->addColumn('action', function (Team $team){
+                return <<<ATAG
+                            <a onclick="showConfirmationModal('{$team->id}')">
+                                <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                            </a>
+                            &nbsp;
+                            <a onclick="showEditModal('{$team->id}')">
+                                <i class="fa fa-edit text-danger" aria-hidden="true"></i>
+                            </a>
+                        ATAG;
             });
     }
 

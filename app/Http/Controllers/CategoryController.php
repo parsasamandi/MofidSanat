@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DataTables\CategoryDataTable;
 use App\Models\Cat;
+use App\Models\SubCat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Providers\SuccessMessages;
@@ -65,4 +66,13 @@ class CategoryController extends Controller
     public function delete(Action $action,$id) {
         return $action->delete(Category::class,$id);
     }
+
+    // Sub Categories to be filled based on Categories(Ajax) Section
+    public function ajax_subCategory(Request $request) {
+        $c_id = $request->get('c_id');
+        $subCategories = SubCat::where('c_id',$c_id)->get();
+
+        return Response::json($subCategories);
+    }
+    
 }

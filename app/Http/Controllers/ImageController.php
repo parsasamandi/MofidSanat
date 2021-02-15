@@ -53,16 +53,19 @@ class ImageController extends Controller
 
     // Add Image
     public function addImage($request) {
-        // If there were any picture
-        if($request->hasFile('image')) {
-            $image = $request->file('image');
-            $file = $image->getClientOriginalName();
-            $image->move(public_path('images'), $file);
+        foreach($request->get('products') as $product) {
+            // If there were any picture
+            if($request->hasFile('image')) {
+                $image = $request->file('image');
+                $file = $image->getClientOriginalName();
+                $image->move(public_path('images'), $file);
+
+                Media::updateOrCreate(
+                    ['id' => $request->get('id')],
+                    ['media_url' => $file, 'product_id' => $product, 'type' => 0]
+                );
+            }
         }
-        Media::updateOrCreate(
-            ['id' => $request->get('id')],
-            ['media_url' => $file, 'product_id' => $request->get('productSelect'), 'type' => 0]
-        );
     }
 
     // Edit

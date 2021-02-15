@@ -28,7 +28,7 @@ class ProductDataTable extends DataTable
             ->eloquent($query)
             ->addIndexColumn()
             ->rawColumns(['action','image'])
-            ->addColumn('image', function (Product $product) {
+            ->addColumn('media', function (Product $product) {
                 foreach($product->media as $media) {
                     if($media->type === MEDIA::IMAGE) 
                         return "<img src=/images/" . $media->media_url . " height='auto' width='50%' />";
@@ -111,7 +111,7 @@ class ProductDataTable extends DataTable
                 ->addClass('column-title')
                 ->searchable(false)
                 ->orderable(false),
-            Column::computed('image') // This column is not in database
+            Column::computed('media') // This column is not in database
             ->title('ویدئو | عکس')
                 ->addClass('column-title')
                 ->searchable(false)

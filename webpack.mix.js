@@ -21,15 +21,15 @@ mix.js('resources/assets/js/app.js',  'public/js')
     // DataTable Persian Language
     .scripts('resources/assets/js/Persian.json','public/js/Persian.json')
     // Isotope
-    .scripts('resources/assets/js/isotope.js','public/js/isotope.json');
+    .scripts('resources/assets/js/isotope.js','public/js/isotope.json')
+    // Images
+    .copy('resources/assets/images', 'public/images')
+    // Ajax Request Handler
+    .copy('resources/assets/js/requestHandler.js', 'public/js/requestHandler.js')
+    // Fonts
+    .copy('resources/assets/fonts','public/fonts');
 
-// Images
-mix.copy('resources/assets/images', 'public/images');
-// Ajax Request Handler
-mix.copy('resources/assets/js/requestHandler.js', 'public/js/requestHandler.js');
-// Fonts
-mix.copy('resources/assets/fonts','public/fonts');
-
+mix.sourceMaps();
 mix.version();
 mix.extract();
 mix.disableNotifications();

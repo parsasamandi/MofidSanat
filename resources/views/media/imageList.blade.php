@@ -17,7 +17,7 @@
         {{-- Product --}}
         <div class="col-md-6">
           <label for="productSelect">انتخاب محصول مرتبط:</label>
-          <select name="productSelect" id="productSelect" class="browser-default custom-select">
+          <select name="products[]" id="productSelect" class="browser-default custom-select">
             @foreach($products as $product)
               <option name="product" value="{{ $product->id }}">{{ $product->name }}</option>
             @endforeach
