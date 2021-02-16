@@ -39,7 +39,9 @@
             <!-- Brand Logo -->
             <a href="/" class="brand-link text-center">
                 <i class="fa fa-user"></i>
-                <span class="brand-text font-weight-light">{{ Auth::user()->name }}</span>
+                @auth
+                    <span class="brand-text font-weight-light">{{ Auth::user()->name }}</span>
+                @endauth
             </a>
             <!-- Sidebar -->
             <div class="sidebar">
