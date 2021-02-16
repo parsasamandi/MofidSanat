@@ -29,14 +29,16 @@ class AparatController extends Controller
     // Insert
     public function store(StoreAparatRequest $request,SuccessMessages $message) {
 
+        // Insert or update
+        $this->addAparat($request);
+
+
         // Insert
         if($request->get('button_action') == 'insert') {
-            $this->addAparat($request);
             $success_output = $message->getInsert();
         }
         // Update
         else if($request->get('button_action') == 'update') {
-            $this->addAparat($request);
             $success_output = $message->getUpdate();
         }
 

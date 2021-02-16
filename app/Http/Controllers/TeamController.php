@@ -28,16 +28,17 @@ class TeamController extends Controller
     }
 
     // Store Team
-    public function store(StoreTeamRequest $request,SuccessMessages $message)
-    {
+    public function store(StoreTeamRequest $request,SuccessMessages $message) {
+
+        // Insert or update
+        $this->addTeam($request);
+
         // Insert
         if($request->get('button_action') == "insert") {
-            $this->addTeam($request);
             $success_output = $message->getInsert();
         }
         // Update
         else if($request->get('button_action') == 'update') {
-            $this->addTeam($request);
             $success_output = $message->getUpdate();
         }
         $output = array('success' => $success_output);
@@ -51,16 +52,22 @@ class TeamController extends Controller
             $image = $request->file('image');
             $file = $image->getClientOriginalName();
             $image->move(public_path('images'), $file);
-        }
         
-        Team::updateOrCreate(
-            ['id' => $request->get('id')],
-            [
-                'name' => $request->get('name'), 'responsibility' => $request->get('responsibility'), 
-                'linkedin' => $request->get('linkedin'), 'image' => $file, 'size' => $request->get('size')
-            ]
-        );
+            Team::updateOrCreate(
+                ['id' => $request->get('id')],
+                ['name' => $request->get('name'), 'responsibility' => $request->get('responsibility'), 
+                'linkedin' => $request->get('linkedin'), 'image' => $file, 'size' => $this->convertToEnglish($request->get('size'))]
+            );
+        }
+    }
 
+    // Convertion
+    function convertToEnglish($number) {
+        $newNumbers = range(0, 9);
+        // 1. Persian Numeric
+        $persian = array('۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹');
+
+        return str_replace($persian, $newNumbers, $number);
     }
 
     // Delete Each Team

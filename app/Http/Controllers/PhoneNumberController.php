@@ -30,14 +30,16 @@ class PhoneNumberController extends Controller
 
     // Store Phone Number
     public function store(StorePhoneNumberRequest $request,SuccessMessages $message) {
+
+        // Insert or update
+        $this->addPhoneNumber($request);
+
         // Insert
         if($request->get('button_action') == "insert") {
-            $this->addPhoneNumber($request);
             $success_output = $message->getInsert();
         }
         // Update
         else if($request->get('button_action') == "update") {
-            $this->addPhoneNumber($request);
             $success_output = $message->getUpdate();
         }
 

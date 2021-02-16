@@ -43,14 +43,15 @@ class ProductController extends Controller
     // Store Admin
     public function store(StoreProductRequest $request,SuccessMessages $message) {
 
+        // Insert or update
+        $this->addProduct($request);
+
         if($request->get('button_action') == "insert") {
             // Insert
-            $this->addProduct($request);
             $success_output = $message->getInsert();
         }
         else if($request->get('button_action') == "update") {
             // Update
-            $this->addProduct($request);
             $success_output = $message->getUpdate();
         }
 

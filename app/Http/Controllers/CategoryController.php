@@ -34,14 +34,16 @@ class CategoryController extends Controller
 
     // Store
     public function store(StoreCategoryRequest $request,SuccessMessages $message) {
+
+        // Insert or update
+        $this->addCat($request);
+
         // Insert
         if($request->get('button_action') == "insert") {
-            $this->addCat($request);
             $success_output = $message->getInsert();
         }
         // Update
         else if($request->get('button_action') == "update") {
-            $this->addCat($request);
             $success_output = $message->getUpdate();
         }
 

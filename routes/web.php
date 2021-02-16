@@ -62,23 +62,22 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit','SubCategoryController@edit')->name('edit');
         Route::get('delete/{id}','SubCategoryController@delete')->name('delete');
     });
-    // Media
-        // Aparat
-        Route::group(['prefix' => 'aparat', 'as' => 'aparat.'], function () {
-            Route::get('list','AparatController@list')->name('list');
-            Route::get('table/list','AparatController@aparatTable')->name('list.table');
-            Route::post('new','AparatController@store')->name('store');
-            Route::get('edit','AparatController@edit')->name('edit');
-            Route::get('delete/{id}','AparatController@delete')->name('delete');
-        });
-        // Image
-        Route::group(['prefix' => 'image', 'as' => 'image.'], function() {
-            Route::get('list','ImageController@list')->name('list');
-            Route::get('table/list','ImageController@imageTable')->name('list.table');
-            Route::post('new','ImageController@store')->name('store');
-            Route::get('edit','ImageController@edit')->name('edit');
-            Route::get('delete/{id}','ImageController@delete')->name('delete');
-        });
+    // Aparat
+    Route::group(['prefix' => 'aparat', 'as' => 'aparat.'], function () {
+        Route::get('list','AparatController@list')->name('list');
+        Route::get('table/list','AparatController@aparatTable')->name('list.table');
+        Route::post('new','AparatController@store')->name('store');
+        Route::get('edit','AparatController@edit')->name('edit');
+        Route::get('delete/{id}','AparatController@delete')->name('delete');
+    });
+    // Image
+    Route::group(['prefix' => 'image', 'as' => 'image.'], function() {
+        Route::get('list','ImageController@list')->name('list');
+        Route::get('table/list','ImageController@imageTable')->name('list.table');
+        Route::post('new','ImageController@store')->name('store');
+        Route::get('edit','ImageController@edit')->name('edit');
+        Route::get('delete/{id}','ImageController@delete')->name('delete');
+    });
     // Phone Numbers
     Route::group(['prefix' => 'phoneNumber', 'as' => 'phoneNumber.'], function() {
         Route::get('list','PhoneNumberController@list')->name('list');

@@ -33,14 +33,16 @@ class ImageController extends Controller
     // Store
     public function store(StoreImageRequest $request,SuccessMessages $message) {
 
+        // Insert or update
+        $this->addImage($request);
+
+
         // Insert
         if($request->get('button_action') == 'insert') {
-            $this->addImage($request);
             $success_output = $message->getInsert();
         }
         // Update
         else if($request->get('button_action') == 'update') {
-            $this->addImage($request);
             $success_output = $message->getUpdate();
         }
         

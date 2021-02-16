@@ -45,14 +45,15 @@ class AdminController extends Controller
     // Store Admin
     public function store(StoreAdminRequest $request,SuccessMessages $message) {
 
+        // Insert or update
+        $this->addAdmin($request);
+
         // Insert
         if($request->get('button_action') == "insert") {
-            $this->addAdmin($request);
             $success_output = $message->getInsert();
         }
         // Update
         else if($request->get('button_action') == 'update') {
-            $this->addAdmin($request);
             $success_output = $message->getUpdate();
         }
 
