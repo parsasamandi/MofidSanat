@@ -45,7 +45,7 @@ class ImageDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\AparatDataTable $model
+     * @param \App\Models\ImageDataTable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(Media $model)

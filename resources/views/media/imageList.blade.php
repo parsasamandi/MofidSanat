@@ -6,7 +6,7 @@
   {{-- Header --}}
   <x-header pageName="عکس" buttonValue="افزودن عکس">  
     <x-slot name="table">
-      {!! $imageTable->table(['class' => 'table table-striped table-hover-responsive dt_responsive nowrap text-center']) !!}
+      {!! $imageTable->table(['class' => 'table table-bordered table-striped table-hover-responsive dt_responsive nowrap text-center']) !!}
     </x-slot>
   </x-header>
 
@@ -19,7 +19,7 @@
           <label for="products">انتخاب محصول مرتبط:</label>
           <select name="products[]" id="products" class="browser-default custom-select">
             @foreach($products as $product)
-              <option name="product" value="{{ $product->id }}" multiple>{{ $product->name }}</option>
+              <option value="{{ $product->id }}" multiple>{{ $product->name }}</option>
             @endforeach
           </select>
         </div>
@@ -34,7 +34,7 @@
   </x-admin.insert>
 
   {{-- Delete Modal --}}
-  <x-admin.delete title="آیا از حذف تصویر یا ویدئو آپارات مطمئن هستید؟"/>
+  <x-admin.delete title="آیا مایل به حذف تصویر هستید؟"/>
 
 @endsection
 

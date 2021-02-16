@@ -6,7 +6,7 @@
     {{-- Header --}}
     <x-header pageName="ویدئو آپارات" buttonValue="افزودن ویدیئو آپارات">
         <x-slot name="table">
-            {!! $aparatTable->table(['class' => 'table table-striped table-hover-responsive dt_responsive nowrap text-center'], false) !!}
+            {!! $aparatTable->table(['class' => 'table table-bordered table-striped table-hover-responsive dt_responsive nowrap text-center'], false) !!}
         </x-slot>
     </x-header>
 
@@ -15,15 +15,14 @@
         <x-slot name="content">
             <div class="row text-right rtl">
                 {{-- Aparat --}}
-                <div class="col-md-6 mt-2">
+                <div class="col-md-12 mb-3">
                   <label for="aparat_url">لینک ویدئو:</label>
-                  <textarea rows="5" id="aparat_url" name="aparat_url" type="text" class="form-control"
-                    placeholder="لینک ویدئو آپارات"></textarea>
+                  <textarea rows="3" id="aparat_url" name="aparat_url" type="text" class="form-control" placeholder="لینک ویدئو آپارات"></textarea>
                 </div>
                 {{-- Product --}}
-                <div class="col-md-6 mt-2">
+                <div class="col-md-12">
                   <label for="products">انتخاب محصول مرتبط:</label>
-                  <select name="products[]" id="products" class="custom-select">
+                  <select id="products" name="products[]" class="custom-select">
                     @foreach($products as $product)
                       <option name="product" value="{{ $product->id }}" multiple>{{ $product->name }}</option>
                     @endforeach
@@ -97,11 +96,11 @@
                     data: {id: id},
                     dataType: "json",
                     success: function(data) {
+                        $('#id').val(id);
+                        $('#action').val('ویرایش');
+                        $('#button_action').val('update');
                         $('#aparat_url').val(data.media_url);
                         $('#products').val(data.product_id).trigger('change');
-                        $('#id').val(id);
-                        $('#button_action').val('update');
-                        $('#action').val('ویرایش');
                     }
                 })
             }

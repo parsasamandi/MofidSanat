@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Providers;
+
 use App\Models\Cat;
 use App\Models\Product;
 use Illuminate\Support\ServiceProvider;
 use View;
+
 
 
 class AppServiceProvider extends ServiceProvider
@@ -29,11 +31,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $cats = Cat::select('name','id')->get();
-        $products = Product::all();
-        View::share([
-            'cats' => $cats,
-            'products' => $products
-        ]); 
+        $vars['cats'] = Cat::select('name','id')->get();
+        $vars['products'] = Product::all();
+
+        View::share($vars); 
     }
 }

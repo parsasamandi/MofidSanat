@@ -36,7 +36,6 @@ class ImageController extends Controller
         // Insert or update
         $this->addImage($request);
 
-
         // Insert
         if($request->get('button_action') == 'insert') {
             $success_output = $message->getInsert();
@@ -71,7 +70,7 @@ class ImageController extends Controller
     }
 
     // Edit
-    public function delete(Request $request, $id) {
+    public function delete(Action $action, $id) {
         return $action->deleteWithImage(Media::class,$id,'media_url');
     }
 

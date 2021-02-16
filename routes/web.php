@@ -13,7 +13,7 @@ use App\Http\Controllers\CategoryController;
 */
 
 // Login Page
-Route::get('login',[ 'as' => 'login', 'uses' => 'LoginController@index']);
+Route::get('login','LoginController@index');
 Route::post('login', 'LoginController@store');
 // Home
 Route::get('/','HomeController@index');
