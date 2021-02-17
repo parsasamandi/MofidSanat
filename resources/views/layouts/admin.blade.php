@@ -65,9 +65,9 @@
                             <x-admin.urlAddressParent text="دسته بندی ها" fontAwesome="fa fa-list">
                                 <x-slot name="content">
                                     {{-- Categories --}}
-                                    <x-admin.urlAddress text="دسته بندی سطح-۱" fontAwesome="null" route="{{ route('category.list') }}" />
+                                    <x-admin.urlAddress text="دسته بندی اول" fontAwesome="null" route="{{ route('category.list') }}" />
                                     {{-- Sub Categories --}}
-                                    <x-admin.urlAddress text="دسته بندی سطح-۲" fontAwesome="null" route="{{ route('subCategory.list') }}" />
+                                    <x-admin.urlAddress text="دسته بندی دوم" fontAwesome="null" route="{{ route('subCategory.list') }}" />
                                 </x-slot>
                             </x-admin.urlAddressParent>
 
