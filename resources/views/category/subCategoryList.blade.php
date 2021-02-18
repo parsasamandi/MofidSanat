@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','لیست دسته بندی سطح-۲')
+@section('title','لیست دسته بندی دوم')
 
 @section('content')
   {{-- Header --}}
@@ -20,7 +20,7 @@
         </div>
         {{-- Category --}}
         <div class="col-md-6 mb-1 lrt">
-          <label for="category">در دسته بندی سطح-۱:</label>
+          <label for="category">در دسته بندی اول:</label>
           <select class="browser-default custom-select" id="category" name="category">
             @foreach($cats as $cat)
                 <option value="{{ $cat->id }}">{{ $cat->name }}</option>

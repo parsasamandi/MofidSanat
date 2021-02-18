@@ -32,12 +32,12 @@ class ProductController extends Controller
 
         $vars['productTable'] = $dataTable->html();
         
-        return view('product.productsList', $vars);
+        return view('product.list', $vars);
     }
 
     // Rendering DataTable
     public function productTable(ProductDataTable $datatable) {
-        return $datatable->render('product.productsList');
+        return $datatable->render('product.list');
     }
 
     // Store Admin

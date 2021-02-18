@@ -37,7 +37,7 @@
         <li>
           @if($product->Cat)
             <strong>
-              دسته بندی سطح-۱:
+              دسته بندی اول:
             </strong>
             {{ $product->Cat->name }}
           @else
@@ -46,10 +46,10 @@
         </li>
         <li>
           @if($product->SubCat)
-            <strong>دسته بندی سطح-۲:</strong>
+            <strong>دسته بندی دوم:</strong>
             {{ $product->SubCat->name }}
           @else
-            دسته بندی سطح دومی برای این محصول وجود ندارد
+            دسته بندی دومی برای این محصول وجود ندارد
           @endif
         </li>
         <li>

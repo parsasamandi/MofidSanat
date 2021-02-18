@@ -12,23 +12,28 @@
   {{-- Insert Modal --}}
   <x-admin.insert size="modal-l" formId="teamForm">
     <x-slot name="content">
+      {{-- Name --}}
       <div class="col-md-12 mb-3">
         <label for="name">نام:</label>
         <input id="name" name="name" type="text" placeholder="نام">
       </div>
+      {{-- Responsibility --}}
       <div class="col-md-12 mb-3">
         <label for="responsibility">مسئولیت:</label>
         <input id="responsibility" name="responsibility" type="text" placeholder="مسئولیت">
       </div>
+      {{-- Linkedin address --}}
       <div class="col-md-12 mb-3">
         <label for="linkedin">آدرس لینکدین:</label>
         <input id="linkedin" name="linkedin" type="url" placeholder="آدرس لینکدین">
       </div>
+      {{-- Image --}}
       <div class="col-md-12 mb-3">
         <label for="image">عکس:</label>
         <br>
         <input type="file" name="image"/>
       </div>
+      {{-- Size --}}
       <div class="col-md-12 mb-3">
         <label for="size">اندازه:</label>
         <input type="text" id="size" name="size" placeholder="اندازه"/>
@@ -48,89 +53,44 @@
   <script>
 
     $(document).ready(function () {
-      // ُTeam Table
+      // Admin DataTable And Action Object
       let dt = window.LaravelDataTables['teamTable'];
+      let action = new requestHandler(dt,'#teamForm','team');
+
       // Record modal
       $('#create_record').click(function () {
-        $('#formModal').modal('show');
-        $('#teamForm')[0].reset();
-        $('#form_output').html('');
+        action.modal();
       });
+      
       // Insert
-      $('#teamForm').on('submit', function (event) {
-        event.preventDefault();
-        var form_data = new FormData(this);
-        form_data.append('file',form_data);
-        $.ajax({
-          url: "{{ route('team.store') }}",
-          method: "POST",
-          data: form_data,
-          dataType: "json",
-          cache: false,
-          contentType: false,
-          processData: false,
-          success: function(data) {
-            $('#form_output').html(data.success);
-            $('#teamForm')[0].reset();
-            $('#button_action').val('insert');
-            dt.draw(false);
-          },
-          error: function(data) {
-            // Parse To Json
-            var data = JSON.parse(data.responseText);
-            // Error
-            error_html = '';
-            for(var all in data.errors) {
-              error_html += '<div class="alert alert-danger">' + data.errors[all] + '</div>';
-            }
-            $('#form_output').html(error_html);
-          }
-        })
-      });
+      action.insert();
+
+      // Delete
+      window.showConfirmationModal = function showConfirmationModal(url) {
+        action.delete(url);
+      }
       // Edit
       window.showEditModal = function showEditModal(url) {
-        editTeam(url);
+        edit(url);
       }
-      function editTeam($url) {
-        var id = $url;
+      // Edit
+      function edit($url) {
         $('#formModal').modal('show');
         $('#form_output').html('');
+
         $.ajax({
           url: "{{ route('team.edit') }}",
           method: "get",
-          data: {id: id},
-          dataType: "json",
+          data: {id: $url},
           success: function(data) {
+            $('#id').val($url);
+            $('#action').val('ویرایش');
+            $('#button_action').val('update');
             $('#name').val(data.name);
             $('#responsibility').val(data.responsibility);
             $('#linkedin').val(data.linkedin_address);
             $('#size').val(data.size);
-            $('#id').val(id);
-            $('#action').val('ویرایش');
-            $('#button_action').val('update');
           }
-        })
-      }
-      // Delete
-      window.showConfirmationModal = function showConfirmationModal(url) {
-        deleteTeam(url);
-      }
-      function deleteTeam($url) {
-        var id = $url;
-        $('#confirmModal').modal('show');
-        $('#ok_button').click(function () {
-          $.ajax({
-            url: "/team/delete/" + id,
-            method: "get",
-            data: {id: id},
-            dataType: "json",
-            success: function(data) {
-              setTimeout(function (data) {
-                $('#confirmModal').modal('hide');
-                dt.draw(false);
-              }, 500);
-            }
-          })
         })
       }
     });

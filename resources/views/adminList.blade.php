@@ -51,7 +51,44 @@
 
   <script>
     $(document).ready(function () {
-      let action = new Action('','','');
+      // Admin DataTable And Action Object
+      let dt = window.LaravelDataTables['adminTable'];
+      let action = new requestHandler(dt,'#adminForm','admin');
+
+      // Record modal
+      $('#create_record').click(function () {
+        action.modal();
+      });
+      // Insert
+      action.insert();
+      // Delete
+      window.showConfirmationModal = function showConfirmationModal(url) {
+        action.delete(url);
+      }
+      // Edit
+      window.showEditModal = function showEditModal(url) {
+        edit(url);
+      }
+      function edit($url) {
+        var id = $url;
+        $('#form_output').html('');
+        $('#formModal').modal('show');
+
+        $.ajax({
+          url: "{{ url('admin/edit') }}",
+          method: "get",
+          data: {id: id},
+          success: function(data) {
+            $('#id').val(id);
+            $('#action').val('ویرایش');
+            $('#button_action').val('update');
+            $('#name').val(data.name);
+            $('#email').val(data.email);
+            $('#password').val('رمز عبور جدید');
+            $('#password2').val('رمز عبور جدید');
+          }
+        })
+      }
     });
   </script>
 @endsection

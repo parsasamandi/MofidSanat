@@ -13,7 +13,7 @@ use App\Http\Controllers\CategoryController;
 */
 
 // Login Page
-Route::get('login','LoginController@index');
+Route::get('login','LoginController@index')->name('login');
 Route::post('login', 'LoginController@store');
 // Home
 Route::get('/','HomeController@index');
@@ -30,69 +30,69 @@ Route::group(['middleware' => 'auth'], function () {
     // Admin
     Route::get('/adminHome','AdminController@admin');
     Route::group(['prefix' => 'admin','as' => 'admin.'], function() {
-        Route::get('list', 'AdminController@list')->name('list');
+        Route::get('list', 'AdminController@list');
         Route::get('table/list', 'AdminController@adminTable')->name('list.table');
-        Route::post('new', 'AdminController@store')->name('store');
-        Route::get('edit', 'AdminController@edit')->name('edit');
-        Route::get('delete/{id}','AdminController@delete')->name('delete');
+        Route::post('store', 'AdminController@store');
+        Route::get('edit', 'AdminController@edit');
+        Route::get('delete/{id}','AdminController@delete');
     });
     // Product
     Route::group(['prefix' => 'product', 'as' => 'product.'], function() {
-        Route::get('list','ProductController@list')->name('list');
+        Route::get('list','ProductController@list');
         Route::get('table/list', 'ProductController@productTable')->name('list.table');
-        Route::post('new','ProductController@store')->name('store');
-        Route::get('edit', 'ProductController@edit')->name('edit');
-        Route::get('delete/{id}','ProductController@delete')->name('delete');
+        Route::post('store','ProductController@store');
+        Route::get('edit', 'ProductController@edit');
+        Route::get('delete/{id}','ProductController@delete');
     });
     // Categories based on Sub Categories
     Route::get('/subCategory', 'CategoryController@ajax_subCategory');
     // Categories
     Route::group(['prefix' => 'category', 'as' => 'category.'], function () {
-        Route::get('list','CategoryController@list')->name('list');
+        Route::get('list','CategoryController@list');
         Route::get('table/list','CategoryController@categoryTable')->name('list.table');
-        Route::post('new','CategoryController@store')->name('store');
-        Route::get('edit','CategoryController@edit')->name('edit');
-        Route::get('delete/{id}', 'CategoryController@delete')->name('delete');
+        Route::post('store','CategoryController@store');
+        Route::get('edit','CategoryController@edit');
+        Route::get('delete/{id}', 'CategoryController@delete');
     });
     // Sub Categories
     Route::group(['prefix' => 'subCategory', 'as' => 'subCategory.'], function() {
-        Route::get('list','SubCategoryController@list')->name('list');
+        Route::get('list','SubCategoryController@list');
         Route::get('table/list','SubCategoryController@subCategoryTable')->name('list.table');
-        Route::post('new','SubCategoryController@store')->name('store');
-        Route::get('edit','SubCategoryController@edit')->name('edit');
-        Route::get('delete/{id}','SubCategoryController@delete')->name('delete');
+        Route::post('store','SubCategoryController@store');
+        Route::get('edit','SubCategoryController@edit');
+        Route::get('delete/{id}','SubCategoryController@delete');
     });
     // Aparat
     Route::group(['prefix' => 'aparat', 'as' => 'aparat.'], function () {
-        Route::get('list','AparatController@list')->name('list');
+        Route::get('list','AparatController@list');
         Route::get('table/list','AparatController@aparatTable')->name('list.table');
-        Route::post('new','AparatController@store')->name('store');
-        Route::get('edit','AparatController@edit')->name('edit');
-        Route::get('delete/{id}','AparatController@delete')->name('delete');
+        Route::post('store','AparatController@store');
+        Route::get('edit','AparatController@edit');
+        Route::get('delete/{id}','AparatController@delete');
     });
     // Image
     Route::group(['prefix' => 'image', 'as' => 'image.'], function() {
-        Route::get('list','ImageController@list')->name('list');
+        Route::get('list','ImageController@list');
         Route::get('table/list','ImageController@imageTable')->name('list.table');
-        Route::post('new','ImageController@store')->name('store');
-        Route::get('edit','ImageController@edit')->name('edit');
-        Route::get('delete/{id}','ImageController@delete')->name('delete');
+        Route::post('store','ImageController@store');
+        Route::get('edit','ImageController@edit');
+        Route::get('delete/{id}','ImageController@delete');
     });
     // Phone Numbers
     Route::group(['prefix' => 'phoneNumber', 'as' => 'phoneNumber.'], function() {
-        Route::get('list','PhoneNumberController@list')->name('list');
+        Route::get('list','PhoneNumberController@list');
         Route::get('table/list','PhoneNumberController@phoneNumberTable')->name('list.table');
-        Route::get('delete/{id}', 'PhoneNumberController@delete')->name('delete');
-        Route::post('new','PhoneNumberController@store')->name('store');
-        Route::get('edit', 'PhoneNumberController@edit')->name('edit');
+        Route::get('delete/{id}', 'PhoneNumberController@delete');
+        Route::post('store','PhoneNumberController@store');
+        Route::get('edit', 'PhoneNumberController@edit');
     });
     // Team
     Route::group(['prefix' => 'team', 'as' => 'team.'], function () {
-        Route::get('list','TeamController@index')->name('list');
+        Route::get('list','TeamController@index');
         Route::get('table/list','TeamController@teamTable')->name('list.table');
-        Route::post('new','TeamController@store')->name('store');
-        Route::get('edit', 'TeamController@edit')->name('edit');
-        Route::get('delete/{id}', 'TeamController@delete')->name('delete');
+        Route::post('store','TeamController@store');
+        Route::get('edit', 'TeamController@edit');
+        Route::get('delete/{id}', 'TeamController@delete');
     });
     // Home Setting
     Route::group(['prefix' => 'setting', 'as' => 'setting.'], function() {

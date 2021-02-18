@@ -47,89 +47,45 @@
 <script>
   $(document).ready(function () {
     // Select2
-    $('#productSelect').select2({ tags: true, width: '100%'});
+    $('#productSelect').select2({width: '100%'});
 
     // phoneNumber Table
     let dt = window.LaravelDataTables['phoneNumberTable'];
+    let action = new requestHandler(dt,'phoneForm', 'phoneNumber');
 
     // Record modal
     $('#create_record').click(function () {
-      $('#formModal').modal('show');
-      $('#phoneForm')[0].reset();
+      action.modal();
     });
-    // Store
-    $('#phoneForm').on('submit', function (event) {
-      event.preventDefault();
-      var form_data = $(this).serialize();
-      $.ajax({
-        url: "{{ route('phoneNumber.store') }}",
-        method: "POST",
-        data: form_data,
-        dataType: "json",
-        success: function(data) {
-          $('#form_output').html(data.success);
-          $('#phoneForm')[0].reset();
-          $('#button_action').val('insert');
-          dt.draw(false);
-        },
-        error: function (data) {
-          // Parse To Json
-          var data = JSON.parse(data.responseText);
-          // Error
-          error_html = '';
-          for(var all in data.errors) {
-            error_html += '<div class="alert alert-danger">' + data.errors[all] + '</div>';
-          }
-          $('#form_output').html(error_html);
-        }
-      })
-    });
-    
+    // Insert
+    action.insert();
     // Delete
     window.showConfirmationModal = function showConfirmationModal(url) {
-      deletePhoneNumber(url);
-    }
-    function deletePhoneNumber($url) {
-      var id = $url;
-      $('#confirmModal').modal('show'); 
-      $('#ok_button').click(function () {
-        $.ajax({
-          url: "/phoneNumber/delete/" + id,
-          mehtod: "get",
-          success: function (data) {
-            setTimeout(function () {
-              $('#confirmModal').modal('hide');
-              dt.draw(false);
-            }, 500);
-          }
-        })
-      }) 
+      action.delete(url);
     }
     // Edit
     window.showEditModal = function showEditModal(url) {
-      editPhoneNumber(url);
+      edit(url);
     }
-    function editPhoneNumber($url) {
-      var id = $url;
+    
+    // Edit
+    window.showEditModal = function showEditModal(url) {
+      edit(url);
+    }
+    function edit($url) {
       $('#form_output').html('');
       $('#formModal').modal('show');
 
       $.ajax({
         url: "{{ route('phoneNumber.edit') }}",
         method: 'get',
-        data: { id: id },
-        dataType: 'json',
+        data: { id: $url },
         success: function (data) {  
-          $('#id').val(id);
-          $('#number').val(data.number);
+          $('#id').val($url);
           $('#button_action').val('update');
           $('#action').val('ویرایش');
-          if(data.status == 0) 
-              $('#status').val(0).trigger('change');
-          else if(data.status == 1) 
-            $('#status').val(1).trigger('change');
-          else if(data.status == 2) 
-            $('#status').val(2).trigger('change');
+          $('#number').val(data.number);
+          $('#status').val(data.status).trigger('change');
         }
       })
     }

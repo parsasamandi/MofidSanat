@@ -45,9 +45,9 @@
         </div> 
         {{-- Category --}}
         <div class="col-md-6 mb-3">
-          <label for="category_select">دسته بندی سطح-۱:</label>
+          <label for="category_select">دسته بندی اول:</label>
           <select class="browser-default custom-select" name="categories" id="categories">
-            <option value="">دسته بندی سطح-۱</option>
+            <option value="">دسته بندی اول</option>
             @foreach($cats as $cat)
               <option value="{{ $cat->id }}" required> {{ $cat->name }}</option>
             @endforeach
@@ -55,9 +55,9 @@
         </div>
         {{-- Sub Category --}}
         <div class="col-md-6 mb-3 ltr">
-          <label for="subCategory">:دسته بندی سطح-۲</label>
+          <label for="subCategory">دسته بندی دوم:</label>
           <select class="browser-default custom-select" name="subCategories" id="subCategories">
-            <option value="">دسته بندی سطح-۲</option>
+            <option value="">دسته بندی دوم</option>
             @foreach($subCats as $subCat)
               <option value="{{ $subCat->id }}"> {{ $subCat->name }}</option>
             @endforeach
@@ -89,84 +89,46 @@
   {!! $productTable->scripts() !!}
 
   <script>
-    document.getElementsByTagName("tr")[0].setAttribute("role", "row");
-    
     $(document).ready(function () {
-      // Product Table
-      let dt = window.LaravelDataTables['productTable'];
 
       // Select2
       $('#category_select').select2({ width: '100%'});
       $('#subCategory').select2({ width: '100%'});
 
+      // Product DataTable And Action Object
+      let dt = window.LaravelDataTables['productTable'];
+      let action = new requestHandler(dt,'#productForm','product');
+
       // Record modal
       $('#create_record').click(function () {
-        $('#formModal').modal('show');
-        $('#productForm')[0].reset();
-        $('#form_output').html('');
+        action.modal();
       });
 
-      // Store
-      $('#productForm').on('submit', function (event) {
-        event.preventDefault();
-        var form_data = $(this).serialize();
-        $.ajax({
-          url: "{{ route('product.store') }}",
-          method: "POST",
-          data: form_data,
-          processing: true,
-          dataType: "json",
-          success: function (data) { 
-            $('#form_output').html(data.success);
-            $('#productForm')[0].reset();
-            $('#button_action').val('insert');
-            dt.draw(false);
-          },
-          error: function(data) {
-            // Parse To Json
-            var data = JSON.parse(data.responseText);
-            // Error
-            error_html = '';
-            for(var all in data.errors) {
-              error_html += '<div class="alert alert-danger">' + data.errors[all] + '</div>';
-            }
-            $('#form_output').html(error_html);
-          }
-        })
-      });
+      // Insert
+      action.insert();
+
       // Delete
       window.showConfirmationModal = function showConfirmationModal(url) {
-        deleteProduct(url);
-      }
-      function deleteProduct($url) {
-        var id = $url;
-        $('#confirmModal').modal('show'); 
-        $('#ok_button').click(function () {
-          $.ajax({
-            url: "/product/delete/" + id,
-            mehtod: "get",
-            success: function (data) {
-              $('#confirmModal').modal('hide');
-              dt.draw(false);
-            }
-          })
-        }) 
+        action.delete(url);
       }
       // Edit
       window.showEditModal = function showEditModal(url) {
-        editProduct(url);
+        edit(url);
       }
-      function editProduct($url) {
-        var id = $url;
+      // Edit
+      function edit($url) {
         $('#formModal').modal('show');
         $('#form_output').html('');
+
         $.ajax({
           url: "{{ route('product.edit') }}",
           method: 'get',
-          data: { id: id },
+          data: { id: $url },
           dataType: 'json',
           success: function (data) { 
-            $('#id').val(id); 
+            $('#id').val($url);
+            $('#button_action').val('update');
+            $('#action').val('ویرایش'); 
             $('#name').val(data.name);
             $('#model').val(data.model);
             $('#description').val(data.desc);
@@ -175,9 +137,6 @@
             $('#status').val(data.status).trigger('change');
             $('#category_select').val(data.c_id).trigger('change');
             $('#subCategory').val(data.sc_id).trigger('change');
-            $('#button_action').val('update');
-            $('#action').val('ویرایش');
-            $('#action').show();
           }
         })
       }
@@ -186,13 +145,12 @@
         var c_id = e.target.value;
         $.get('/subCategory?c_id=' + c_id, function (data) {
           $('#subCategories').empty();
-          $("#subCategories").append('<option value="">دسته بندی سطح-۲</option>');
+          $("#subCategories").append('<option value="">دسته بندی دوم</option>');
           $.each(data, function (index, subCat) {
             $("#subCategories").append('<option value="' + subCat.id + '">' + subCat.name + '</option>');
-          });
-        });
-      });
-
+          })
+        })
+      })
     });
   </script>
 @endsection

@@ -45,10 +45,6 @@
 
   <script>
     $(document).ready(function () {
-      // Image DataTable
-      let dt = window.LaravelDataTables['imageTable'];
-      // Product Select2
-      $('#products').select2({tags: true, width: "100%"});
 
       // ----------------------- Filepond  -----------------------
       // const inputElement = document.querySelector('input[type="file"]');
@@ -59,82 +55,46 @@
       //   allowDrop: true,
       // });
 
+      // Product Select2
+      $('#products').select2({width:'100%'});
+
+      // Image DataTable
+      let dt = window.LaravelDataTables['imageTable'];
+      let action = new requestHandler(dt,'#imageForm','image');
+
       // Record modal
       $('#create_record').click(function () {
-        $('#formModal').modal('show');
-        $('#imageForm')[0].reset();
-        $('#form_output').html('');
+        action.modal();
       });
       // Insert
-      $('#imageForm').on('submit', function (event) {
-        event.preventDefault();
-        var form_data = new FormData(this);
-        form_data.append('file',form_data);
-        $.ajax({
-          url: "{{ route('image.store') }}",
-          method: "POST",
-          data: form_data,
-          dataType: "json",
-          contentType: false,
-          processData: false,
-          cache: false,
-          success: function(data) {
-            $('#form_output').html(data.success);
-            $('#imageForm')[0].reset();
-            dt.draw(false); 
-          }
-        })
-      });
+      action.insert();
+      // Delete
+      window.showConfirmationModal = function showConfirmationModal(url) {
+        action.delete(url);
+      }
       // Edit
       window.showEditModal = function showEditModal(url) {
-        editImage(url);
+        edit(url);
+      }
+      // Edit
+      window.showEditModal = function showEditModal(url) {
+        edit(url);
       }
 
-      function editImage($url) {
-        var id = $url;
+      function edit($url) {
         $('#form_output').html('');
         $('#formModal').modal('show');
+
         $.ajax({
           url: "{{ route('image.edit') }}",
           method: "get",
-          data: {id: id},
-          dataType: "json",
+          data: {id: $url},
           success: function(data) {
-            $('#id').val(id);
+            $('#id').val($url);
             $('#button_action').val('update');
             $('#products').val(data.product_id).trigger('change');
-          },
-          error: function(data) {
-            // Parse To Json
-            var data = JSON.parse(data.responseText);
-            // Error
-            error_html = '';
-            for(var all in data.errors) {
-              error_html += '<div class="alert alert-danger">' + data.errors[all] + '</div>';
-            }
-            $('#form_output').html(error_html);
           }
         })
-      }
-
-      // Delete
-      window.showConfirmationModal = function showConfirmationModal(url) {
-        deleteImage(url);
-      }
-
-      function deleteImage($url) {
-        var id = $url;
-        $('#confirmModal').modal('show');
-        $('#ok_button').click(function(data) {
-          $.ajax({
-            url: "/image/delete/" + id,
-            method: "get",
-            success: function(data) {
-              $('#confirmModal').modal('hide');
-              dt.draw(false);
-            }
-          })
-        });
       }
     });
   </script>

@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','لیست دسته بندی سطح-۱')
+@section('title','لیست دسته بندی اول')
 
 @section('content')
     

@@ -129,10 +129,10 @@ class ProductDataTable extends DataTable
             ->title('توضیحات')
                 ->addClass('column-title'),
             Column::make('c_id')
-                ->title('دسته بندی سطح-۱')
+                ->title('دسته بندی اول')
                     ->addClass('column-title'),
             Column::make('sc_id')
-            ->title('دسته بندی سطح-۲')
+            ->title('دسته بندی دوم')
                 ->addClass('column-title'),
             Column::make('status')
             ->title('وضعیت')
