@@ -157,8 +157,10 @@ class ProductController extends Controller
         $products = Product::where($column,$data)->paginate(9);
         if(count($products) > 0)
             return view('product.products',$vars,['products' => $products]);
+
         else if(count($products) == 0 and $column == 'status') 
             return view('product.products',$vars,['products' => $products]);
+            
         else 
             return Redirect::to('product/products')->with('faliure', 'متاسفانه محصولی با این دسته بندی پیدا نشد');
     }   
@@ -172,9 +174,9 @@ class ProductController extends Controller
             $products = Product::where('name',$name)->paginate(9);
 
             if(count($products) > 0)
-                return view('product.products',['products' => $products]);
+                return view('product.products',compact('products'));
             else 
-                return Redirect::to('/product/products')->with('faliure', 'متاسفانه محصولی با این نام پیدا نشد');
+                return Redirect('/product/products')->with('faliure', 'متاسفانه محصولی با این نام پیدا نشد');
         } 
         else {
             return Redirect('/product/products')->with('faliure','لطفا نوشته مورد نظر خود را جستجو کنید');

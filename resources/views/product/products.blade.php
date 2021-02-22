@@ -15,7 +15,7 @@
     <!-- Category -->
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark">
-            <form method="POST" action="{{ route('searchProduct') }}" class="form-inline searchBar navbar-brand">
+            <form method="POST" action="{{ url('product/search') }}" class="form-inline searchBar navbar-brand">
                 {{ csrf_field() }}
                 <input class="form-control my-1" name="search" type="text" placeholder="نام دوره" aria-label="Search">
                 <button class="btn btn-success" type="submit">جستجو</button>

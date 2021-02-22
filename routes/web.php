@@ -21,8 +21,6 @@ Route::get('/','HomeController@index');
 Route::get('/product/eachProduct/{id}', 'ProductController@each');
 // Products With Categories
 Route::get('product/products', 'ProductController@get')->name('products');
-// Search For Products
-Route::post('/product/search', 'ProductController@search')->name('searchProduct');
 
 Route::group(['middleware' => 'auth'], function () {
     // logout
@@ -43,6 +41,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('store','ProductController@store');
         Route::get('edit', 'ProductController@edit');
         Route::get('delete/{id}','ProductController@delete');
+        // Search For Products
+        Route::post('search', 'ProductController@search');
     });
     // Categories based on Sub Categories
     Route::get('/subCategory', 'CategoryController@ajax_subCategory');

@@ -130,7 +130,7 @@
 					<h3 class="section-title">محصولات</h3>
 					<p class="section-description">برای دیدن بیشتر محصولات به <a href="/product/products">صفحه محصولات</a> مراجعه کنید</p>
 				</div>
-				<form method="POST" action="{{ route('searchProduct') }}" class="form-inline mb-3 search">
+				<form method="POST" action="{{ url('product/search') }}" class="form-inline mb-3 search">
 					{{ csrf_field() }}
 					<input class="form-control my-2" name="search" type="search" placeholder="نام دوره" aria-label="Search">
 					<button class="btn btn-success" type="submit">جستجو</button>
