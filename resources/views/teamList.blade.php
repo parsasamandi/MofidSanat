@@ -79,7 +79,7 @@
         $('#form_output').html('');
 
         $.ajax({
-          url: "{{ route('team.edit') }}",
+          url: "{{ url('team/edit') }}",
           method: "get",
           data: {id: $url},
           success: function(data) {

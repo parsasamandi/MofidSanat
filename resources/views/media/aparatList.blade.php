@@ -4,7 +4,7 @@
 
 @section('content')
     {{-- Header --}}
-    <x-header pageName="ویدئو آپارات" buttonValue="افزودن ویدیئو آپارات">
+    <x-header pageName="ویدئو آپارات" buttonValue="ویدیئو آپارات">
         <x-slot name="table">
             {!! $aparatTable->table(['class' => 'table table-bordered table-striped table-hover-responsive dt_responsive nowrap text-center'], false) !!}
         </x-slot>
@@ -71,7 +71,7 @@
                 $('#formModal').modal('show');
 
                 $.ajax({
-                    url: "{{ route('aparat.edit') }}",
+                    url: "{{ url('aparat/edit') }}",
                     method: "get",
                     data: {id: $url},
                     success: function(data) {

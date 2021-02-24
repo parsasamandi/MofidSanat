@@ -3,14 +3,14 @@
 
 @section('content')
   {{-- Header --}}
-  <x-header pageName="دسته بندی ۲" buttonValue="افزودن دسته بندی دوم">
+  <x-header pageName="دسته بندی ۲" buttonValue="دسته بندی دوم">
     <x-slot name="table">
       {!! $subCategoryTable->table(['class' => 'table table-bordered table-striped table-hover-responsive dt_responsive nowrap text-center'], false) !!}
     </x-slot>
   </x-header>
 
   {{-- Insert Modal --}}
-  <x-admin.insert size="modal-lg" formId="subCatForm">
+  <x-admin.insert size="modal-lg" formId="subCategoryForm">
     <x-slot name="content">
       <div class="row rtl">
         {{-- Name --}}
@@ -52,51 +52,35 @@
   <!-- DataTable data -->
   <script>
     $(document).ready(function () {
-      // Sub Category Table
-      let dt = window.LaravelDataTables["subCategoryTable"];
+
+      // Category DataTable
+      let dt = window.LaravelDataTables['subCategoryTable'];
+      let action = new requestHandler(dt,'#subCategoryForm','subCategory');
+
       // Record modal
       $('#create_record').click(function () {
-        $('#formModal').modal('show');
-        $('#subCatForm')[0].reset();
-        $('#form_output').html('');
+        action.modal();
       });
-      // Create a new one
-      $('#subCatForm').on('submit', function (event) {
-        event.preventDefault();
-        var form_data = $(this).serialize();
-        $.ajax({
-          url: "{{ route('subCategory.store') }}",
-          method: "POST",
-          data: form_data,
-          dataType: "json",
-          success: function (data) {
-            $('#form_output').html(data.success); 
-            $('#subCatForm')[0].reset(); 
-            $('#button_action').val('insert');
-            dt.draw(false);
-          },
-          error: function (data) {
-            // Parse To Json
-            var data = JSON.parse(data.responseText);
-            // Error
-            error_html = '';
-            for(var all in data.errors) {
-              error_html += '<div class="alert alert-danger">' + data.errors[all] + '</div>';
-            }
-            $('#form_output').html(error_html);
-          }
-        })
-      });
+
+      // Insert
+      action.insert();
+
+      // Delete
+      window.showConfirmationModal = function showConfirmationModal(url) {
+        action.delete(url);
+      }
+
       // Edit
       window.showEditModal = function showEditModal(url) {
-        editSubCategory(url);
+        edit(url);
       }
-      function editSubCategory($url) {
+      function edit($url) {
         var id = $url;
         $('#formModal').modal('show');
         $('#form_output').html('');
+
         $.ajax({
-          url: "{{ route('subCategory.edit') }}",
+          url: "{{ url('subCategory/edit') }}",
           method: "get",
           data: {id,id},
           dataType: "json",
@@ -110,28 +94,6 @@
           }
         })
       }
-      // Delete
-      window.showConfirmationModal = function showConfirmationModal(url) {
-        deleteSubCategory(url);
-      }
-      function deleteSubCategory($url)
-      {
-        var id = $url;
-        $('#confirmModal').modal('show');
-        $('#ok_button').click(function () {
-          $.ajax({
-            url: "/subCategory/delete/" + id,
-            method: "get",
-            success: function(data) {
-              setTimeout(function () {
-                $('#confirmModal').modal('hide');
-                dt.draw(false);
-              }, 500)
-            }
-          })
-        })
-      }
-
     });
   </script>
 @endsection

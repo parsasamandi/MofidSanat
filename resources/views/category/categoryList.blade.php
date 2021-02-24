@@ -4,14 +4,14 @@
 @section('content')
     
     {{-- Header --}}
-    <x-header pageName="دسته بندی ۱" buttonValue="افزودن دسته بندی">
+    <x-header pageName="دسته بندی ۱" buttonValue="دسته بندی">
         <x-slot name="table">
             {!! $categoryTable->table(['class' => 'table table-bordered table-striped table-hover-responsive dt_responsive nowrap text-center'], false) !!}
         </x-slot>
     </x-header>
 
     {{-- Insert Modal --}}
-    <x-admin.insert size="modal-l" formId="catForm">
+    <x-admin.insert size="modal-l" formId="categoryForm">
         <x-slot name="content">
             <div class="row">
                 {{-- Name --}}
@@ -30,6 +30,7 @@
             </div>
         </x-slot>
     </x-admin.insert>
+
     {{-- Delete --}}
     <x-admin.delete title="آیا مایل هستید دسته بندی ۱ را حذف کنید؟" />
 
@@ -42,87 +43,40 @@
     
     <script>
         $(document).ready(function () {
-            // Category Table
-            let dt = window.LaravelDataTables["categoryTable"];
-            // create modal
+            // Category DataTable
+            let dt = window.LaravelDataTables['categoryTable'];
+            let action = new requestHandler(dt,'#categoryForm','category');
+
+            // Record modal
             $('#create_record').click(function () {
-                $('#formModal').modal('show');
-                $('#catForm')[0].reset();
-                $('#form_output').html('');
+                action.modal();
             });
-            // Store
-            $('#catForm').on('submit', function (event) {
-                event.preventDefault();
-                var form_data = $(this).serialize();
-                $.ajax({
-                    url: "{{ route('category.store') }}",
-                    method: "POST",
-                    data: form_data,
-                    dataType: "json",
-                    success: function(data) {
-                        $('#form_output').html(data.success);
-                        $('#catForm')[0].reset();
-                        $('#button_action').val('insert');
-                        dt.draw(false);
-                    },
-                    error: function(data) {
-                        // Parse To Json
-                        var data = JSON.parse(data.responseText);
-                        // Error
-                        error_html = '';
-                        for(var all in data.errors) {
-                            error_html += '<div class="alert alert-danger">' + data.errors[all] + '</div>';
-                        }
-                        $('#form_output').html(error_html);
-                    }
-                })
-            });
-            // Edit
-            window.showEditModal = function showEditModal(url) {
-                editCategory(url);
-            }
-            function editCategory($url) {
-                var id = $url;
-                $('#formModal').modal('show');
-                $('#form_output').html('');
-                $.ajax({
-                    url: "{{ route('category.edit') }}",
-                    method: 'get',
-                    data: { id: id },
-                    dataType: 'json',
-                    success: function (data) {  
-                        $('#name').val(data.name);
-                        $('#id').val(id);
-                        $('#formModal').modal('show');
-                        $('#action').val('ویرایش');
-                        $("#action").show();
-                        if(data.status == 0) 
-                            $('#status').val(0).trigger('change');
-                        if(data.status == 1) 
-                            $('#status').val(1).trigger('change');
-                        $('#button_action').val('update');
-                    }
-                })
-            }
+            // Insert
+            action.insert();
             // Delete
             window.showConfirmationModal = function showConfirmationModal(url) {
-                deleteCategory(url);
+                action.delete(url);
             }
-            function deleteCategory($url)
-            {
-                var id = $url;
-                $('#confirmModal').modal('show');
-                $('#ok_button').click(function () {
-                    $.ajax({
-                        url: "/category/delete/" + id,
-                        method: "get",
-                        success: function(data) {
-                            setTimeout(function () {
-                                $('#confirmModal').modal('hide');
-                                dt.draw(false);
-                            }, 500)
-                        }
-                    })
+            // Edit
+            window.showEditModal = function showEditModal(url) {
+                edit(url);
+            }
+            function edit($url) {
+                $('#formModal').modal('show');
+                $('#form_output').html('');
+
+                $.ajax({
+                    url: "{{ url('category/edit') }}",
+                    method: 'get',
+                    data: { id: $url },
+                    dataType: 'json',
+                    success: function (data) { 
+                        $('#id').val($url);
+                        $('#name').val(data.name);
+                        $('#status').val(data.status).trigger('change');
+                        $('#action').val('ویرایش');
+                        $('#button_action').val('update');
+                    }
                 })
             }
         });

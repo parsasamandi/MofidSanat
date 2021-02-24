@@ -33,6 +33,10 @@ class SubCategoryDataTable extends DataTable
             ->addColumn('c_id', function (SubCat $subCat) {
                 return optional($subCat->cat)->name;
             })
+            ->filterColumn('c_id', function($query, $keyword) {
+                $sql = "c_id in (select id from cat where name like ?)";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
             ->addColumn('action', function (SubCat $subCat) {
                 return <<<ATAG
                             <a onclick="showConfirmationModal('{$subCat->id}')">

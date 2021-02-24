@@ -14,7 +14,7 @@ use App\Http\Requests\StoreTeamRequest;
 class TeamController extends Controller
 {
     // Get Team
-    public function index(Request $request) {
+    public function list(Request $request) {
         $dataTable = new TeamDataTable;
 
         $vars['teamTable'] = $dataTable->html();

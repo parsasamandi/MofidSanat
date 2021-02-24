@@ -31,7 +31,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Categories
         $vars['cats'] = Cat::select('name','id')->get();
+        // Products
         $vars['products'] = Product::all();
 
         View::share($vars); 

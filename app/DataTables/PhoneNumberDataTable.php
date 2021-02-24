@@ -28,6 +28,10 @@ class PhoneNumberDataTable extends DataTable
             ->editColumn('product_id', function (PhoneNumber $phoneNumber) {
                 return $phoneNumber->product->name;
             })
+            ->filterColumn('product_id', function ($query,$keyword) {
+                $sql = "product_id in (select id from product where name = ?)";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
             ->addColumn('action', function(PhoneNumber $phoneNumber) {
                 return <<<ATAG
                             <a onclick="showConfirmationModal('{$phoneNumber->id}')">

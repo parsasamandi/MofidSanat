@@ -29,6 +29,10 @@ class ImageDataTable extends DataTable
             ->editColumn('product_id', function (Media $media) {
                 return $media->product->name;
             })
+            ->filterColumn('product_id', function($query,$keyword) {
+                $sql = "product_id in (select id from product where name like ?)";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
             ->addColumn('action', function(Media $media){
                 return <<<ATAG
                             <a onclick="showConfirmationModal('{$media->id}')">
@@ -69,7 +73,7 @@ class ImageDataTable extends DataTable
                     ["className" => 'dt-center text-center', "target" => '_all'],
                 ]
             )
-            ->searching(false)
+            ->searching(true)
             ->info(false)
             ->responsive(true)
             ->dom('PBCfrtip')

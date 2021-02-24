@@ -4,7 +4,7 @@
 @section('content')
 
   {{-- Header --}}
-  <x-header pageName="شماره تلفن" buttonValue="افزودن شماره تلفن">
+  <x-header pageName="شماره تلفن" buttonValue="شماره تلفن">
     <x-slot name="table">
       {!! $phoneNumberTable->table(['class' => 'table table-striped table-bordered table-hover-responsive dt_responsive nowrap  text-center'], false) !!}
     </x-slot>
@@ -37,7 +37,6 @@
   
 @endsection
 
-
 @section('scripts')
 @parent
 
@@ -57,17 +56,15 @@
     $('#create_record').click(function () {
       action.modal();
     });
+
     // Insert
     action.insert();
+
     // Delete
     window.showConfirmationModal = function showConfirmationModal(url) {
       action.delete(url);
     }
-    // Edit
-    window.showEditModal = function showEditModal(url) {
-      edit(url);
-    }
-    
+
     // Edit
     window.showEditModal = function showEditModal(url) {
       edit(url);
@@ -77,7 +74,7 @@
       $('#formModal').modal('show');
 
       $.ajax({
-        url: "{{ route('phoneNumber.edit') }}",
+        url: "{{ url('phoneNumber/edit') }}",
         method: 'get',
         data: { id: $url },
         success: function (data) {  

@@ -86,7 +86,7 @@
         $('#formModal').modal('show');
 
         $.ajax({
-          url: "{{ route('image.edit') }}",
+          url: "{{ url('image/edit') }}",
           method: "get",
           data: {id: $url},
           success: function(data) {

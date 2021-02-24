@@ -28,11 +28,6 @@ class CategoryDataTable extends DataTable
                 else if($category->status === Cat::HIDDEN) return 'غیر فعال';
                 else return '-';
             })
-            ->addColumn('sc_id', function (Cat $category) {
-                foreach($category->subCat as $subCat){
-                    return $subCat->name;
-                } 
-            })
             ->addColumn('action', function (Cat $category) {
                 return <<<ATAG
                             <a onclick="showConfirmationModal('{$category->id}')">
@@ -99,11 +94,8 @@ class CategoryDataTable extends DataTable
             ->title('نام')
                 ->addClass('column-title'),
             Column::make('status')
-                ->title('وضعیت')
+            ->title('وضعیت')
                 ->addClass('column-title'),
-            Column::make('sc_id')
-                ->title('دسته بندی دوم')
-                    ->addClass('column-title'),
             Column::computed('action') // This column is not in database
             ->title('ویرایش/حذف')
                 ->exportable(false)

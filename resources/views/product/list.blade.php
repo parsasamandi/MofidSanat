@@ -121,7 +121,7 @@
         $('#form_output').html('');
 
         $.ajax({
-          url: "{{ route('product.edit') }}",
+          url: "{{ url('product/edit') }}",
           method: 'get',
           data: { id: $url },
           dataType: 'json',

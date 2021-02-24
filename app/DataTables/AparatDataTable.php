@@ -26,6 +26,13 @@ class AparatDataTable extends DataTable
             ->editColumn('media_url', function(Media $media) {
                 return '<iframe src="'.$media->media_url.'"  width="50%" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>';
             })
+            ->editColumn('product_id', function (Media $media) {
+                return $media->product->name;
+            })
+            ->filterColumn('product_id', function($query,$keyword) {
+                $sql = "product_id in (select id from product where name like ?)";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
             ->addColumn('action', function(Media $media){
                 return <<<ATAG
                             <a onclick="showConfirmationModal('{$media->id}')">
@@ -66,7 +73,7 @@ class AparatDataTable extends DataTable
                     ["className" => 'dt-center text-center', "target" => '_all'],
                 ]
             )
-            ->searching(false)
+            ->searching(true)
             ->info(false)
             ->responsive(true)
             ->dom('PBCfrtip')
@@ -89,6 +96,9 @@ class AparatDataTable extends DataTable
                 ->orderable(false),
             Column::make('media_url')
             ->title('رسانه')
+                ->addClass('column-title'),
+            Column::make('product_id')
+            ->title('محصول مرتبط')
                 ->addClass('column-title'),
             Column::computed('action') // This column is not in database
                 ->exportable(false)

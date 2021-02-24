@@ -88,7 +88,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
     // Team
     Route::group(['prefix' => 'team', 'as' => 'team.'], function () {
-        Route::get('list','TeamController@index');
+        Route::get('list','TeamController@list');
         Route::get('table/list','TeamController@teamTable')->name('list.table');
         Route::post('store','TeamController@store');
         Route::get('edit', 'TeamController@edit');

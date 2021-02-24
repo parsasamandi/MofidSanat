@@ -38,11 +38,19 @@ class ProductDataTable extends DataTable
                 }
                 
             })
+            ->editColumn('c_id', function(Product $product) {
+                return $product->cat->name ?? '-';
+            })
+            ->filterColumn('c_id', function($query, $keyword) {
+                $sql = "c_id in (select id from cat where name like ?)";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
             ->editColumn('sc_id', function(Product $product) {
                 return $product->sub_cat->name ?? '-';
             })
-            ->editColumn('c_id', function(Product $product) {
-                return $product->cat->name ?? '-';
+            ->filterColumn('sc_id', function($query, $keyword) {
+                $sql = "sc_id in (select id from sub_cat where name like ?)";
+                $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->editColumn('status', function(Product $product) {
                 if($product->status === Product::VISIBLE) return 'موجود';
@@ -50,7 +58,6 @@ class ProductDataTable extends DataTable
                 else return '-';
             })
             ->addColumn('action', function (Product $product) {
-                $deleteAddress = URL::signedRoute('product.delete', ['id' => $product->id]);
                 return <<<ATAG
                             <a onclick="showConfirmationModal('{$product->id}')">
                                 <i class="fa fa-trash text-danger" aria-hidden="true"></i>
