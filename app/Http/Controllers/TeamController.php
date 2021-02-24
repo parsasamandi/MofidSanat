@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use App\Providers\SuccessMessages;
 use App\Providers\Action;
+use App\Providers\EnglishConvertion;
 use App\Http\Requests\StoreTeamRequest;
 
 class TeamController extends Controller
@@ -48,6 +49,9 @@ class TeamController extends Controller
 
     public function addTeam($request) {
 
+        // English convertion
+        $englishConvertion = new EnglishConvertion();
+
         if($request->hasFile('image')) {
             $image = $request->file('image');
             $file = $image->getClientOriginalName();
@@ -56,18 +60,9 @@ class TeamController extends Controller
             Team::updateOrCreate(
                 ['id' => $request->get('id')],
                 ['name' => $request->get('name'), 'responsibility' => $request->get('responsibility'), 
-                'linkedin' => $request->get('linkedin'), 'image' => $file, 'size' => $this->convertToEnglish($request->get('size'))]
+                'linkedin' => $request->get('linkedin'), 'image' => $file, 'size' => $englishConvertion->convert(($request->get('size')))]
             );
         }
-    }
-
-    // Convertion
-    function convertToEnglish($number) {
-        $newNumbers = range(0, 9);
-        // 1. Persian Numeric
-        $persian = array('۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹');
-
-        return str_replace($persian, $newNumbers, $number);
     }
 
     // Delete Each Team

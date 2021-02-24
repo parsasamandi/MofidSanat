@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
 use App\DataTables\PhoneNumberDataTable;
 use App\Providers\SuccessMessages;
 use App\Models\PhoneNumber;
@@ -8,7 +10,7 @@ use App\Models\Product;
 use App\Http\Requests\StorePhoneNumberRequest;
 use Illuminate\Support\Facades\Validator;
 use App\Providers\Action;
-use Illuminate\Http\Request;
+use App\Providers\EnglishConvertion;
 
 class PhoneNumberController extends Controller
 {
@@ -48,20 +50,14 @@ class PhoneNumberController extends Controller
     }
 
     public function addPhoneNumber($request) {
+
+        // English convertion
+        $englishConvertion = new EnglishConvertion();
+
         PhoneNumber::updateOrCreate(
             ['id' => $request->get('id')],
-            ['number' => $request->get('number'), 'product_id' => $request->get('productSelect')]
+            ['number' => $englishConvertion->convert($request->get('number')), 'product_id' => $request->get('productSelect')]
         );
-    }
-
-    // Convertion
-    function convertToEnglish($string) {
-        $newNumbers = range(0,9);
-        // 1. Persian Numeric
-        $persian = array('۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹');
-
-        return str_replace($persian, $newNumbers, $string);
-
     }
 
     // Edit

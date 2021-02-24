@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\DataTables\ProductDataTable;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use App\Providers\SuccessMessages;
 use App\Http\Requests\StoreProductRequest;
 use Illuminate\Database\Eloquent\Model;
@@ -15,6 +13,7 @@ use App\Models\Product;
 use App\Models\Cat;
 use App\Models\SubCat;
 use App\Models\ProductSetting;
+use App\Providers\EnglishConvertion;
 use Response;
 use File;
 use Redirect;
@@ -61,6 +60,10 @@ class ProductController extends Controller
 
     // Add Product
     public function addProduct($request) {
+
+        // English convertion
+        $englishConvertion = new EnglishConvertion();
+
         // Edit
         $product = Product::find($request->get('id'));
         if(!$product) {
@@ -69,8 +72,8 @@ class ProductController extends Controller
         }
         $product->name = $request->get('name');
         $product->model = $request->get('model');
-        $product->price = $this->convertToEnglish($request->get('price'));
-        $product->size = $this->convertToEnglish($request->get('size'));
+        $product->price = $englishConvertion->convert(($request->get('price')));
+        $product->size = $englishConvertion->convert(($request->get('size')));
         $product->desc = $request->get('description');
 
         // Category
@@ -94,15 +97,6 @@ class ProductController extends Controller
             default:
                 return $request;
         }
-    }
-
-    // Convertion
-    function convertToEnglish($number) {
-        $newNumbers = range(0, 9);
-        // 1. Persian Numeric
-        $persian = array('۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹');
-
-        return str_replace($persian, $newNumbers, $number);
     }
 
     // Edit Data
