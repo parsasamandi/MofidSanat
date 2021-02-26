@@ -5,6 +5,7 @@ use App\Models\HomeSetting;
 use Illuminate\Http\Request;
 use App\Providers\SuccessMessages;
 use Illuminate\Support\Facades\Validator;
+use App\Providers\EnglishConvertion;
 
 
 class HomeSettingController extends Controller
@@ -57,7 +58,7 @@ class HomeSettingController extends Controller
     }
 
     // Store Setting Data
-    public function store(Request $request,SuccessMessages $message)
+    public function store(Request $request,EnglishConvertion $englishConvertion,SuccessMessages $message)
     {
         $persian = ['۰', '۱', '۲', '۳', '۴', '٤', '۵', '٥', '٦', '۶', '۷', '۸', '۹'];
         $english = [ 0 ,  1 ,  2 ,  3 ,  4 ,  4 ,  5 ,  5 ,  6 ,  6 ,  7 ,  8 ,  9 ];
@@ -100,7 +101,7 @@ class HomeSettingController extends Controller
         }
         // About Us Image Size
         $home_setting7 = HomeSetting::where('name', 'about_us_imageSize')->first();
-        $home_setting7->value = str_replace($persian, $english, $request->get('about_us_imageSize'));
+        $home_setting7->value = $englishConvertion->convert($request->get('about_us_imageSize'));
         $home_setting7->save();
         // About Us Header
         $home_setting8 = HomeSetting::where('name', 'about_us_header')->first();
@@ -138,7 +139,7 @@ class HomeSettingController extends Controller
         }
         // Why Us Image Size
         $home_setting15 = HomeSetting::where('name', 'why_us_imageSize')->first();
-        $home_setting15->value = str_replace($persian, $english, $request->get('why_us_imageSize'));
+        $home_setting15->value = $englishConvertion->convert($request->get('why_us_imageSize'));
         $home_setting15->save();
         // Why Us Text
         $home_setting16 = HomeSetting::where('name', 'why_us_text')->first();
