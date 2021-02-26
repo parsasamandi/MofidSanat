@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\HomeSetting;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreHomeSettingRequest;
 use App\Providers\SuccessMessages;
 use Illuminate\Support\Facades\Validator;
 use App\Providers\EnglishConvertion;
@@ -58,11 +59,7 @@ class HomeSettingController extends Controller
     }
 
     // Store Setting Data
-    public function store(Request $request,EnglishConvertion $englishConvertion,SuccessMessages $message)
-    {
-        $persian = ['۰', '۱', '۲', '۳', '۴', '٤', '۵', '٥', '٦', '۶', '۷', '۸', '۹'];
-        $english = [ 0 ,  1 ,  2 ,  3 ,  4 ,  4 ,  5 ,  5 ,  6 ,  6 ,  7 ,  8 ,  9 ];
-
+    public function store(StoreHomeSettingRequest $request,EnglishConvertion $englishConvertion,SuccessMessages $message) {
         // Header Image
         if($request->hasFile('header_image')) {
             $header_image = $request->file('header_image');
@@ -213,7 +210,7 @@ class HomeSettingController extends Controller
 
         $success_output = $message->getInsert();
 
-        $output = array('error' => $error_array,'success' => $success_output);
+        $output = array('success' => $success_output);
 
         return json_encode($output);
     }
