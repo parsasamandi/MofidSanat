@@ -73,6 +73,7 @@ class AdminController extends Controller
             );
         }
     }
+    
     // Delete Each Admin
     public function delete(Action $action, $id) {
         return $action->delete(User::class,$id);

@@ -13,22 +13,8 @@
     {{-- Insert Modal --}}
     <x-admin.insert size="modal-lg" formId="aparatForm">
         <x-slot name="content">
-            <div class="row text-right rtl">
-                {{-- Aparat --}}
-                <div class="col-md-12 mb-3">
-                  <label for="aparat_url">لینک ویدئو:</label>
-                  <textarea rows="3" id="aparat_url" name="aparat_url" type="text" class="form-control" placeholder="لینک ویدئو آپارات"></textarea>
-                </div>
-                {{-- Product --}}
-                <div class="col-md-12">
-                  <label for="products">انتخاب محصول مرتبط:</label>
-                  <select id="products" name="products[]" class="custom-select">
-                    @foreach($products as $product)
-                      <option name="product" value="{{ $product->id }}" multiple>{{ $product->name }}</option>
-                    @endforeach
-                  </select>
-                </div>
-            </div>
+            {{-- Form --}}
+            @include('includes.form.aparat')
         </x-slot>
     </x-admin.insert>
 
@@ -39,50 +25,50 @@
 
 
 @section('scripts')
-    @parent
-    {!! $aparatTable->scripts() !!}
+@parent
+{!! $aparatTable->scripts() !!}
 
-    <script>
-        $(document).ready(function() {
+<script>
+    $(document).ready(function() {
 
-            // Product Select2
-            $('#products').select2({width:'100%'});
+        // Product Select2
+        $('#products').select2({width:'100%'});
 
-            // Aparat DataTable And Action Object
-            let dt = window.LaravelDataTables['aparatTable'];
-            let action = new requestHandler(dt,'#aparatForm','aparat');
+        // Aparat DataTable And Action Object
+        let dt = window.LaravelDataTables['aparatTable'];
+        let action = new requestHandler(dt,'#aparatForm','aparat');
 
-            // Record modal
-            $('#create_record').click(function () {
-                action.modal();
-            });
-            // Insert
-            action.insert();
-            // Delete
-            window.showConfirmationModal = function showConfirmationModal(url) {
-                action.delete(url);
-            }
-            // Edit
-            window.showEditModal = function showEditModal(url) {
-                edit(url);
-            }
-            function edit($url) {
-                $('#form_output').html('');
-                $('#formModal').modal('show');
-
-                $.ajax({
-                    url: "{{ url('aparat/edit') }}",
-                    method: "get",
-                    data: {id: $url},
-                    success: function(data) {
-                        $('#id').val($url);
-                        $('#action').val('ویرایش');
-                        $('#button_action').val('update');
-                        $('#aparat_url').val(data.media_url);
-                        $('#products').val(data.product_id).trigger('change');
-                    }
-                })
-            }
+        // Record modal
+        $('#create_record').click(function () {
+            action.modal();
         });
-    </script>
+        // Insert
+        action.insert();
+        // Delete
+        window.showConfirmationModal = function showConfirmationModal(url) {
+            action.delete(url);
+        }
+        // Edit
+        window.showEditModal = function showEditModal(url) {
+            edit(url);
+        }
+        function edit($url) {
+            $('#form_output').html('');
+            $('#formModal').modal('show');
+
+            $.ajax({
+                url: "{{ url('aparat/edit') }}",
+                method: "get",
+                data: {id: $url},
+                success: function(data) {
+                    $('#id').val($url);
+                    $('#action').val('ویرایش');
+                    $('#button_action').val('update');
+                    $('#aparat_url').val(data.media_url);
+                    $('#products').val(data.product_id).trigger('change');
+                }
+            })
+        }
+    });
+</script>
 @endsection
