@@ -127,7 +127,7 @@ class HomeSettingController extends Controller
         // Why Us Image
         if($request->hasFile('why_us_image')) {
             $why_us_image = $request->file('why_us_image');
-            $file = rand() . '.' . $why_us_image->getClientOriginalName();
+            $file = $why_us_image->getClientOriginalName();
             $why_us_image->move(public_path('images'),$file);
 
             $home_setting14 = HomeSetting::where('name','why_us_image')->first();
@@ -209,7 +209,6 @@ class HomeSettingController extends Controller
         $home_setting32->save();
 
         $success_output = $message->getInsert();
-
         $output = array('success' => $success_output);
 
         return json_encode($output);

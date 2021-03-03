@@ -182,6 +182,7 @@
                     <input name="phone_number" type="text" value="{{ $setting_phone_number }}" Placeholder="تلفن همراه"/>
                 </div>
             </div>
+            {{-- Submit button --}}
             <div class="col-md-12 text-center">
                 <button class="btn btn-primary mb-3 mt-3" type="submit">تاييد</button>
             </div>
