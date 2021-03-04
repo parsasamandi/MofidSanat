@@ -22,8 +22,6 @@ mix.js('resources/assets/js/app.js',  'public/js')
     .scripts('resources/assets/js/Persian.json','public/js/Persian.json')
     // Isotope
     .scripts('resources/assets/js/isotope.js','public/js/isotope.json')
-    // Images
-    .copy('resources/assets/images', 'public/images')
     // Ajax Request Handler
     .copy('resources/assets/js/requestHandler.js', 'public/js/requestHandler.js')
     // Fonts

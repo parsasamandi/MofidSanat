@@ -44,7 +44,7 @@ class Action {
         try {
             $modelImage = $model::find($id);
             if($modelImage) {
-                $imageDelete = public_path("images/$modelImage->$column");
+                $imageDelete = public_path("images/" . $modelImage->$column);
                 if($imageDelete) {
                     File::delete($imageDelete); 
                 }

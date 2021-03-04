@@ -15,7 +15,7 @@ class CreateMediaTable extends Migration {
 	{
 		Schema::create('media', function(Blueprint $table)
 		{
-			$table->integer('media_id', true);
+			$table->integer('id', true);
 			$table->text('media_url')->nullable();
 			$table->integer('type');
 			$table->integer('product_id')->index('product_id');
