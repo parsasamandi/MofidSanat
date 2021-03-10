@@ -6,7 +6,7 @@
   {{-- Header --}}
   <x-header pageName="شماره تلفن" buttonValue="شماره تلفن">
     <x-slot name="table">
-      {!! $phoneNumberTable->table(['class' => 'table table-striped table-bordered table-hover-responsive dt_responsive nowrap  text-center'], false) !!}
+      {!! $phoneNumberTable->table(['class' => 'table table-striped table-bordered dt_responsive nowrap  text-center'], false) !!}
     </x-slot>
   </x-header>
 
@@ -31,9 +31,6 @@
 
 <script>
   $(document).ready(function () {
-    // Select2
-    $('#productSelect').select2({width: '100%'});
-
     // phoneNumber Table
     let dt = window.LaravelDataTables['phoneNumberTable'];
     let action = new requestHandler(dt,'phoneForm', 'phoneNumber');

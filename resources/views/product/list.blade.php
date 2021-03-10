@@ -6,7 +6,7 @@
    {{-- Header --}}
   <x-header pageName="محصولات" buttonValue="محصول">
     <x-slot name="table">
-      {!! $productTable->table(['class' => 'table table-striped table-bordered table-hover-responsive dt_responsive nowrap text-center']) !!}
+      {!! $productTable->table(['class' => 'table table-striped table-bordered dt_responsive nowrap text-center']) !!}
     </x-slot>
   </x-header>
 
@@ -36,11 +36,6 @@
 
   <script>
     $(document).ready(function () {
-
-      // Select2
-      $('#category_select').select2({ width: '100%'});
-      $('#subCategory').select2({ width: '100%'});
-
       // Product DataTable And Action Object
       let dt = window.LaravelDataTables['productTable'];
       let action = new requestHandler(dt,'#productForm','product');

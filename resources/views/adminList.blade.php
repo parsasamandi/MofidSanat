@@ -5,7 +5,7 @@
   {{-- Header --}}
   <x-header pageName="ادمین" buttonValue="افزودن ادمین">
     <x-slot name="table">
-      {!! $adminTable->table(['class' => 'table table-striped table-bordered table-hover-responsive dt_responsive nowrap text-center']) !!}
+      {!! $adminTable->table(['class' => 'table table-striped table-bordered dt_responsive nowrap text-center']) !!}
     </x-slot>
   </x-header>
 

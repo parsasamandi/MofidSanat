@@ -6,7 +6,7 @@
   {{-- Header --}}
   <x-header pageName="عکس" buttonValue="افزودن عکس">  
     <x-slot name="table">
-      {!! $imageTable->table(['class' => 'table table-bordered table-striped table-hover-responsive dt_responsive nowrap text-center']) !!}
+      {!! $imageTable->table(['class' => 'table table-bordered table-striped dt_responsive nowrap text-center']) !!}
     </x-slot>
   </x-header>
 
@@ -39,9 +39,6 @@
       //   allowReplace: true,
       //   allowDrop: true,
       // });
-
-      // Product Select2
-      $('#products').select2({width:'100%'});
 
       // Image DataTable
       let dt = window.LaravelDataTables['imageTable'];

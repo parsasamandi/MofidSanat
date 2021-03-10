@@ -5,7 +5,7 @@
   {{-- Header --}}
   <x-header pageName="تیم" buttonValue="افزودن عضو">
     <x-slot name="table">
-      {!! $teamTable->table(['class' => 'table table-bordered table-striped table-hover-responsive dt_responsive nowrap text-center'], false)!!}
+      {!! $teamTable->table(['class' => 'table table-bordered table-striped dt_responsive nowrap text-center'], false)!!}
     </x-slot>
   </x-header>
 

@@ -123,12 +123,12 @@
         <script src="{{ mix('js/app.js') }}"></script>
         {{-- Ajax Requests --}}
         <script src="{{ asset('js/requestHandler.js') }}"></script>
-        {{-- Ajax Setup --}}
+
         <script>
-            $.ajaxSetup({
-                processing: true,
-                dataType: "json"
-            });
+            // Ajax Setup
+            $.ajaxSetup({ processing: true, dataType: "json" });
+            // Select2
+            $('select').select2({ width:'100%' });
         </script>
     @show
 </body>

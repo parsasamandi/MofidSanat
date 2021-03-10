@@ -6,7 +6,7 @@
     {{-- Header --}}
     <x-header pageName="ویدئو آپارات" buttonValue="ویدیئو آپارات">
         <x-slot name="table">
-            {!! $aparatTable->table(['class' => 'table table-bordered table-striped table-hover-responsive dt_responsive nowrap text-center'], false) !!}
+            {!! $aparatTable->table(['class' => 'table table-bordered table-striped dt_responsive nowrap text-center'], false) !!}
         </x-slot>
     </x-header>
 
@@ -30,10 +30,6 @@
 
 <script>
     $(document).ready(function() {
-
-        // Product Select2
-        $('#products').select2({width:'100%'});
-
         // Aparat DataTable And Action Object
         let dt = window.LaravelDataTables['aparatTable'];
         let action = new requestHandler(dt,'#aparatForm','aparat');

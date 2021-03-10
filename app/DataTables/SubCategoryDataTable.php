@@ -22,7 +22,7 @@ class SubCategoryDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addIndexColumn()
-            ->rawColumns(['action'])
+            ->rawColumns(['action', 'status'])
             ->editColumn('name', function(SubCat $subCat) {
                 return $subCat->name;   
             })
@@ -30,7 +30,7 @@ class SubCategoryDataTable extends DataTable
                 if($subCat->status === SubCat::VISIBLE) return 'فعال';
                 else if($subCat->status === SubCat::HIDDEN) return 'غیر فعال';
             })
-            ->addColumn('c_id', function (SubCat $subCat) {
+            ->editColumn('c_id', function (SubCat $subCat) {
                 return optional($subCat->cat)->name;
             })
             ->filterColumn('c_id', function($query, $keyword) {
@@ -104,8 +104,7 @@ class SubCategoryDataTable extends DataTable
             ->title('نام')
                 ->addClass('column-title'),
             Column::make('status')
-            ->title('وضعیت')
-                ->addClass('column-title'),
+                ->title('وضعیت'),
             Column::make('c_id')
             ->title('دسته بندی اول')
                 ->addClass('column-title'),
