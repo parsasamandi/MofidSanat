@@ -8,13 +8,12 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.1.3",
+        "php": "^7.3|^8.0",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^8.12",
         "laravel/telescope": "^4.4",
         "laravel/tinker": "^2.5",
         "morilog/jalali": "3.*",
-        "sopamo/laravel-filepond": "^0.5.0",
         "yajra/laravel-datatables": "^1.5",
         "yajra/laravel-datatables-oracle": "^9.15"
     },
