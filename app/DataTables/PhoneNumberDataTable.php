@@ -25,7 +25,7 @@ class PhoneNumberDataTable extends DataTable
             ->eloquent($query)
             ->addIndexColumn()
             ->rawColumns(['action'])
-            ->editColumn('product_id', function (PhoneNumber $phoneNumber) {
+            ->addColumn('product_id', function (PhoneNumber $phoneNumber) {
                 return $phoneNumber->product->name;
             })
             ->filterColumn('product_id', function ($query,$keyword) {
@@ -92,16 +92,17 @@ class PhoneNumberDataTable extends DataTable
     {
         return [
             Column::make('DT_RowIndex')
-                ->title('#')
+            ->title('#')
                 ->searchable(false)
                 ->orderable(false)
                 ->addClass('column-title'),
             Column::make('number')
-                ->title('شماره تلفن')
+            ->title('شماره تلفن')
                 ->addClass("column-title"),
             Column::make('product_id')
-                ->title('محصول')
-                ->addClass('column-title'),
+            ->title('محصول')
+                ->addClass('column-title')
+                ->orderable(false),
             Column::computed('action')
                 ->exportable(false)
                 ->searchable(false)

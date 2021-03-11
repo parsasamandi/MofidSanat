@@ -26,7 +26,7 @@ class ImageDataTable extends DataTable
             ->editColumn('media_url', function(Media $media) {
                 return "<img src=/images/" . $media->media_url . " height='auto' width='50%' />";
             })
-            ->editColumn('product_id', function (Media $media) {
+            ->addColumn('product_id', function (Media $media) {
                 return $media->product->name;
             })
             ->filterColumn('product_id', function($query,$keyword) {
@@ -99,7 +99,8 @@ class ImageDataTable extends DataTable
                 ->addClass('column-title'),
             Column::make('product_id')
             ->title('محصول مرتبط')
-                ->addClass('column-title'),
+                ->addClass('column-title')
+                ->orderable(false),
             Column::computed('action') // This column is not in database
                 ->exportable(false)
                 ->searchable(false)

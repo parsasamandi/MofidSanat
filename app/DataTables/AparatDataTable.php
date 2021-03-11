@@ -26,7 +26,7 @@ class AparatDataTable extends DataTable
             ->editColumn('media_url', function(Media $media) {
                 return '<iframe src="'.$media->media_url.'"  width="50%" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>';
             })
-            ->editColumn('product_id', function (Media $media) {
+            ->addColumn('product_id', function (Media $media) {
                 return $media->product->name;
             })
             ->filterColumn('product_id', function($query,$keyword) {
@@ -99,7 +99,8 @@ class AparatDataTable extends DataTable
                 ->addClass('column-title'),
             Column::make('product_id')
             ->title('محصول مرتبط')
-                ->addClass('column-title'),
+                ->addClass('column-title')
+                ->orderable(false),
             Column::computed('action') // This column is not in database
                 ->exportable(false)
                 ->searchable(false)

@@ -23,7 +23,6 @@ class TeamDataTable extends DataTable
             ->eloquent($query)
             ->addIndexColumn()
             ->rawColumns(['action','image','linkedin_address'])
-
             ->editColumn('linkedin_address', function(Team $team){
                 return <<<ATAG
                             <a href="$team->linkedin_address">باز کردن آدرس</a>

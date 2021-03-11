@@ -27,7 +27,7 @@ class ProductDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addIndexColumn()
-            ->rawColumns(['action','image'])
+            ->rawColumns(['action','media'])
             ->addColumn('media', function (Product $product) {
                 foreach($product->media as $media) {
                     if($media->type === MEDIA::IMAGE) 
@@ -121,7 +121,6 @@ class ProductDataTable extends DataTable
             Column::computed('media') // This column is not in database
             ->title('ویدئو | عکس')
                 ->addClass('column-title')
-                ->searchable(false)
                 ->orderable(false),
             Column::make('name')
             ->title('نام')
