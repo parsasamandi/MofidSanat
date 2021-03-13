@@ -46,16 +46,16 @@ class HomeController extends Controller
         ];
 
         $home_settings = HomeSetting::whereIn('name', $names)->get();
-        $products = Product::where('status',1)->paginate(6);
-        $cats = Cat::select('name','id')->get();
-        $teams = Team::select('name','responsibility','linkedin_address','image')->paginate(4);
+        $vars['products'] = Product::where('status',1)->paginate(6);
+        $vars['cats'] = Cat::select('name','id')->get();
+        $vars['teams'] = Team::select('name','responsibility','linkedin_address','image')->paginate(4);
 
         $vars = [];
         foreach($home_settings as $setting) {
             $vars["setting_$setting->name"] = $setting->value;
         }
 
-        return view('/home', $vars, compact('products','cats','teams'));
+        return view('/home', $vars);
     }
 
 

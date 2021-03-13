@@ -27,13 +27,35 @@ class LoginController extends Controller
      */
     protected $redirectTo = '/adminHome';
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
+
+    // Show Login login
+    public function index() {
+        return view('login');
     }
+
+    // Store Login
+    public function store(StoreLoginRequest $request) {
+        // Remember Token
+        $remember = $request->get('remember_me');
+
+        $remember_me = false;
+        if(isset($remember)) {
+            $remember_me = true;
+        }
+
+        // Auth
+        $credentials = $request->only('email', 'password');
+        if (Auth::attempt(($credentials), $remember_me)) {
+            // Authentication passed...
+            return redirect()->intended('/adminHome');
+        }
+        return back()->with('faliure', 'رمز عبور یا ایمیل شما نادرست است');
+    }
+    
+    //logout
+    public function logout(Request $request) {
+        Auth::logout();
+        return redirect('login');
+    }
+
 }

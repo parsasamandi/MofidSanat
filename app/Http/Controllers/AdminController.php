@@ -23,7 +23,7 @@ class AdminController extends Controller
 
     // Admin Home
     public function admin() {
-        return view('adminHome');
+        return view('admin.home');
     }
 
     // DataTable to blade
@@ -34,12 +34,12 @@ class AdminController extends Controller
         // Admin Table
         $vars['adminTable'] = $dataTable->html();
 
-        return view('adminList', $vars);
+        return view('admin.list', $vars);
     }
 
     // get Admin
     public function adminTable(AdminDataTable $dataTable) {
-        return $dataTable->render('adminList');
+        return $dataTable->render('admin.list');
     }
 
     // Store Admin
@@ -65,13 +65,11 @@ class AdminController extends Controller
     // Add Or Update Admin
     public function addAdmin($request) {
 
-        if($request->get('password') != 'رمز عبور جدید' and $request->get('password') != 'تکرار رمز عبور جدید') {
-            $password = Hash::make($request->get('password'));
-            User::updateOrCreate(
-                ['id' => $request->get('id')],
-                ['name' => $request->get('name'), 'email' => $request->get('email'), 'password' => $password]
-            );
-        }
+        $password = Hash::make($request->get('password'));
+        User::updateOrCreate(
+            ['id' => $request->get('id')],
+            ['name' => $request->get('name'), 'email' => $request->get('email'), 'password' => $password]
+        );
     }
     
     // Delete Each Admin

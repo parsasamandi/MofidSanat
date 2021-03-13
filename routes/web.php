@@ -13,8 +13,8 @@ use App\Http\Controllers\CategoryController;
 */
 
 // Login Page
-Route::get('login','LoginController@index')->name('login');
-Route::post('login', 'LoginController@store');
+Route::get('login','Auth\loginController@index')->name('login');
+Route::post('login', 'Auth\LoginController@store');
 // Home
 Route::get('/','HomeController@index');
 // Each Product Description
@@ -24,7 +24,7 @@ Route::get('product/products', 'ProductController@get')->name('products');
 
 Route::group(['middleware' => 'auth'], function () {
     // logout
-    Route::get('/logout', 'LoginController@logout');
+    Route::get('/logout', 'Auth\LoginController@logout');
     // Admin
     Route::get('/adminHome','AdminController@admin');
     Route::group(['prefix' => 'admin','as' => 'admin.'], function() {
