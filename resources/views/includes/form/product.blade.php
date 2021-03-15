@@ -1,23 +1,19 @@
 <div class="row">
     {{-- Name --}}
     <div class="col-md-6 mb-3">
-      <label for="name">نام:</label>
-      <input id="name" name="name" type="text" placeholder="نام">
+      <x-input key="name" name="نام" />
     </div>
     {{-- Model --}}
-    <div class="col-md-6 mb-3 ltr">
-      <label for="modal">:مدل</label>
-      <input id="model" name="model" type="text" placeholder="مدل">
+    <div class="col-md-6 mb-3">
+      <x-input key="model" name="مدل" />
     </div>
     {{-- Price --}}
-    <div class="col-md-4 mb-3 ltr">
-      <label for="price">:هزینه</label>
-      <input id="price" name="price" type="text" placeholder="هزینه">
+    <div class="col-md-4 mb-3">
+      <x-input key="price" name="هزینه" />
     </div>
     {{-- Size --}}
     <div class="col-md-4 mb-3">
-      <label for="size">اندازه:</label>
-      <input id="size" name="size" type="text" placeholder="اندازه(بین ۱ تا ۱۲ انتخاب کنید)">
+      <x-input key="model" name="اندازه(بین ۱ تا ۱۲ انتخاب کنید)" />
     </div>
     {{-- Status --}}
     <div class="col-md-4 mb-3">
@@ -47,9 +43,8 @@
         @endforeach
       </select>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12 mb-3">
+    {{-- Description --}}
+    <div class="col-md-12">
       <label for="description">توضیحات:</label>
       <textarea id="description" name="description" type="text" rows="6" Placeholder="توضیحات" class="form-control"></textarea>
     </div>

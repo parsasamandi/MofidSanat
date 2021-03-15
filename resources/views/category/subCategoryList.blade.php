@@ -10,15 +10,26 @@
   </x-header>
 
   {{-- Insert Modal --}}
-  <x-admin.insert size="modal-lg" formId="subCategoryForm">
+  <x-admin.insert size="xs" formId="subCategoryForm">
     <x-slot name="content">
       {{-- Form --}}
-      @include('includes.form.subCategory')
+      @include('includes.form.category')
+      {{-- Category --}}
+      <div class="row">
+        <div class="col-md-12 mt-3">
+          <label for="categories">در دسته بندی اول:</label>
+          <select class="custom-select" id="categories" name="categories">
+            @foreach($categories as $category)
+              <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @endforeach
+          </select>
+        </div>
+      </div>
     </x-slot>
   </x-admin.insert>
 
   {{-- Delete Modal --}}
-  <x-admin.delete title="آیا مایل به حذف دسته بندی یک هستید؟" />
+  <x-admin.delete title="آیا مایل به حذف دسته بندی دوم هستید؟" />
 
 @endsection
 

@@ -1,12 +1,7 @@
 <div class="row rtl">
     {{-- Product --}}
     <div class="col-md-6">
-      <label for="products">انتخاب محصول مرتبط:</label>
-      <select name="products[]" id="products" class="browser-default custom-select">
-        @foreach($products as $product)
-          <option value="{{ $product->id }}" multiple>{{ $product->name }}</option>
-        @endforeach
-      </select>
+      @include('includes.form.productSelectBox')
     </div>
     {{-- Image --}}
     <div class="col-md-6 mt-2">

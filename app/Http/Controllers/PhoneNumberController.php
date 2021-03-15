@@ -56,7 +56,7 @@ class PhoneNumberController extends Controller
 
         PhoneNumber::updateOrCreate(
             ['id' => $request->get('id')],
-            ['number' => $englishConvertion->convert($request->get('number')), 'product_id' => $request->get('productSelect')]
+            ['number' => $englishConvertion->convert($request->get('number')), 'product_id' => $request->get('products')]
         );
     }
 

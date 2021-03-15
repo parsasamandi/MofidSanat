@@ -6,11 +6,6 @@
     </div>
     {{-- Product --}}
     <div class="col-md-12">
-      <label for="products">انتخاب محصول مرتبط:</label>
-      <select id="products" name="products[]" class="custom-select">
-        @foreach($products as $product)
-          <option name="product" value="{{ $product->id }}" multiple>{{ $product->name }}</option>
-        @endforeach
-      </select>
+      @include('includes.form.productSelect')
     </div>
 </div>

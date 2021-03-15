@@ -65,6 +65,7 @@
           $('#button_action').val('update');
           $('#action').val('ویرایش');
           $('#number').val(data.number);
+          $('#products').val(data.product_id)
           $('#status').val(data.status).trigger('change');
         }
       })

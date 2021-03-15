@@ -272,7 +272,7 @@ input[type=text],input[type=email],input[type=password], input[type=url] {
     font-family: 'Vazir', sans-serif;
 }
 
-/* ---------------------------------- Admin---------------------------------- */
+/* ---------------------------------- Admin and DataTable ---------------------------------- */
 .admin_panel {
     text-align: center;
     padding: 10px;
@@ -300,8 +300,16 @@ table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>td.dtr-control, table.
     cursor: pointer;
 }
 
+// Right pagination
 div.dataTables_wrapper div.dataTables_paginate {
     margin: 0;
     white-space: nowrap;
     float: right;
+}
+
+// Right search input
+@media screen and (max-width: 767px) {
+    div.dataTables_wrapper div.dataTables_length, div.dataTables_wrapper div.dataTables_filter, div.dataTables_wrapper div.dataTables_info, div.dataTables_wrapper div.dataTables_paginate {
+        text-align: right;
+    }
 }

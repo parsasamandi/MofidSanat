@@ -1,8 +1,7 @@
 <div class="row">
     {{-- Name --}}
     <div class="col-md-12 mb-3">
-        <label for="title">نام:</label>
-        <input name="name" id="name" type="text" class="form-control" placeholder="نام دسته بندی">
+        <x-input key="name" name="نام" />
     </div>
     {{-- Status --}}
     <div class="col-md-12">

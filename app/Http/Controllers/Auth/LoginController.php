@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Redirect;
 
 class LoginController extends Controller
 {
@@ -49,7 +50,7 @@ class LoginController extends Controller
             // Authentication passed...
             return redirect()->intended('/adminHome');
         }
-        return back()->with('faliure', 'رمز عبور یا ایمیل شما نادرست است');
+        return Redirect::back()->withErrors('رمز عبور یا ایمیل شما نادرست است');
     }
     
     //logout

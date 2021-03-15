@@ -23,9 +23,9 @@ class SubCategoryController extends Controller
         $vars['subCategoryTable'] = $datatable->html();
 
         // Categories
-        $cats = Cat::select('name','id')->get();
+        $vars['categories'] = Cat::select('name','id')->get();
 
-        return view('category.subCategoryList', $vars , compact($cats));
+        return view('category.subCategoryList', $vars);
     }
 
     // Render Datatable

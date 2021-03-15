@@ -65,8 +65,8 @@
             $('#button_action').val('update');
             $('#name').val(data.name);
             $('#email').val(data.email);
-            $('#password').val('رمز عبور جدید');
-            $('#password2').val('رمز عبور جدید');
+            $('#password').val('newPassword');
+            $('#password-confirm').val('newPassword');
           }
         })
       }
