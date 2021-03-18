@@ -20,13 +20,6 @@ class Category extends Model
     public $timestamps = null;
 
     /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'cat';
-
-    /**
      * @var array
      */
     protected $fillable = ['name', 'status'];

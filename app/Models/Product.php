@@ -28,12 +28,6 @@ class Product extends Model
     const VIDEO = 1;
 
     public $timestamps = false;
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'product';
 
     /**
      * @var array
