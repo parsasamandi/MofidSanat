@@ -49,7 +49,7 @@ class ImageController extends Controller
             'success' => $success_output
         );
 
-        return json_encode($output);
+        return response()->json($output);
     }
 
     // Add Image

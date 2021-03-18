@@ -59,7 +59,7 @@ class AdminController extends Controller
 
         $output = array('success' => $success_output);
 
-        return json_encode($output);
+        return response()->json($output);
     }
 
     // Add Or Update Admin

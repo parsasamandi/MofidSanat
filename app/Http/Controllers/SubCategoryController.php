@@ -49,7 +49,7 @@ class SubCategoryController extends Controller
         }
 
         $output = array('success'   =>  $success_output);
-        return json_encode($output);
+        return response()->json($output);
     }
 
     // Add SUb Category

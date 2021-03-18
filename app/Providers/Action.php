@@ -8,12 +8,12 @@ class Action {
     /**
      * Edit
      * 
-     * @return json_encode
+     * @return json
      */
     public function edit($model,$id) {
         try {
             $values = $model::find($id);
-            return json_encode($values);
+            return response()->json($values);
             
         } catch (Throwable $e) {
             return response()->json($e);
@@ -23,7 +23,7 @@ class Action {
     /**
      * Delete
      * 
-     * @return json_encode
+     * @return json
      */
     public function delete($model,$id) {
         $values = $model::find($id);
@@ -38,7 +38,7 @@ class Action {
     /**
      * Delete With Image
      * 
-     * @return json_encode
+     * @return json
      */
     public function deleteWithImage($model,$id,$column) {
         try {

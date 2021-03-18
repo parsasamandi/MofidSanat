@@ -54,8 +54,8 @@ class ProductController extends Controller
             $success_output = $message->getUpdate();
         }
 
-        $output = array('success'   =>  $success_output );
-        return json_encode($output);
+        $output = array('success' => $success_output );
+        return response()->json($output);
     }
 
     // Add Product
