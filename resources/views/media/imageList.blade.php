@@ -6,7 +6,7 @@
   {{-- Header --}}
   <x-header pageName="عکس" buttonValue="افزودن عکس">  
     <x-slot name="table">
-      {!! $imageTable->table(['class' => 'table table-bordered table-striped dt_responsive nowrap text-center']) !!}
+      {!! $imageTable->table(['class' => 'table table-bordered table-striped w-100 nowrap text-center']) !!}
     </x-slot>
   </x-header>
 

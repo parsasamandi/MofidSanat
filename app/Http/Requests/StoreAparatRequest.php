@@ -24,8 +24,20 @@ class StoreAparatRequest extends FormRequest
     public function rules()
     {
         return [
-            'aparat_url' => 'required',
+            'aparat_url' => 'required|url',
             'products' => 'required'
+        ];
+    }
+
+    /**
+     * Get custom attributes for validator errors.
+     *
+     * @return array
+     */
+    public function attributes()
+    {
+        return [
+            'aparat_url' => '"لینک ویدئو آپارات"'
         ];
     }
 }

@@ -6,7 +6,7 @@
    {{-- Header --}}
   <x-header pageName="محصولات" buttonValue="محصول">
     <x-slot name="table">
-      {!! $productTable->table(['class' => 'table table-striped table-bordered dt_responsive nowrap text-center']) !!}
+      {!! $productTable->table(['class' => 'table table-striped table-bordered w-100 nowrap text-center']) !!}
     </x-slot>
   </x-header>
 

@@ -6,7 +6,7 @@
   {{-- Header --}}
   <x-header pageName="شماره تلفن" buttonValue="شماره تلفن">
     <x-slot name="table">
-      {!! $phoneNumberTable->table(['class' => 'table table-striped table-bordered dt_responsive nowrap  text-center'], false) !!}
+      {!! $phoneNumberTable->table(['class' => 'table table-striped table-bordered w-100 nowrap text-center'], false) !!}
     </x-slot>
   </x-header>
 

@@ -82,14 +82,14 @@
                             </x-admin.urlAddressParent>
 
                             {{-- Setting --}}
-                            <x-admin.urlAddressParent text="تنظیمات" fontAwesome="fa fa-cog">
-                                <x-slot name="content">
-                                    {{-- Home Setting --}}
-                                    <x-admin.urlAddress text="تنظیمات صفحه اصلی" fontAwesome="null" route="{{ url('setting/homeSetting') }}" />
-                                    {{-- Product Setting --}}
-                                    <x-admin.urlAddress text="تنظیمات صفحه محصولات" fontAwesome="null" route="{{ url('setting/productSetting') }}" />
-                                </x-slot>
-                            </x-admin.urlAddressParent>
+                            <x-admin.urlAddress text="تنظیمات صفحه اصلی" fontAwesome="null" route="{{ url('setting/homeSetting') }}" />
+
+                            {{-- Consultation --}}
+                            <x-admin.urlAddress text="تنظیمات صفحه اصلی" fontAwesome="null" route="{{ url('setting/homeSetting') }}" />
+
+                            {{-- Setting --}}
+                            <x-admin.urlAddress text="تنظیمات صفحه اصلی" fontAwesome="null" route="{{ url('setting/homeSetting') }}" />
+
                         </ul>
                     </nav>
                 </div>

@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property SubCat[] $subCats
  */
 
-class Cat extends Model
+class Category extends Model
 {
     const VISIBLE = 0;
     const HIDDEN = 1;
@@ -42,7 +42,7 @@ class Cat extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function subCat()
+    public function subCategory()
     {
         return $this->hasMany('App\Models\SubCat', 'c_id');
     }

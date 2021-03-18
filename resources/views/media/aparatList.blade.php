@@ -6,7 +6,7 @@
     {{-- Header --}}
     <x-header pageName="ویدئو آپارات" buttonValue="ویدیئو آپارات">
         <x-slot name="table">
-            {!! $aparatTable->table(['class' => 'table table-bordered table-striped dt_responsive nowrap text-center'], false) !!}
+            {!! $aparatTable->table(['class' => 'table table-bordered table-striped w-100 nowrap text-center'], false) !!}
         </x-slot>
     </x-header>
 
