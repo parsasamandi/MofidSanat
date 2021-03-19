@@ -42,7 +42,7 @@
 
       // Image DataTable
       let dt = window.LaravelDataTables['imageTable'];
-      let action = new requestHandler(dt,'#imageForm','image');
+      let action = new RequestHandler(dt,'#imageForm','image');
 
       // Record modal
       $('#create_record').click(function () {
@@ -62,10 +62,8 @@
       window.showEditModal = function showEditModal(url) {
         edit(url);
       }
-
       function edit($url) {
-        $('#form_output').html('');
-        $('#formModal').modal('show');
+        action.edit();
 
         $.ajax({
           url: "{{ url('image/edit') }}",

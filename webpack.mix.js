@@ -23,7 +23,7 @@ mix.js('resources/assets/js/app.js',  'public/js')
     // Isotope
     .scripts('resources/assets/js/isotope.js','public/js/isotope.js')
     // Ajax Request Handler
-    .copy('resources/assets/js/requestHandler.js', 'public/js/requestHandler.js')
+    .copy('resources/assets/js/RequestHandler.js', 'public/js/RequestHandler.js')
     // Fonts
     .copy('resources/assets/fonts','public/fonts');
 

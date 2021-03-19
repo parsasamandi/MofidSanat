@@ -122,7 +122,7 @@
         <script src="{{ mix('js/vendor.js') }}"></script>
         <script src="{{ mix('js/app.js') }}"></script>
         {{-- Ajax Requests --}}
-        <script src="{{ asset('js/requestHandler.js') }}"></script>
+        <script src="{{ asset('js/RequestHandler.js') }}"></script>
 
         <script>
             // Ajax Setup

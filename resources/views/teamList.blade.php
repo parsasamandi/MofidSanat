@@ -31,7 +31,7 @@
     $(document).ready(function () {
       // Admin DataTable And Action Object
       let dt = window.LaravelDataTables['teamTable'];
-      let action = new requestHandler(dt,'#teamForm','team');
+      let action = new RequestHandler(dt,'#teamForm','team');
 
       // Record modal
       $('#create_record').click(function () {
@@ -51,8 +51,8 @@
       }
       // Edit
       function edit($url) {
-        $('#formModal').modal('show');
-        $('#form_output').html('');
+        // Edit
+        action.edit();
 
         $.ajax({
           url: "{{ url('team/edit') }}",

@@ -38,7 +38,7 @@
     $(document).ready(function () {
       // Product DataTable And Action Object
       let dt = window.LaravelDataTables['productTable'];
-      let action = new requestHandler(dt,'#productForm','product');
+      let action = new RequestHandler(dt,'#productForm','product');
 
       // Record modal
       $('#create_record').click(function () {
@@ -58,8 +58,7 @@
       }
       // Edit
       function edit($url) {
-        $('#formModal').modal('show');
-        $('#form_output').html('');
+        action.edit();
 
         $.ajax({
           url: "{{ url('product/edit') }}",

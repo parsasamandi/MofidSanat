@@ -1,4 +1,4 @@
-class requestHandler {
+class RequestHandler {
     // Constructor
     constructor(dt,formId,url) {
         window.dt = dt; // DataTable 
@@ -55,6 +55,12 @@ class requestHandler {
                 }
             })
         });
+    }
+
+    // Edit
+    edit() {
+        $('#form_output').html('');
+        $('#formModal').modal('show');
     }
 }
 

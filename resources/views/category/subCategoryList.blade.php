@@ -44,7 +44,7 @@
 
       // Category DataTable
       let dt = window.LaravelDataTables['subCategoryTable'];
-      let action = new requestHandler(dt,'#subCategoryForm','subCategory');
+      let action = new RequestHandler(dt,'#subCategoryForm','subCategory');
 
       // Record modal
       $('#create_record').click(function () {

@@ -33,7 +33,7 @@
   $(document).ready(function () {
     // phoneNumber Table
     let dt = window.LaravelDataTables['phoneNumberTable'];
-    let action = new requestHandler(dt,'phoneForm', 'phoneNumber');
+    let action = new RequestHandler(dt,'phoneForm', 'phoneNumber');
 
     // Record modal
     $('#create_record').click(function () {
@@ -53,8 +53,8 @@
       edit(url);
     }
     function edit($url) {
-      $('#form_output').html('');
-      $('#formModal').modal('show');
+      // Edit
+      action.edit();
 
       $.ajax({
         url: "{{ url('phoneNumber/edit') }}",

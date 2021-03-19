@@ -32,7 +32,7 @@
     $(document).ready(function() {
         // Aparat DataTable And Action Object
         let dt = window.LaravelDataTables['aparatTable'];
-        let action = new requestHandler(dt,'#aparatForm','aparat');
+        let action = new RequestHandler(dt,'#aparatForm','aparat');
 
         // Record modal
         $('#create_record').click(function () {
@@ -49,8 +49,8 @@
             edit(url);
         }
         function edit($url) {
-            $('#form_output').html('');
-            $('#formModal').modal('show');
+            // Edit
+            action.edit();
 
             $.ajax({
                 url: "{{ url('aparat/edit') }}",

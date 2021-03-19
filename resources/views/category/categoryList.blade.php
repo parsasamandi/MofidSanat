@@ -32,7 +32,7 @@
         $(document).ready(function () {
             // Category DataTable
             let dt = window.LaravelDataTables['categoryTable'];
-            let action = new requestHandler(dt,'#categoryForm','category');
+            let action = new RequestHandler(dt,'#categoryForm','category');
 
             // Record modal
             $('#create_record').click(function () {
@@ -49,8 +49,8 @@
                 edit(url);
             }
             function edit($url) {
-                $('#formModal').modal('show');
-                $('#form_output').html('');
+                // Edit
+                action.edit();
 
                 $.ajax({
                     url: "{{ url('category/edit') }}",
