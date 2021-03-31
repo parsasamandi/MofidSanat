@@ -4,7 +4,6 @@ const CompressionPlugin = require('compression-webpack-plugin');
 mix.setPublicPath('public');
 mix.setResourceRoot('../');
 
-
 // Mix
 mix.js('resources/assets/js/app.js',  'public/js')
     .sass('resources/assets/sass/app.scss','public/css')

@@ -47,7 +47,7 @@ class HomeSettingController extends Controller
             'phone_number'
         ];
 
-        $home_settings = homeSetting::whereIn('name', $names)->select('value')->get();
+        $home_settings = homeSetting::whereIn('name', $names)->select('name','value')->get();
 
         $vars = [];
         foreach($home_settings as $setting) {
@@ -66,16 +66,16 @@ class HomeSettingController extends Controller
             $file = $header_image->getClientOriginalName();
             $header_image->move(public_path('images'),$file);
 
-            $home_setting1 = HomeSetting::where('name', 'header_image')->select('value')->first();
+            $home_setting1 = HomeSetting::where('name', 'header_image')->first();
             $home_setting1->value = $file;
             $home_setting1->save();
         }
         // Main Header
-        $home_setting2 = HomeSetting::where('name', 'header')->select('value')->first();
+        $home_setting2 = HomeSetting::where('name', 'header')->first();
         $home_setting2->value = $request->get('header');
         $home_setting2->save();
         // Sub Header
-        $home_setting3 = HomeSetting::where('name', 'sub_header')->select('value')->first();
+        $home_setting3 = HomeSetting::where('name', 'sub_header')->first();
         $home_setting3->value = $request->get('sub_header');
         $home_setting3->save();
         // Header Button
