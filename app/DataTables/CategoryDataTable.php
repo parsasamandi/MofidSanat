@@ -2,11 +2,12 @@
 
 namespace App\DataTables;
 
-use App\Models\Cat;
-use Yajra\DataTables\DataTableAbstract;
+use App\Models\Category;
+use App\Models\Status;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Illuminate\Support\Facades\URL;
+use Yajra\DataTables\Html\Editor\Editor;
+use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class CategoryDataTable extends DataTable
@@ -15,7 +16,7 @@ class CategoryDataTable extends DataTable
      * Build DataTable class.
      *
      * @param mixed $query Results from query() method.
-     * @return DataTableAbstract
+     * @return \Yajra\DataTables\DataTableAbstract
      */
     public function dataTable($query)
     {
@@ -23,12 +24,20 @@ class CategoryDataTable extends DataTable
             ->eloquent($query)
             ->addIndexColumn()
             ->rawColumns(['action'])
-            ->editColumn('status', function (Cat $category) {
-                if($category->status === Cat::VISIBLE) return 'فعال';
-                else if($category->status === Cat::HIDDEN) return 'غیر فعال';
-                else return '-';
+            ->addColumn('status', function (Category $category) {
+                if($category->statuses->status == Status::ACTIVE) return "موجود";
+                else if($category->statuses->status == Status::INACTIVE) return 'ناموجود';
             })
-            ->addColumn('action', function (Cat $category) {
+            ->filterColumn('status', function ($query, $keyword) {
+                switch($keyword) {
+                    case 'موجود': $keyword = 0; 
+                        break;
+                    case 'ناموجود': $keyword = 1;
+                }
+                $sql = 'id in (select status_id from status where status like ?)';
+                $query->whereRaw($sql, ["%{$keyword}%"]);
+            })
+            ->addColumn('action', function (Category $category){
                 return <<<ATAG
                             <a onclick="showConfirmationModal('{$category->id}')">
                                 <i class="fa fa-trash text-danger" aria-hidden="true"></i>
@@ -37,17 +46,17 @@ class CategoryDataTable extends DataTable
                             <a onclick="showEditModal('{$category->id}')">
                                 <i class="fa fa-edit text-danger" aria-hidden="true"></i>
                             </a>
-                        ATAG;      
+                        ATAG;
             });
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param Cat $model
+     * @param \App\Models\Category $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Cat $model)
+    public function query(Category $model)
     {
         return $model->newQuery();
     }
@@ -60,21 +69,23 @@ class CategoryDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('categoryTable')
-            ->minifiedAjax(route('category.list.table'))
-            ->columns($this->getColumns())
-            ->columnDefs(
-                [
-                    ["className" => 'dt-center text-center', "target" => '_all'],
-                ]
-            )
-            ->searching(true)
-            ->info(false)
-            ->pageLength(8)
-            ->responsive(true)
-            ->dom('PBCfrtip')
-            ->orderBy(1)
-            ->language(asset('js/Persian.json'));
+                ->setTableId('categoryTable')
+                ->minifiedAjax(route('category.list.table'))
+                ->columns($this->getColumns())
+                ->columnDefs([["className" => 'dt-center text-center', "target" => '_all']])
+                ->searching(true)
+                // ->lengthMenu([10,25,40])
+                ->info(false)
+                ->ordering(true)
+                ->responsive(true)
+                ->pageLength(8)
+                ->dom('PBCfrtip')
+                ->buttons(
+                    Button::make('print'),
+                    Button::make('copy')
+                )
+                ->orderBy(1)
+                ->language(asset('js/persian.json'));
     }
 
     /**
@@ -85,7 +96,7 @@ class CategoryDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('DT_RowIndex') // connected to line 226 column
+            Column::make('DT_RowIndex')
             ->title('#')
                 ->addClass('column-title')
                 ->searchable(false)
@@ -95,13 +106,14 @@ class CategoryDataTable extends DataTable
                 ->addClass('column-title'),
             Column::make('status')
             ->title('وضعیت')
-                ->addClass('column-title'),
-            Column::computed('action') // This column is not in database
-            ->title('ویرایش/حذف')
+                ->addClass('column-title')
+                ->orderable(false),
+            Column::computed('action') // This Column is not in database
                 ->exportable(false)
                 ->searchable(false)
                 ->printable(false)
                 ->orderable(false)
+                ->title('حذف | ویرایش')
                 ->addClass('column-title')
         ];
     }
@@ -111,8 +123,8 @@ class CategoryDataTable extends DataTable
      *
      * @return string
      */
-    protected function filename()//excel method
+    protected function filename()
     {
-        return 'Categories_' . date('YmdHis');
+        return 'Category_' . date('YmdHis');
     }
 }

@@ -28,8 +28,8 @@
       <label for="category_select">دسته بندی اول:</label>
       <select class="browser-default custom-select" name="categories" id="categories">
         <option value="">دسته بندی اول</option>
-        @foreach($cats as $cat)
-          <option value="{{ $cat->id }}" required> {{ $cat->name }}</option>
+        @foreach($categories as $category)
+          <option value="{{ $category->id }}"> {{ $category->name }}</option>
         @endforeach
       </select>
     </div>
@@ -38,8 +38,8 @@
       <label for="subCategory">دسته بندی دوم:</label>
       <select class="browser-default custom-select" name="subCategories" id="subCategories">
         <option value="">دسته بندی دوم</option>
-        @foreach($subCats as $subCat)
-          <option value="{{ $subCat->id }}"> {{ $subCat->name }}</option>
+        @foreach($subcategories as $subcategory)
+          <option value="{{ $subcategory->id }}"> {{ $subcategory->name }}</option>
         @endforeach
       </select>
     </div>

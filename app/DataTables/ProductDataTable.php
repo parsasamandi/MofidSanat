@@ -3,9 +3,10 @@
 namespace App\DataTables;
 
 use App\Models\Product;
-use App\Models\Cat;
+use App\Models\Category;
 use App\Models\Media;
-use App\Models\SubCat;
+use App\Models\Subcategory;
+use App\Models\Status;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -35,27 +36,25 @@ class ProductDataTable extends DataTable
                     else if($media->type === MEDIA::VIDEO) {
                         return '<iframe src="' . $media->media_url . '"  width="50%" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>';
                     }
-                }
-                
+                } 
             })
-            ->editColumn('c_id', function(Product $product) {
+            ->addColumn('category_id', function(Product $product) {
                 return $product->cat->name ?? '-';
             })
-            ->filterColumn('c_id', function($query, $keyword) {
-                $sql = "c_id in (select id from cat where name like ?)";
+            ->filterColumn('category_id', function($query, $keyword) {
+                $sql = "category_id in (select id from categories where name like ?)";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
-            ->editColumn('sc_id', function(Product $product) {
-                return $product->sub_cat->name ?? '-';
+            ->addColumn('subcategory_id', function(Product $product) {
+                return $product->subcategory->name ?? '-';
             })
-            ->filterColumn('sc_id', function($query, $keyword) {
-                $sql = "sc_id in (select id from sub_cat where name like ?)";
+            ->filterColumn('subcategory_id', function($query, $keyword) {
+                $sql = "subcategory_id in (select id from subcategories where name like ?)";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->editColumn('status', function(Product $product) {
-                if($product->status === Product::VISIBLE) return 'موجود';
-                else if($product->status === Product::HIDDEN) return 'غیر موجود';
-                else return '-';
+                if($product->statuses->status == Status::ACTIVE) return 'موجود';
+                else if($product->statuses->status == Status::INACTIVE) return 'ناموجود';
             })
             ->addColumn('action', function (Product $product) {
                 return <<<ATAG
@@ -103,7 +102,7 @@ class ProductDataTable extends DataTable
             ->responsive(true)
             ->dom('PBCfrtip')
             ->orderBy(1)
-            ->language(asset('js/Persian.json'));
+            ->language(asset('js/persian.json'));
     }
     /**
      * Get columns.
@@ -118,7 +117,7 @@ class ProductDataTable extends DataTable
                 ->addClass('column-title')
                 ->searchable(false)
                 ->orderable(false),
-            Column::computed('media') // This column is not in database
+            Column::make('media') // This column is not in database
             ->title('ویدئو | عکس')
                 ->addClass('column-title')
                 ->orderable(false),
@@ -134,10 +133,11 @@ class ProductDataTable extends DataTable
             Column::make('desc')
             ->title('توضیحات')
                 ->addClass('column-title'),
-            Column::make('c_id')
+            Column::make('category_id')
                 ->title('دسته بندی اول')
-                    ->addClass('column-title'),
-            Column::make('sc_id')
+                    ->addClass('column-title')
+                    ->orderable(false),
+            Column::make('subcategory_id')
             ->title('دسته بندی دوم')
                 ->addClass('column-title'),
             Column::make('status')

@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 use App\Models\Product;
-use App\Models\Cat;
+use App\Models\Category;
 use App\Models\Team;
-use App\Models\HomeSetting;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 
@@ -45,17 +45,21 @@ class HomeController extends Controller
             'phone_number'
         ];
 
-        $home_settings = HomeSetting::whereIn('name', $names)->get();
-        $vars['products'] = Product::where('status',1)->paginate(6);
-        $vars['cats'] = Cat::select('name','id')->get();
-        $vars['teams'] = Team::select('name','responsibility','linkedin_address','image')->paginate(4);
+        $home_settings = Setting::whereIn('name', $names)->get();
 
         $vars = [];
         foreach($home_settings as $setting) {
             $vars["setting_$setting->name"] = $setting->value;
         }
 
-        return view('/home', $vars);
+        // Products
+        // $vars['products'] = Product::where('status',1)->paginate(6);
+        // Categories
+        $vars['categories'] = Category::select('name','id')->get();
+        // Team
+        $vars['teams'] = Team::select('name','responsibility','linkedin_address','image')->paginate(4);
+
+        return view('home', $vars);
     }
 
 

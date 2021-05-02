@@ -8,8 +8,8 @@ use App\DataTables\SubCategoryDataTable;
 use App\Http\Requests\StoreSubCategoryRequest;
 use App\Providers\Action;
 use Illuminate\Http\Request;
-use App\Models\Cat;
-use App\Models\SubCat;
+use App\Models\Category;
+use App\Models\Subcategory;
 use Auth;
 use File;
 

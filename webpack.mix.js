@@ -21,8 +21,8 @@ mix.js('resources/assets/js/app.js',  'public/js')
     .scripts('resources/assets/js/Persian.json','public/js/Persian.json')
     // Isotope
     .scripts('resources/assets/js/isotope.js','public/js/isotope.js')
-    // Ajax Request Handler
-    .copy('resources/assets/js/RequestHandler.js', 'public/js/RequestHandler.js')
+    // Ajax request handler
+    .scripts('resources/assets/js/RequestHandler.js', 'public/js/RequestHandler.js')
     // Fonts
     .copy('resources/assets/fonts','public/fonts');
 

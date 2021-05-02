@@ -75,8 +75,8 @@
             $('#price').val(data.price);
             $('#size').val(data.size);
             $('#status').val(data.status).trigger('change');
-            $('#category_select').val(data.c_id).trigger('change');
-            $('#subCategory').val(data.sc_id).trigger('change');
+            $('#category_select').val(data.category_id).trigger('change');
+            $('#subCategory').val(data.subcategory_id).trigger('change');
           }
         })
       }

@@ -15,12 +15,6 @@ use Illuminate\Database\Eloquent\Model;
 class Team extends Model
 {
     public $timestamps = false;
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'team';
 
     /**
      * @var array

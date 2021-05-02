@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $name
  * @property int $status
  * @property Product[] $products
- * @property SubCat[] $subCats
+ * @property Subcategories[] $subcategories
  */
 
 class Category extends Model
@@ -29,15 +29,22 @@ class Category extends Model
      */
     public function product()
     {
-        return $this->hasMany('App\Models\Product', 'c_id');
+        return $this->hasMany('App\Models\Product', 'category_id');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function subCategory()
+    public function subcategory()
     {
-        return $this->hasMany('App\Models\SubCat', 'c_id');
+        return $this->hasMany('App\Models\Subcategory', 'category_id');
+    }
+
+    /*
+     * Get all of the category status.
+     */
+    public function statuses() {
+        return $this->morphOne('App\Models\Status', 'status');
     }
     
 }

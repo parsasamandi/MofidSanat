@@ -11,8 +11,6 @@
     <title>@yield('title')</title>
     {{-- App --}}
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    {{-- Bootstrap rtl --}}
-    {{-- <link href="{{ asset('css/bootstrap-rtl.css') }}" rel="stylesheet"> --}}
 @show
 
 <body class="hold-transition sidebar-mini">
@@ -29,7 +27,13 @@
                         <i class="fa fa-user"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item text-danger" href="/logout">خروج</a>
+                        <form method="POST" action="{{ url('logout') }}">
+                            @csrf
+                            {{-- Admin --}}
+                            <input type="hidden" name="admin" />
+                            {{-- Exit --}}
+                            <button class="dropdown-item text-danger" type="submit">خروج</button>
+                        </form>
                     </div>
                 </li>
             </ul>
@@ -89,7 +93,6 @@
 
                             {{-- Setting --}}
                             <x-admin.urlAddress text="تنظیمات صفحه اصلی" fontAwesome="null" route="{{ url('setting/homeSetting') }}" />
-
                         </ul>
                     </nav>
                 </div>

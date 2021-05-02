@@ -37,7 +37,7 @@ class StoreAparatRequest extends FormRequest
     public function attributes()
     {
         return [
-            'aparat_url' => '"لینک ویدئو آپارات"'
+            'aparat_url' => '"لینک ویدئو امبد آپارات"'
         ];
     }
 }

@@ -12,21 +12,11 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
-// Login Page
-Route::get('login','Auth\loginController@index')->name('login');
-Route::post('login', 'Auth\LoginController@store');
-// Home
-Route::get('/','HomeController@index');
-// Each Product Description
-Route::get('/product/eachProduct/{id}', 'ProductController@each');
-// Products With Categories
-Route::get('product/products', 'ProductController@get')->name('products');
-
 Route::group(['middleware' => 'auth'], function () {
-    // logout
-    Route::get('/logout', 'Auth\LoginController@logout');
+    // Logout
+    Route::post('/logout', 'Auth\LoginController@logout');
     // Admin
-    Route::get('/adminHome','AdminController@admin');
+    Route::get('/admin/home','AdminController@admin');
     Route::group(['prefix' => 'admin','as' => 'admin.'], function() {
         Route::get('list', 'AdminController@list');
         Route::get('table/list', 'AdminController@adminTable')->name('list.table');
@@ -44,7 +34,7 @@ Route::group(['middleware' => 'auth'], function () {
         // Search For Products
         Route::post('search', 'ProductController@search');
     });
-    // Categories based on Sub Categories
+    // Categories based on subcategories
     Route::get('/subCategory', 'CategoryController@ajax_subCategory');
     // Categories
     Route::group(['prefix' => 'category', 'as' => 'category.'], function () {
@@ -54,7 +44,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit','CategoryController@edit');
         Route::get('delete/{id}', 'CategoryController@delete');
     });
-    // Sub Categories
+    // Subcategories
     Route::group(['prefix' => 'subCategory', 'as' => 'subCategory.'], function() {
         Route::get('list','SubCategoryController@list');
         Route::get('table/list','SubCategoryController@subCategoryTable')->name('list.table');
@@ -78,7 +68,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit','ImageController@edit');
         Route::get('delete/{id}','ImageController@delete');
     });
-    // Phone Numbers
+    // Phone numbers
     Route::group(['prefix' => 'phoneNumber', 'as' => 'phoneNumber.'], function() {
         Route::get('list','PhoneNumberController@list');
         Route::get('table/list','PhoneNumberController@phoneNumberTable')->name('list.table');
@@ -94,15 +84,23 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit', 'TeamController@edit');
         Route::get('delete/{id}', 'TeamController@delete');
     });
-    // Home Setting
+    // Home setting
     Route::group(['prefix' => 'setting', 'as' => 'setting.'], function() {
-        // Home Setting
+        // Home setting
         Route::get('homeSetting','HomeSettingController@index')->name('homeSetting');
         Route::post('homeSetting','HomeSettingController@store')->name('storeSetting');
-        // Product Setting
+        // Product setting
         Route::get('productSetting','ProductSettingController@index')->name('productSetting');
         Route::post('productSetting','ProductSettingController@store')->name('storeProduct');
     });
 });
 
-
+// Login page
+Route::get('login','Auth\loginController@index')->name('login');
+Route::post('login', 'Auth\LoginController@store');
+// Home
+Route::get('/','HomeController@index');
+// Each product description
+Route::get('/product/eachProduct/{id}', 'ProductController@each');
+// Products with categories
+Route::get('product/products', 'ProductController@get')->name('products');

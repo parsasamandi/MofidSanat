@@ -28,17 +28,17 @@
                     <li><a href="/#services">خدمات</a></li>
                     <li class="menu-has-children"><a href="/#portfolio">محصولات</a>
                         <ul>
-                            @foreach($cats as $cat)
-                                @if($cat->subCat->count())
-                                    <li class="menu-has-children"><a href="{{route('products', ['c_id' => $cat->id])}}">{{ $cat->name }}</a>
+                            @foreach($categories as $category)
+                                @if($category->subcategory->count())
+                                    <li class="menu-has-children"><a href="{{route('products', ['c_id' => $cat->id])}}">{{ $category->name }}</a>
                                         <ul>
                                             @foreach($cat->subCat as $subCat)
-                                                <li><a href="{{route('products', ['sc_id' => $subCat->id])}}">{{ $subCat->name }}</a></li>
+                                                <li><a href="{{route('products', ['sc_id' => $subcategory->id])}}">{{ $subcategory->name }}</a></li>
                                             @endforeach
                                         </ul>
                                     </li>
                                 @else
-                                    <li><a href="{{route('products', ['c_id' => $cat->id ])}}">{{ $cat->name }}</a></li>
+                                    <li><a href="{{route('products', ['category_id' => $category->id])}}">{{ $category->name }}</a></li>
                                 @endif
                             @endforeach
                         </ul>
@@ -66,8 +66,9 @@
         <script src="{{ mix('js/app.js') }}"></script>
         <script src="{{ mix('js/vendor.js') }}"></script>
         <script src="{{ mix('js/manifest.js') }}"></script>
-        <script src="/mainStyle/isotope-layout/isotope.pkgd.min.js"></script>
-        <script src="/mainStyle/aos/aos.js"></script>
+        {{-- <script src="{{ asset('mainStyle/isotope-layout/isotope.pkgd.min.js') }}"></script> --}}
+        <script src="{{ asset('js/isotope.js') }}"></script>
+        <script src="{{ asset('mainStyle/aos/aos.js') }}"></script>
         <!-- Template Main JS File -->
         <script src="{{ asset('js/main.js') }}"></script>
 

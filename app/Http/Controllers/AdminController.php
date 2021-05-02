@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreAdminRequest;
 use App\Providers\Action;
 use App\Providers\SuccessMessages;
-use App\Models\Cat;
+use App\Models\Category;
 use App\Models\User;
 use File;
 use Session;

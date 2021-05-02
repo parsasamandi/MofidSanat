@@ -2,14 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Models\SubCat;
+use App\Models\Subcetegory;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class SubCategoryDataTable extends DataTable
+class SubcategoryDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -23,27 +23,27 @@ class SubCategoryDataTable extends DataTable
             ->eloquent($query)
             ->addIndexColumn()
             ->rawColumns(['action', 'status'])
-            ->editColumn('name', function(SubCat $subCat) {
-                return $subCat->name;   
+            ->editColumn('name', function(Subcategory $subcategory) {
+                return $subcategory->name;   
             })
-            ->editColumn('status', function (SubCat $subCat) {
-                if($subCat->status === SubCat::VISIBLE) return 'فعال';
-                else if($subCat->status === SubCat::HIDDEN) return 'غیر فعال';
+            ->editColumn('status', function (Subcategory $subcategory) {
+                if($subcategory->statuses->status == Status::ACTIVE) return 'موجود';
+                else if($subcategory->statuses->status == Status::INACTIVE) return 'ناموجود';
             })
-            ->editColumn('c_id', function (SubCat $subCat) {
-                return optional($subCat->cat)->name;
+            ->addColumn('category_id', function (Subcategory $subcategory) {
+                return optional($subcategory->category)->name;
             })
-            ->filterColumn('c_id', function($query, $keyword) {
-                $sql = "c_id in (select id from cat where name like ?)";
+            ->filterColumn('category_id', function($query, $keyword) {
+                $sql = "category_id in (select id from cat where name like ?)";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
-            ->addColumn('action', function (SubCat $subCat) {
+            ->addColumn('action', function (Subcategory $subcategory) {
                 return <<<ATAG
-                            <a onclick="showConfirmationModal('{$subCat->id}')">
+                            <a onclick="showConfirmationModal('{$subcategory->id}')">
                                 <i class="fa fa-trash text-danger" aria-hidden="true"></i>
                             </a>
                             &nbsp;
-                            <a onclick="showEditModal('{$subCat->id}')">
+                            <a onclick="showEditModal('{$subcategory->id}')">
                                 <i class="fa fa-edit text-danger" aria-hidden="true"></i>
                             </a>
                         ATAG;      
@@ -53,10 +53,10 @@ class SubCategoryDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Models\SubCat $model
+     * @param \App\Models\Subcategory $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(SubCat $model)
+    public function query(Subcategory $model)
     {
         return $model->newQuery();
     }
@@ -69,9 +69,9 @@ class SubCategoryDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-            ->setTableId('subCategoryTable')
+            ->setTableId('subcategoryTable')
             ->columns($this->getColumns())
-            ->minifiedAjax(route('subCategory.list.table'))
+            ->minifiedAjax(route('subcategory.list.table'))
             ->dom('Bfrtip')
             ->orderBy(1)
             ->columnDefs(
@@ -84,7 +84,7 @@ class SubCategoryDataTable extends DataTable
             ->responsive(true)
             ->dom('PBCfrtip')
             ->orderBy(1)
-            ->language(asset('js/Persian.json'));
+            ->language(asset('js/persian.json'));
     }
 
     /**
@@ -104,8 +104,9 @@ class SubCategoryDataTable extends DataTable
             ->title('نام')
                 ->addClass('column-title'),
             Column::make('status')
-                ->title('وضعیت'),
-            Column::make('c_id')
+                ->title('وضعیت')
+                ->orderable(false),
+            Column::make('category_id')
             ->title('دسته بندی اول')
                 ->addClass('column-title'),
             Column::computed('action') // This column is not in database
@@ -125,6 +126,6 @@ class SubCategoryDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'SubCategory_' . date('YmdHis');
+        return 'Subcategory_' . date('YmdHis');
     }
 }

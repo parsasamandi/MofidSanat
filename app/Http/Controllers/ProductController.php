@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Providers\Action;
 use App\Models\Product;
-use App\Models\Cat;
-use App\Models\SubCat;
+use App\Models\Category;
+use App\Models\Subcategory;
 use App\Models\ProductSetting;
 use App\Providers\EnglishConvertion;
 use Response;
@@ -23,9 +23,10 @@ class ProductController extends Controller
 {
     // List
     public function list(Request $request) {
-        // Categories and SubCategories
-        $vars['cats'] = Cat::select('name','id')->get();
-        $vars['subCats'] = SubCat::select('name','id')->get();
+        // Categories
+        $vars['categories'] = Category::select('name','id')->get();
+        // Subcategories
+        $vars['subcategories'] = Subcategory::select('name','id')->get();
         
         $dataTable = new ProductDataTable;
 
@@ -40,26 +41,7 @@ class ProductController extends Controller
     }
 
     // Store Admin
-    public function store(StoreProductRequest $request,SuccessMessages $message) {
-
-        // Insert or update
-        $this->addProduct($request);
-
-        if($request->get('button_action') == "insert") {
-            // Insert
-            $success_output = $message->getInsert();
-        }
-        else if($request->get('button_action') == "update") {
-            // Update
-            $success_output = $message->getUpdate();
-        }
-
-        $output = array('success' => $success_output );
-        return response()->json($output);
-    }
-
-    // Add Product
-    public function addProduct($request) {
+    public function store(StoreProductRequest $request) {
 
         // English convertion
         $englishConvertion = new EnglishConvertion();
@@ -80,12 +62,21 @@ class ProductController extends Controller
         $product->c_id = $this->subSet($request->get('categories'));
         // Sub Category
         $product->sc_id = $this->subSet($request->get('subCategories'));
-
         // Status
-        $request->get('status') == 1 ? $product->status = 1 : ($request->get('status') == 0 ? $product->status = 0 : ($product->status = null));
+        $product->status = $request->get('status');
 
         $product->save();
+
+        $product = Product::updateOrCreate(
+            ['id' => $id],
+            ['name' => $request->get('name'), 'price' => $request->get('price'), 
+            'category_id' => $courseArticle->subSet($request->get('categories')), 
+            'subcategory_id' => $courseArticle->subSet($request->get('subcategories'))]
+        );
+
+        return $this->getAction($request->get('button_action'));
     }
+
 
     // Product SubSet
     public function subSet($request) {
@@ -117,7 +108,7 @@ class ProductController extends Controller
         ]);
     }
 
-    // Get All Products In Products Page
+    // Get all products In products Page
     public function get(Request $request) {
         // If Category is requested
         if(!empty($request->get('c_id'))) {

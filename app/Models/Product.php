@@ -32,22 +32,22 @@ class Product extends Model
     /**
      * @var array
      */
-    protected $fillable = ['sc_id', 'c_id', 'name', 'model', 'price', 'desc', 'status', 'size'];
+    protected $fillable = ['subcategory_id', 'category_id', 'name', 'model', 'price', 'desc', 'status', 'size'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function subCat()
+    public function subcategory()
     {
-        return $this->belongsTo('App\Models\SubCat', 'sc_id');
+        return $this->belongsTo('App\Models\Subcategory', 'subcategory_id');
     }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function cat()
+    public function category()
     {
-        return $this->belongsTo('App\Models\Cat', 'c_id');
+        return $this->belongsTo('App\Models\Category', 'category_id');
     }
 
     /**
@@ -65,4 +65,13 @@ class Product extends Model
     {
         return $this->hasMany('App\Models\PhoneNumber');
     }
+
+    /*
+     * Get all of the course's status.
+     */
+    public function statuses() {
+        return $this->morphOne('App\Models\Status', 'status');
+    }
+
+    
 }

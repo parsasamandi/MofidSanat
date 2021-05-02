@@ -33,8 +33,8 @@
                             دسته بندی ها
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            @foreach($cats as $cat)
-                                <a class="dropdown-item" href="{{ route('products', ['c_id' => $cat->id]) }}">{{ $cat->name }}</a>
+                            @foreach($categories as $category)
+                                <a class="dropdown-item" href="{{ route('products', ['category_id' => $category->id]) }}">{{ $category->name }}</a>
                             @endforeach
                             <!-- <div class="dropdown-divider"></div> -->
                             <!-- <a class="dropdown-item" href="#">Something else here</a> -->

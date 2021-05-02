@@ -22,17 +22,17 @@
 					<li><a href="/#services">خدمات</a></li>
 					<li class="menu-has-children"><a href="/product/products">محصولات</a>
 						<ul>
-							@foreach($cats as $cat)
-								@if($cat->subCat->count())
-									<li class="menu-has-children"><a href="{{route('products', ['c_id' => $cat->id])}}">{{ $cat->name }}</a>
+							@foreach($categories as $category)
+								@if($category->subCategory->count())
+									<li class="menu-has-children"><a href="{{route('products', ['category_id' => $category->id])}}">{{ $category->name }}</a>
 										<ul>
-											@foreach($cat->subCat as $subCat)
-												<li><a href="{{ route('products', ['sc_id' => $subCat->id]) }}">{{ $subCat->name }}</a></li>
+											@foreach($category->subcategory as $subcategory)
+												<li><a href="{{ route('products', ['subcategory_id' => $subcategory->id]) }}">{{ $subcategory->name }}</a></li>
 											@endforeach
 										</ul>
 									</li>
 								@else
-                                    <li><a href="{{route('products', ['c_id' => $cat->c_id ])}}">{{ $cat->name }}</a></li>
+                                    <li><a href="{{route('products', ['category_id' => $category->id ])}}">{{ $category->name }}</a></li>
 								@endif
 							@endforeach
 						</ul>
