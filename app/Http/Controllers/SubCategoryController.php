@@ -33,42 +33,26 @@ class SubCategoryController extends Controller
         return $datatable->render('category.subCategoryList');
     }
 
-    // Storing And Updating Category
+    // Storing or updating category
     public function store(StoreSubCategoryRequest $request,SuccessMessages $message) {
 
         // Insert or update
-        $this->addSubCategory($request);
-
-        // Insert
-        if($request->get('button_action') == "insert") {
-            $success_output = $message->getInsert();
-        }
-        // Update
-        else if($request->get('button_action') == 'update') {
-            $success_output = $message->getUpdate();
-        }
-
-        $output = array('success'   =>  $success_output);
-        return response()->json($output);
-    }
-
-    // Add SUb Category
-    public function addSubCategory($request) {
-        
-        SubCat::updateOrCreate(
+        Subcategory::updateOrCreate(
             ['id' => $request->get('id')],
-            ['name' => $request->get('name'), 'status' => $request->get('status'), 'c_id' => $request->get('category')]
+            ['name' => $request->get('name'), 'status' => $request->get('status'), 'category_id' => $request->get('category')]
         );
+
+        return $this->getAction($request->get('button_action'));
     }
 
     // Edit Sub Catgory Data
     public function edit(Action $action,Request $request) {
-        return $action->edit(SubCat::class,$request->get('id'));
+        return $action->edit(Subcategory::class,$request->get('id'));
     }
 
     // Delete Each Category
     public function delete(Action $action,$id) {
-        return $action->delete(SubCat::class,$id);
+        return $action->delete(Subcategory::class,$id);
     }
 
 

@@ -46,39 +46,23 @@ class AdminController extends Controller
     public function store(StoreAdminRequest $request,SuccessMessages $message) {
 
         // Insert or update
-        $this->addAdmin($request);
-
-        // Insert
-        if($request->get('button_action') == "insert") {
-            $success_output = $message->getInsert();
-        }
-        // Update
-        else if($request->get('button_action') == 'update') {
-            $success_output = $message->getUpdate();
-        }
-
-        $output = array('success' => $success_output);
-
-        return response()->json($output);
-    }
-
-    // Add Or Update Admin
-    public function addAdmin($request) {
-
         $password = Hash::make($request->get('password'));
+
         User::updateOrCreate(
             ['id' => $request->get('id')],
             ['name' => $request->get('name'), 'email' => $request->get('email'), 'password' => $password]
         );
+
+        return $this->getAction($request->get('button_action'));
     }
     
-    // Delete Each Admin
-    public function delete(Action $action, $id) {
-        return $action->delete(User::class,$id);
-    }
-
-    // Edit Data
+    // Edit 
     public function edit(Action $action,Request $request) {
         return $action->edit(User::class,$request->get('id'));
+    }
+
+    // Delete
+    public function delete(Action $action, $id) {
+        return $action->delete(User::class,$id);
     }
 }

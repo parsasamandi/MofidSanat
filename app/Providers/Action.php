@@ -10,7 +10,7 @@ class Action {
      * 
      * @return json
      */
-    public function edit($model,$id) {
+    public function edit($model, $id) {
         try {
             $values = $model::find($id);
             return response()->json($values);
@@ -25,7 +25,7 @@ class Action {
      * 
      * @return json
      */
-    public function delete($model,$id) {
+    public function delete($model, $id) {
         $values = $model::find($id);
         if ($values) {
             $values->delete();
@@ -40,7 +40,7 @@ class Action {
      * 
      * @return json
      */
-    public function deleteWithImage($model,$id,$column) {
+    public function deleteWithImage($model, $id, $column) {
         try {
             $modelImage = $model::find($id);
             if($modelImage) {

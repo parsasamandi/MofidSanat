@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use App\Providers\SuccessMessages;
 use App\Providers\Action;
-use App\Providers\EnglishConvertion;
 use App\Http\Requests\StoreTeamRequest;
 
 class TeamController extends Controller
@@ -32,26 +31,6 @@ class TeamController extends Controller
     public function store(StoreTeamRequest $request,SuccessMessages $message) {
 
         // Insert or update
-        $this->addTeam($request);
-
-        // Insert
-        if($request->get('button_action') == "insert") {
-            $success_output = $message->getInsert();
-        }
-        // Update
-        else if($request->get('button_action') == 'update') {
-            $success_output = $message->getUpdate();
-        }
-        $output = array('success' => $success_output);
-
-        return response()->json($output);
-    }
-
-    public function addTeam($request) {
-
-        // English convertion
-        $englishConvertion = new EnglishConvertion();
-
         if($request->hasFile('image')) {
             $image = $request->file('image');
             $file = $image->getClientOriginalName();
@@ -60,19 +39,20 @@ class TeamController extends Controller
             Team::updateOrCreate(
                 ['id' => $request->get('id')],
                 ['name' => $request->get('name'), 'responsibility' => $request->get('responsibility'), 
-                'linkedin' => $request->get('linkedin'), 'image' => $file, 'size' => $englishConvertion->convert(($request->get('size')))]
+                'linkedin' => $request->get('linkedin'), 'image' => $file, 'size' => $request->get('size')]
             );
         }
+
+        return $this->getAction($request->get('button_action'));
     }
 
-    // Delete Each Team
-    public function delete(Action $action,$id) {
-        return $action->deleteWithImage(Team::class,$id,'image');
-
-    }
-
-    // Edit Team
+    // Edit 
     public function edit(Action $action,Request $request) {
-        return $action->edit(Team::class,$request->get('id')); 
+        return $action->edit(Team::class, $request->get('id')); 
+    }
+
+    // Delete
+    public function delete(Action $action,$id) {
+        return $action->deleteWithImage(Team::class, $id, 'image');
     }
 }

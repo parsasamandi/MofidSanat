@@ -4,18 +4,18 @@ namespace App\Http\Controllers;
 
 use App\DataTables\CategoryDataTable;
 use Illuminate\Http\Request;
-use App\Models\Category;
-use App\Models\Subcategory;
 use Yajra\DataTables\DataTableAbstract;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Providers\Action;
+use App\Models\Category;
+use App\Models\Subcategory;
 
 class CategoryController extends Controller
 {
-    // DataTable to blade
+    // Datatable to blade
     public function list(Request $request) {
 
         $dataTable = new CategoryDataTable;

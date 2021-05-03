@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Providers\EnglishConvertion;
 
 class StorePhoneNumberRequest extends FormRequest
 {
@@ -27,5 +28,20 @@ class StorePhoneNumberRequest extends FormRequest
             'number' => 'required|int|digits:11',
             'productSelect' => 'required'
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        // English convertion
+        $englishConvertion = new EnglishConvertion();
+
+        $this->merge([
+            'number' => $englishConvertion->convert($this->input('number'))
+        ]);
     }
 }

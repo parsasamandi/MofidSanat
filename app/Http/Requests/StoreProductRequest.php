@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Providers\EnglishConvertion;
 
 class StoreProductRequest extends FormRequest
 {
@@ -29,5 +30,20 @@ class StoreProductRequest extends FormRequest
             'price' => 'required',
             'size' => 'required|between:1,12'
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        // English convertion
+        $englishConvertion = new EnglishConvertion();
+
+        $this->merge([
+            'price' => $englishConvertion->convert($this->input('price'))
+        ]);
     }
 }

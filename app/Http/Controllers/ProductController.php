@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\DataTables\ProductDataTable;
-use App\Providers\SuccessMessages;
-use App\Http\Requests\StoreProductRequest;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\DataTables\ProductDataTable;
+use App\Providers\SuccessMessages;
+use App\Http\Requests\StoreProductRequest;
 use App\Providers\Action;
 use App\Models\Product;
 use App\Models\Category;
@@ -17,7 +17,6 @@ use App\Providers\EnglishConvertion;
 use Response;
 use File;
 use Redirect;
-
 
 class ProductController extends Controller
 {
@@ -40,38 +39,16 @@ class ProductController extends Controller
         return $datatable->render('product.list');
     }
 
-    // Store Admin
+    // Store product
     public function store(StoreProductRequest $request) {
+        // Id
+        $id = $request->get('id');
 
-        // English convertion
-        $englishConvertion = new EnglishConvertion();
-
-        // Edit
-        $product = Product::find($request->get('id'));
-        if(!$product) {
-            // Storing
-            $product = new Product(); 
-        }
-        $product->name = $request->get('name');
-        $product->model = $request->get('model');
-        $product->price = $englishConvertion->convert(($request->get('price')));
-        $product->size = $englishConvertion->convert(($request->get('size')));
-        $product->desc = $request->get('description');
-
-        // Category
-        $product->c_id = $this->subSet($request->get('categories'));
-        // Sub Category
-        $product->sc_id = $this->subSet($request->get('subCategories'));
-        // Status
-        $product->status = $request->get('status');
-
-        $product->save();
-
-        $product = Product::updateOrCreate(
+        Product::updateOrCreate(
             ['id' => $id],
-            ['name' => $request->get('name'), 'price' => $request->get('price'), 
-            'category_id' => $courseArticle->subSet($request->get('categories')), 
-            'subcategory_id' => $courseArticle->subSet($request->get('subcategories'))]
+            ['name' => $request->get('name'), 'model' => $request->get('model'),'price' => $request->get('price'), 
+            'size' => $request->get('size'),'description' => $request->get('description'), 'category_id' => $request->get('categories'), 
+            'subcategory_id' => $request->get('subcategories')]
         );
 
         return $this->getAction($request->get('button_action'));
@@ -108,23 +85,9 @@ class ProductController extends Controller
         ]);
     }
 
-    // Get all products In products Page
-    public function get(Request $request) {
-        // If Category is requested
-        if(!empty($request->get('c_id'))) {
-            return $this->getProperties('c_id', $request->get('c_id'));
-        }
-        // If Sub Category is requested
-        else if(!empty($request->get('sc_id'))) {
-            return $this->getProperties('sc_id', $request->get('sc_id'));
-        }
-        else {
-            return $this->getProperties('status',1);
-        }
-    }
+    // Get all products in products page
+    public function show(Request $request) {
 
-    // Get Categories And SubCategories
-    public function getProperties($column,$data) {
         // Product Setting
         $names = [
             'header_image',
@@ -132,40 +95,47 @@ class ProductController extends Controller
             'header_desc'
         ];
 
-        $productSettings = ProductSetting::whereIn('name',$names)->get();
-        $vars = [];
+        $productSettings = ProductSetting::whereIn('name', $names)->get();
+        $vars = []; 
         foreach($productSettings as $product) {
             $vars["product_$product->name"] = $product->value;
         }
 
-        // Search Based On Categories
-        $products = Product::where($column,$data)->paginate(9);
-        if(count($products) > 0)
-            return view('product.products',$vars,['products' => $products]);
+        $vars['products'] = Product::query();
 
-        else if(count($products) == 0 and $column == 'status') 
-            return view('product.products',$vars,['products' => $products]);
-            
+        // If category is requested
+        if($request->has('category_id')) {
+            $vars['products']->where('category_id', $request->category_id)->get();
+        }
+        // If subcategory is requested
+        else if($request->has('subcategory_id')) {
+            $vars['products']->where('category_id', $request->category_id)->get();
+        }
+
+        if($vars['products'] > 0) 
+            return view('product.products',$vars);
         else 
             return Redirect::to('product/products')->with('faliure', 'متاسفانه محصولی با این دسته بندی پیدا نشد');
-    }   
+    } 
 
     // Search
     public function search(Request $request) {
-        // If Search is requested
-        if(!empty($request->get('search'))) {
 
-            $name = $request->get('search');
+        $name = $request->get('search');
+
+        // If Search is requested
+        if(!empty($name)) {
             $products = Product::where('name',$name)->paginate(9);
 
             if(count($products) > 0)
-                return view('product.products',compact('products'));
+                return view('product.products', compact('products'));
             else 
                 return Redirect('/product/products')->with('faliure', 'متاسفانه محصولی با این نام پیدا نشد');
         } 
         else {
             return Redirect('/product/products')->with('faliure','لطفا نوشته مورد نظر خود را جستجو کنید');
         }
+
     }
 }
 

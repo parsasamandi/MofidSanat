@@ -45,12 +45,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('delete/{id}', 'CategoryController@delete');
     });
     // Subcategories
-    Route::group(['prefix' => 'subCategory', 'as' => 'subCategory.'], function() {
-        Route::get('list','SubCategoryController@list');
-        Route::get('table/list','SubCategoryController@subCategoryTable')->name('list.table');
-        Route::post('store','SubCategoryController@store');
-        Route::get('edit','SubCategoryController@edit');
-        Route::get('delete/{id}','SubCategoryController@delete');
+    Route::group(['prefix' => 'subcategory', 'as' => 'subcategory.'], function() {
+        Route::get('list','SubcategoryController@list');
+        Route::get('table/list','SubcategoryController@subcategoryTable')->name('list.table');
+        Route::post('store','SubcategoryController@store');
+        Route::get('edit','SubcategoryController@edit');
+        Route::get('delete/{id}','SubcategoryController@delete');
     });
     // Aparat
     Route::group(['prefix' => 'aparat', 'as' => 'aparat.'], function () {
@@ -103,4 +103,4 @@ Route::get('/','HomeController@index');
 // Each product description
 Route::get('/product/eachProduct/{id}', 'ProductController@each');
 // Products with categories
-Route::get('product/products', 'ProductController@get')->name('products');
+Route::get('/products', 'ProductController@show')->name('products');

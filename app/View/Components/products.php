@@ -26,7 +26,10 @@ class products extends Component
     public function render()
     {
         if($this->page == "home")   
-            $product['products'] = Product::where('status',1)->paginate(6);
+            $product['products'] = Product::whereHas('statuses', function($query) {
+                $query->active();
+            })->paginate(6);
+            
         else if($this->page == "product")
             $product['products'] = Product::where('status',1)->paginate(9);
         

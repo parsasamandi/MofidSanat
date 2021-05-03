@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Providers\EnglishConvertion;
 
 class StoreTeamRequest extends FormRequest
 {
@@ -28,5 +29,20 @@ class StoreTeamRequest extends FormRequest
             'responsibility' => 'required',
             'size' => 'required|integer|between:1,12'
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation()
+    {
+        // English convertion
+        $englishConvertion = new EnglishConvertion();
+
+        $this->merge([
+            'size' => $englishConvertion->convert($this->input('size'))
+        ]);
     }
 }

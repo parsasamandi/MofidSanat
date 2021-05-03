@@ -7,10 +7,10 @@ use App\Models\Team;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 
-
 class HomeController extends Controller
 {
     public function index() {
+        // Name
         $names = [
             'header_image',
             'header',
@@ -52,8 +52,6 @@ class HomeController extends Controller
             $vars["setting_$setting->name"] = $setting->value;
         }
 
-        // Products
-        // $vars['products'] = Product::where('status',1)->paginate(6);
         // Categories
         $vars['categories'] = Category::select('name','id')->get();
         // Team

@@ -60,6 +60,7 @@ class HomeSettingController extends Controller
 
     // Store Setting Data
     public function store(StoreHomeSettingRequest $request,EnglishConvertion $englishConvertion,SuccessMessages $message) {
+        
         // Header Image
         if($request->hasFile('header_image')) {
             $header_image = $request->file('header_image');
@@ -208,9 +209,6 @@ class HomeSettingController extends Controller
         $home_setting32->value = $request->get('about_us_imageSize');
         $home_setting32->save();
 
-        $success_output = $message->getInsert();
-        $output = array('success' => $success_output);
-
-        return response()->json($output);
+        return response()->json(['success' => $this->getInsertionMessage()]);
     }
 }

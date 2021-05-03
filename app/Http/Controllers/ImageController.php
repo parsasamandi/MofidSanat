@@ -30,30 +30,9 @@ class ImageController extends Controller
         return $dataTable->render('media.imageList');
     }
 
-    // Store
+    // Store image
     public function store(StoreImageRequest $request,SuccessMessages $message) {
 
-        // Insert or update
-        $this->addImage($request);
-
-        // Insert
-        if($request->get('button_action') == 'insert') {
-            $success_output = $message->getInsert();
-        }
-        // Update
-        else if($request->get('button_action') == 'update') {
-            $success_output = $message->getUpdate();
-        }
-        
-        $output = array(
-            'success' => $success_output
-        );
-
-        return response()->json($output);
-    }
-
-    // Add Image
-    public function addImage($request) {
         foreach($request->get('products') as $product) {
             // If there were any picture
             if($request->hasFile('image')) {
@@ -67,16 +46,17 @@ class ImageController extends Controller
                 );
             }
         }
+
+        return $this->getAction($request->get('button_action'));
     }
 
     // Edit
-    public function delete(Action $action, $id) {
-        return $action->deleteWithImage(Media::class,$id,'media_url');
-    }
-
     public function edit(Action $action,Request $request) {
         return $action->edit(Media::class,$requst->get('id'));
     }
-
-
+    
+    // Delete
+    public function delete(Action $action, $id) {
+        return $action->deleteWithImage(Media::class,$id,'media_url');
+    }
 }
