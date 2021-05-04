@@ -13,7 +13,7 @@
     </div>
     {{-- Size --}}
     <div class="col-md-4 mb-3">
-      <x-input key="model" name="اندازه(بین ۱ تا ۱۲ انتخاب کنید)" />
+      <x-input key="size" name="اندازه(بین ۱ تا ۱۲ انتخاب کنید)" />
     </div>
     {{-- Status --}}
     <div class="col-md-4 mb-3">
@@ -27,7 +27,6 @@
     <div class="col-md-6 mb-3">
       <label for="category_select">دسته بندی اول:</label>
       <select class="browser-default custom-select" name="categories" id="categories">
-        <option value="">دسته بندی اول</option>
         @foreach($categories as $category)
           <option value="{{ $category->id }}"> {{ $category->name }}</option>
         @endforeach
@@ -36,7 +35,7 @@
     {{-- Sub Category --}}
     <div class="col-md-6 mb-3 ltr">
       <label for="subCategory">دسته بندی دوم:</label>
-      <select class="browser-default custom-select" name="subCategories" id="subCategories">
+      <select class="browser-default custom-select" name="subcategories" id="subcategories">
         <option value="">دسته بندی دوم</option>
         @foreach($subcategories as $subcategory)
           <option value="{{ $subcategory->id }}"> {{ $subcategory->name }}</option>

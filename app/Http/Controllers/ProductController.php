@@ -44,11 +44,17 @@ class ProductController extends Controller
         // Id
         $id = $request->get('id');
 
-        Product::updateOrCreate(
+        $product = Product::updateOrCreate(
             ['id' => $id],
             ['name' => $request->get('name'), 'model' => $request->get('model'),'price' => $request->get('price'), 
             'size' => $request->get('size'),'description' => $request->get('description'), 'category_id' => $request->get('categories'), 
-            'subcategory_id' => $request->get('subcategories')]
+            'subcategory_id' => $this->subSet($request->get('subcategories'))]
+        );
+
+        // Status
+        $product->statuses()->updateOrCreate(
+            ['status_id' => $id],
+            ['status' => $request->get('status'), 'status_type' => Product::class]
         );
 
         return $this->getAction($request->get('button_action'));

@@ -43,7 +43,8 @@ class StoreProductRequest extends FormRequest
         $englishConvertion = new EnglishConvertion();
 
         $this->merge([
-            'price' => $englishConvertion->convert($this->input('price'))
+            'price' => $englishConvertion->convert($this->input('price')),
+            'size' => $englishConvertion->convert($this->input('size'))
         ]);
     }
 }

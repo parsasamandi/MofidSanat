@@ -130,7 +130,7 @@ class ProductDataTable extends DataTable
             Column::make('price')
             ->title('هزینه')
                 ->addClass('column-title'),
-            Column::make('desc')
+            Column::make('description')
             ->title('توضیحات')
                 ->addClass('column-title'),
             Column::make('category_id')

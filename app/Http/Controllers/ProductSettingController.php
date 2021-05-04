@@ -25,9 +25,10 @@ class ProductSettingController extends Controller
         return view('/setting/productSetting',$vars);
     }
 
-    // Store Product Data
+    // Store product data
     public function store(Request $request,SuccessMessages $message) {
-        // Header Image
+
+        // Header image
         if($request->hasFile('header_image')) {
             $header_image = $request->file('header_image');
             $file = $header_image->getClientOriginalName();
@@ -37,11 +38,12 @@ class ProductSettingController extends Controller
             $setting1->value = $file;
             $setting1->save(); 
         }
-        // Header Text
+        // Header text
         $setting2 = ProductSetting::where('name', 'header_text')->first();
         $setting2->value = $request->get('header_text');
         $setting2->save();
-        // Header Description
+
+        // Header description
         $setting3 = ProductSetting::where('name', 'header_desc')->first();
         $setting3->value = $request->get('header_desc');
         $setting3->save();

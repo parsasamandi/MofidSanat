@@ -64,30 +64,29 @@
           url: "{{ url('product/edit') }}",
           method: 'get',
           data: { id: $url },
-          dataType: 'json',
           success: function (data) { 
             $('#id').val($url);
             $('#button_action').val('update');
             $('#action').val('ویرایش'); 
             $('#name').val(data.name);
             $('#model').val(data.model);
-            $('#description').val(data.desc);
+            $('#description').val(data.description);
             $('#price').val(data.price);
             $('#size').val(data.size);
             $('#status').val(data.status).trigger('change');
-            $('#category_select').val(data.category_id).trigger('change');
-            $('#subCategory').val(data.subcategory_id).trigger('change');
+            $('#categories').val(data.category_id).trigger('change');
+            $('#subcategories').val(data.subcategory_id).trigger('change');
           }
         })
       }
       // Ajax Category Based on Sub Category
       $('#categories').on('change', function (e) {
-        var c_id = e.target.value;
-        $.get('/subCategory?c_id=' + c_id, function (data) {
+        var category_id = e.target.value;
+        $.get('/subCategory?category_id=' + category_id, function (data) {
           $('#subCategories').empty();
           $("#subCategories").append('<option value="">دسته بندی دوم</option>');
-          $.each(data, function (index, subCat) {
-            $("#subCategories").append('<option value="' + subCat.id + '">' + subCat.name + '</option>');
+          $.each(data, function (index, subcategory) {
+            $("#subCategories").append('<option value="' + subcategory.id + '">' + subcategory.name + '</option>');
           })
         })
       })
