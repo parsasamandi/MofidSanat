@@ -20,9 +20,16 @@ class Category extends Model
     public $timestamps = null;
 
     /**
+     * The table associated with the model.
+     * 
+     * @var string
+     */
+    protected $table = 'categories';
+
+    /**
      * @var array
      */
-    protected $fillable = ['name', 'status'];
+    protected $fillable = ['name'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -41,7 +48,7 @@ class Category extends Model
     }
 
     /*
-     * Get all of the category status.
+     * Get all of the categories status.
      */
     public function statuses() {
         return $this->morphOne('App\Models\Status', 'status');

@@ -10,6 +10,7 @@
         {{-- Form --}}
         <form id="{{ $formId }}" class="form-horizontal" enctype="multipart/form-data">
           {{csrf_field()}}
+          {{-- Output --}}
           <span id="form_output"></span>
 
           @if(isset($content))
@@ -21,7 +22,7 @@
           <div cl ass="form-group" align="center">
             <input type="hidden" name="id" id="id" value="" />
             <input type="hidden" name="button_action" id="button_action" value="insert" />
-            <input type="submit" name="submit" id="action" value="تایید" class="btn btn-primary" />
+            <input type="submit" name="submit" id="action" value="تایید" class="btn btn-success" />
             <button type="button" class="btn btn-danger" data-dismiss="modal">خروج</button>
           </div>
         </form>

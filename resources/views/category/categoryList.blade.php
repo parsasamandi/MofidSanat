@@ -30,7 +30,7 @@
     
     <script>
         $(document).ready(function () {
-            // Category DataTable
+            // Category datatable
             let dt = window.LaravelDataTables['categoryTable'];
             let action = new RequestHandler(dt,'#categoryForm','category');
 

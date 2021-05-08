@@ -18,7 +18,7 @@ class PhoneNumber extends Model
      * 
      * @var string
      */
-    protected $table = 'phone_number';
+    protected $table = 'phone_numbers';
 
     /**
      * @var array

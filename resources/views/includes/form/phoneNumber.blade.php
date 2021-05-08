@@ -3,10 +3,7 @@
     <x-input key="number" name="تلفن همراه" />
   </div>
   {{-- Product select box --}}
-  <label for="products">محصول:</label>
-  <select class="browser-default custom-select" id="products" name="products">
-      @foreach($products as $product)
-      <option value="{{ $product->id }}">{{ $product->name }}</option>
-      @endforeach
-  </select>
+  <div class="col-md-12">
+    @include('includes.form.productSelectBox')
+  </div>
 </div>

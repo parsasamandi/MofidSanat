@@ -12,6 +12,7 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Providers\Action;
 use App\Models\Category;
 use App\Models\Subcategory;
+use DB;
 
 class CategoryController extends Controller
 {
@@ -33,11 +34,29 @@ class CategoryController extends Controller
     // Store
     public function store(StoreCategoryRequest $request) {
 
-        // Insert or update
-        Cat::updateOrCreate(
-            ['id' => $request->get('id')],
-            ['name' => $request->get('name'), 'status' => $request->get('status')]
-        );
+        $id = $request->get('id');
+
+        DB::beginTransaction();
+        try {
+
+            // Insert or update
+            $category = Category::updateOrCreate(
+                ['id' => $id],
+                ['name' => $request->get('name')]
+            );  
+
+            // Status
+            $category->statuses()->updateOrCreate(
+                ['status_id' => $id],
+                ['status' => $request->get('status'), 'status_type' => Category::class]
+            );
+
+            DB::commit();
+
+        } catch(Exception $e) {
+            throw $e;
+            DB::rollBack();
+        }
 
         return $this->getAction($request->get('button_action'));
     }
@@ -56,9 +75,9 @@ class CategoryController extends Controller
     public function ajax_subCategory(Request $request) {
 
         $category_id = $request->get('category_id');
-        $subcategories = SubCat::where('category_id',$category_id)->get();
+        $subcategories = Subcategory::where('category_id', $category_id)->get();
 
-        return Response::json($subcategories);
+        return response()->json($subcategories);
     }
     
 }

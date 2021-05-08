@@ -24366,6 +24366,17 @@ select {
   height: 110px;
 }
 
+.image {
+  height: 75%;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 1em;
+}
+
+.btn-opaque {
+  background-color: #E2E6EA;
+}
+
 /*------------------------------------ contacts-list ------------------------------------*/
 .contacts-list-img {
   float: right;

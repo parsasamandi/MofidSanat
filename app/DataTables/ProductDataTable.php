@@ -144,7 +144,7 @@ class ProductDataTable extends DataTable
             ->title('وضعیت')
                 ->addClass('column-title'),
             Column::make('size')
-            ->title('اندازه')
+            ->title('اندازه دوره (۱ تا ۱۲)')
                 ->addClass('column-title'),
             Column::computed('action') // This column is not in database
                 ->exportable(false)

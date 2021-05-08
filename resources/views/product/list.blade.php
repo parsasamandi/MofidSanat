@@ -3,13 +3,12 @@
 
 
 @section('content')
-   {{-- Header --}}
+  {{-- Header --}}
   <x-header pageName="محصولات" buttonValue="محصول">
     <x-slot name="table">
       {!! $productTable->table(['class' => 'table table-striped table-bordered w-100 nowrap text-center']) !!}
     </x-slot>
   </x-header>
-
 
   {{-- Insert Modal --}}
   <x-admin.insert size="modal-xl" formId="productForm">
@@ -22,7 +21,7 @@
   {{-- Delete Modal --}}
   <x-admin.delete title="آیا مایل هستید محصول خود را حذف کنید؟" />
 
-  {{-- Images And Videos --}}
+  {{-- Images and videos --}}
   <div class="col-md-12 mt-3">
     <x-alert type="warning" message="لطفا عکس و ویدئو را در قسمت مربوطه و مشخص، وارد نمایید" />
   </div>

@@ -7,7 +7,7 @@ use Illuminate\View\Component;
 class urlAddressParent extends Component
 {
     public $text;
-    public $fontAwsome;
+    public $fontAwesome;
     /**
      * Create a new component instance.
      *

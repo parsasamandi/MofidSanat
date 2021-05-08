@@ -53,17 +53,30 @@
                     <!-- Sidebar Menu -->
                     <nav class="mt-2">
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                            {{-- Products --}}
-                            <x-admin.urlAddress text="محصولات" fontAwesome="fa fa-shopping-cart" route="{{ url('product/list') }}" />
+                            {{-- Admin --}}
+                            <x-admin.urlAddress text="ادمین" fontAwesome="fa fa-users" route="{{ url('admin/list') }}" />
+
+                            {{-- Courses --}}
+                            <x-admin.urlAddressParent text="محصولات" fontAwesome="fa fa-shopping-cart">
+                                <x-slot name="content">
+                                    {{-- List --}}
+                                    <x-admin.urlAddress text="لیست" fontAwesome="null" route="{{ url('product/list') }}" />
+                                    {{-- New Course --}}
+                                    <x-admin.urlAddress text="شماره همراه" fontAwesome="fas fa-phone" route="{{ url('phoneNumber/list') }}"  />
+                                    {{-- Media --}}
+                                    <x-admin.urlAddressParent text="رسانه" fontAwesome="fas fa-image">
+                                        <x-slot name="content">
+                                            {{-- Aparat --}}
+                                            <x-admin.urlAddress text="ویدئو آپارات" fontAwesome="null" route="{{ url('aparat/list') }}" />
+                                            {{-- Images --}}
+                                            <x-admin.urlAddress text="عکس" fontAwesome="null" route="{{ url('image/list') }}" />
+                                        </x-slot>
+                                    </x-admin.urlAddressParent>
+                                </x-slot>
+                            </x-admin.urlAddressParent>
 
                             {{-- Team --}}
                             <x-admin.urlAddress text="تیم" fontAwesome="fas fa-user-friends" route="{{ url('team/list') }}" />
-
-                            {{-- Phone Number --}}
-                            <x-admin.urlAddress text="شماره همراه" fontAwesome="fas fa-phone" route="{{ url('phoneNumber/list') }}" />
-
-                            {{-- Admin --}}
-                            <x-admin.urlAddress text="ادمین" fontAwesome="fa fa-users" route="{{ url('admin/list') }}" />
 
                             {{-- Categories --}}
                             <x-admin.urlAddressParent text="دسته بندی ها" fontAwesome="fa fa-list">
@@ -72,16 +85,6 @@
                                     <x-admin.urlAddress text="دسته بندی اول" fontAwesome="null" route="{{ url('category/list') }}" />
                                     {{-- Sub Categories --}}
                                     <x-admin.urlAddress text="دسته بندی دوم" fontAwesome="null" route="{{ url('subCategory/list') }}" />
-                                </x-slot>
-                            </x-admin.urlAddressParent>
-
-                            {{-- Media --}}
-                            <x-admin.urlAddressParent text="رسانه" fontAwesome="fas fa-image">
-                                <x-slot name="content">
-                                    {{-- Aparat --}}
-                                    <x-admin.urlAddress text="آپارت" fontAwesome="null" route="{{ url('aparat/list') }}" />
-                                    {{-- Images --}}
-                                    <x-admin.urlAddress text="عکس" fontAwesome="null" route="{{ url('image/list') }}" />
                                 </x-slot>
                             </x-admin.urlAddressParent>
 

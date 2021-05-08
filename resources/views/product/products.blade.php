@@ -42,7 +42,6 @@
                     </li>
                 </ul>
             </div>
-           
         </nav>
     <div>
 
@@ -55,7 +54,7 @@
         <!-- ======= Product Section ======= -->
         <section id="portfolio" class="portfolio bg-primary">
             {{-- Products --}}
-            <x-products page="product"/>
+            <x-products page="product" />
             <!-- Pagination  -->
             <ul class="pagination justify-content-center">
                 {!! $products->links() !!}
@@ -64,7 +63,6 @@
         <!-- End Product Section -->
     @endif
 @endsection
-
 
 @section('scripts')
 @parent

@@ -14,7 +14,7 @@ class urlAddress extends Component
      *
      * @return void
      */
-    public function __construct($title, $description, $fontAwesome)
+    public function __construct($text, $route, $fontAwesome)
     {
         $this->route = $route;
         $this->fontAwesome = $fontAwesome;
