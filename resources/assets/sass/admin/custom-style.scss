@@ -71,11 +71,23 @@ select {
 }
 
 .btn-opaque {
+    background-color: #e9ecef;
+}
+
+.btn-opaque:hover {
     background-color: #E2E6EA;
 }
 
-// .btn-opaque:hover {
-//     background-color: #f0eee9;
+/* Background style  */
+.tableBackground {
+    background-color: #e9ecef;
+    border-radius:5px;
+    padding: 17px 17px 10px 17px;
+}
+
+// Primary button
+// .btn-primary {
+//     background-color: #2DC997 !important;
 // }
   
 /*------------------------------------ contacts-list ------------------------------------*/

@@ -133,7 +133,7 @@
 				<form method="POST" action="{{ url('product/search') }}" class="form-inline mb-3 search">
 					{{ csrf_field() }}
 					<input class="form-control my-2" name="search" type="search" placeholder="نام دوره" aria-label="Search">
-					<button class="btn btn-success" type="submit">جستجو</button>
+					<button class="btn btn-primary" type="submit">جستجو</button>
 				</form>
 				{{-- Products --}}
 				<x-products page="home"/>
@@ -215,5 +215,4 @@
 
 	{{-- Back To Top --}}
 	<a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
-
 @endsection

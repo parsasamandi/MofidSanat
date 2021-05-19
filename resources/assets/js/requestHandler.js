@@ -43,13 +43,13 @@ class RequestHandler {
 
     // Delete
     delete(id) {
-        $('#confirmModal').modal('show');
+        $('#confirmationModal').modal('show');
         $('#ok_button').click(function () {
             $.ajax({
                 url: "/" + window.url + "/delete/" + id,
                 method: "get",
                 success: function(data) {
-                    $('#confirmModal').modal('hide');
+                    $('#confirmationModal').modal('hide');
                     window.dt.draw(false);
                 }
             })

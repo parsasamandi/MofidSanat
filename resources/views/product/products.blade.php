@@ -18,7 +18,7 @@
             <form method="POST" action="{{ url('product/search') }}" class="form-inline searchBar navbar-brand">
                 {{ csrf_field() }}
                 <input class="form-control my-1" name="search" type="text" placeholder="نام دوره" aria-label="Search">
-                <button class="btn btn-success" type="submit">جستجو</button>
+                <button class="btn btn-primary" type="submit">جستجو</button>
             </form>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

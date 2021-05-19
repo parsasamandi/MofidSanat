@@ -7,7 +7,7 @@
 
     {{-- Button --}}
     <button align="right" type="button" name="create_record" id="create_record"
-        class="btn btn-success btn-sm">افزودن {{ $buttonValue }}</button>
+        class="btn btn-primary btn-sm">افزودن {{ $buttonValue }}</button>
     <hr>
     
     {{-- Responsive Table --}}

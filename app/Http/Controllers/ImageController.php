@@ -1,16 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\DataTables\ImageDataTable;
-use App\Models\Media;
 use Illuminate\Support\Facades\Validator;
-use App\Providers\SuccessMessages;
 use Illuminate\Support\Facades\File;
-use App\Http\Requests\StoreImageRequest;
 use Illuminate\Http\Request;
-use App\DataTables\MediaDataTable;
-use App\Providers\Action;
+use App\Models\Media;
 use App\Models\Product;
+use App\DataTables\ImageDataTable;
+use App\DataTables\MediaDataTable;
+use App\Providers\SuccessMessages;
+use App\Http\Requests\StoreImageRequest;
+use App\Providers\Action;
 use Response;
 
 
@@ -36,6 +36,7 @@ class ImageController extends Controller
         foreach($request->get('products') as $product) {
             // If there were any picture
             if($request->hasFile('image')) {
+                
                 $image = $request->file('image');
                 $file = $image->getClientOriginalName();
                 $image->move(public_path('images'), $file);

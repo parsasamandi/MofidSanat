@@ -1,5 +1,5 @@
-<!-- Delete Modal -->
-<div id="confirmModal" class="modal fade" role="dialog">
+<!-- Delete modal -->
+<div id="confirmationModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">

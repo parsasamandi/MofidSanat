@@ -1,32 +1,32 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\ProductSetting;
+use App\Models\Setting;
 use App\Providers\SuccessMessages;
 use Illuminate\Http\Request;
 
 class ProductSettingController extends Controller
 {
-    // Show Product Data
+    // Show product setting
     public function index() {
         $names = [
             'header_image',
             'header_text',
-            'header_desc'
+            'header_description'
         ];
 
-        $product_settings = ProductSetting::whereIn('name', $names)->get();
+        $productSettings = Setting::whereIn('name', $names)->get();
 
         $vars = [];
-        foreach($product_settings as $setting) {
+        foreach($productSettings as $setting) {
             $vars["product_$setting->name"] = $setting->value; 
         }
 
-        return view('/setting/productSetting',$vars);
+        return view('setting.productSetting', $vars);
     }
 
-    // Store product data
-    public function store(Request $request,SuccessMessages $message) {
+    // Store product setting
+    public function store(Request $request, SuccessMessages $message) {
 
         // Header image
         if($request->hasFile('header_image')) {
@@ -34,18 +34,18 @@ class ProductSettingController extends Controller
             $file = $header_image->getClientOriginalName();
             $header_image->move(public_path('images'),$file);
 
-            $setting1 = ProductSetting::where('name', 'header_image')->first();
+            $setting1 = Setting::where('name', 'header_image')->first();
             $setting1->value = $file;
             $setting1->save(); 
         }
         // Header text
-        $setting2 = ProductSetting::where('name', 'header_text')->first();
+        $setting2 = Setting::where('name', 'header_text')->first();
         $setting2->value = $request->get('header_text');
         $setting2->save();
 
         // Header description
-        $setting3 = ProductSetting::where('name', 'header_desc')->first();
-        $setting3->value = $request->get('header_desc');
+        $setting3 = Setting::where('name', 'header_description')->first();
+        $setting3->value = $request->get('header_description');
         $setting3->save();
 
         return response()->json(['success' => $this->getInsertionMessage()]);

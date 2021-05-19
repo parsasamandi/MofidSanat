@@ -43,11 +43,11 @@ class PhoneNumberController extends Controller
 
     // Edit
     public function edit(Action $action,Request $request) {
-        return $action->edit(PhoneNumber::class,$request->get('id'));
+        return $action->edit(PhoneNumber::class, $request->get('id'));
     }
 
     // Delete
     public function delete(Action $action, $id) {
-        return $action->delete(PhoneNumber::class,$id);
+        return $action->delete(PhoneNumber::class, $id);
     }
 }

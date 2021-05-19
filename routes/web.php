@@ -101,6 +101,6 @@ Route::post('login', 'Auth\LoginController@store');
 // Home
 Route::get('/','HomeController@index');
 // Each product description
-Route::get('/product/eachProduct/{id}', 'ProductController@each');
+Route::get('/product/details/{id}', 'ProductController@details');
 // Products with categories
 Route::get('/products', 'ProductController@show')->name('products');

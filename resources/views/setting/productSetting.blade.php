@@ -12,11 +12,11 @@
         {{-- Success Or Error Output --}}
         <span id="form_output"></span>
 
-        <form id="productSetting" class="background_table" enctype="multipart/form-data">
+        <form id="productSetting" class="tableBackground" enctype="multipart/form-data">
             @csrf
             <br>
-            <!-- Header -->
             <div class="row">
+                {{-- Image --}}
                 <div class="col-md-12 mb-3">
                     <h5>تصویر پشت زمینه</h5>
                     <hr/>
@@ -33,9 +33,10 @@
                 </div>
                 <div class="col-md-6">
                     <textarea rows="4" type="text" class="form-control" name="header_desc" 
-                        placeholder="توضیح تیتر">{{ $product_header_desc }}</textarea>
+                        placeholder="توضیح تیتر">{{ $product_header_description }}</textarea>
                 </div>
             </div>
+
             <div class="col-md-12 mt-3 mb-2 text-center">
                 <button class="btn btn-primary" type="submit">تاييد</button>
             </div>

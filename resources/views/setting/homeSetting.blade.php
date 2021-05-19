@@ -7,11 +7,11 @@
             <li class="breadcrumb-item">صفحه تنظیمات</li>
         </ol>
 
-        {{-- Success Or Error Output --}}
+        {{-- Success or error output --}}
         <span id="form_output"></span>
         
-        {{-- Form Submittion --}}
-        <form id="homeSetting" class="background_table" enctype="multipart/form-data">
+        {{-- Form submittion --}}
+        <form id="homeSetting" class="tableBackground" enctype="multipart/form-data">
             @csrf
             <!-- Header -->
             <div class="row">
@@ -26,16 +26,13 @@
             </div>
             <div class="row">
                 <div class="col-md-4 mb-3">
-                    <label for="header">تیتر</label>
-                    <input value="{{ $setting_header }}" type="text" name="header" placeholder="تیتر">
+                    <x-input key="header" name="تیتر" value="{{ $setting_header }}" />
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label for="sub_header">تیتر وسط</label>
-                    <input value="{{ $setting_sub_header }}" type="text" name="sub_header" placeholder="تیتر وسط">
+                    <x-input key="sub_header" name="تیتر وسط" value="{{ $setting_sub_header }}" />
                 </div>
                 <div class="col-md-4 mb-3">
-                    <label for="header_button">متن دکمه</label>
-                    <input value="{{ $setting_header_button }}" type="text" name="header_button" placeholder="متن دکمه">
+                    <x-input key="header_button" name="متن دکمه" value="{{ $setting_header_button }}" />
                 </div>
             </div>
             <!-- About Us -->
@@ -43,9 +40,7 @@
                 <div class="col-md-12">
                     <h5>درباره ما</h5>
                     <hr>
-                    <label for="about_us_headerText">نوشته اول بخش درباره ما</label>
-                    <textarea rows="2" type="text" name="about_us_headerText" class="form-control"
-                        placeholder="نوشته اول بخش درباره ما">{{ $setting_about_us_headerText }}</textarea>
+                    <x-textarea key="about_us_headerText" name="نوشته اول بخش درباره ما" value="{{ $setting_about_us_headerText }}" />
                 </div>
                 <div class="col-md-6 mb-3">
                     <label for="about_us_image">تصویر درباره ما</label>
@@ -53,35 +48,25 @@
                     <input type="file" name="about_us_image"/>
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label for="about_us_imageSize">اندازه عکس بخش درباره ما</label>
-                    <input name="about_us_imageSize" type="text" value="{{ $setting_about_us_imageSize }}" Placeholder="اندازه عکس بخش درباره ما"/>
+                    <x-input key="about_us_imageSize" name="اندازه عکس بخش درباره ما" value="{{ $setting_about_us_imageSize }}" />
                 </div>
                 <div class="col-md-6 mb-2">
-                    <label for="about_us_header">تیتر اول بخش درباره ما</label>
-                    <input name="about_us_header" type="text" value="{{ $setting_about_us_header }}" Placeholder="تیتر اول بخش درباره ما"/>
+                    <x-input key="about_us_header" name="تیتر اول بخش درباره ما" value="{{ $setting_about_us_header }}" />
                 </div>
                 <div class="col-md-6 mb-2">
-                    <label for="about_us_text">توضیح بخش اول درباره ما</label>
-                    <textarea rows="2" type="text"  class="form-control mb-3" name="about_us_text"
-                        placeholder="توضیح بخش اول درباره ما">{{ $setting_about_us_text }}</textarea>
+                    <x-textarea key="about_us_text" name="توضیح بخش اول درباره ما" value="{{ $setting_about_us_text }}" />
                 </div>
                 <div class="col-md-6 mb-2">
-                    <label for="about_us_header2">تیتر دوم بخش درباره ما</label>
-                    <input name="about_us_header2" type="text" value="{{ $setting_about_us_header2 }}" Placeholder="تیتر دوم بخش درباره ما"/>
+                    <x-input key="about_us_header2" name="تیتر دوم بخش درباره ما" value="{{ $setting_about_us_header2 }}" />
                 </div>
                 <div class="col-md-6 mb-2">
-                    <label for="about_us_text2">توضیح دوم بخش درباره ما</label>
-                    <textarea rows="2" type="text" class="form-control mb-3" name="about_us_text2"
-                        placeholder="توضیح دوم بخش درباره ما">{{ $setting_about_us_text2 }}</textarea>
+                    <x-textarea key="about_us_text2" name="توضیح دوم بخش درباره ما" value="{{ $setting_about_us_text2 }}" />
                 </div>
                 <div class="col-md-6 mb-2">
-                    <label for="about_us_header3">تیتر سوم بخش درباره ما</label>
-                    <input  name="about_us_header3" type="text" value="{{ $setting_about_us_header3 }}" Placeholder="تیتر سوم بخش درباره ما"/>
+                    <x-input key="about_us_header3" name="تیتر سوم بخش درباره ما" value="{{ $setting_about_us_header3 }}" />
                 </div>
                 <div class="col-md-6 mb-2">
-                    <label for="about_us_text3">توضیح سوم بخش درباره ما</label>
-                    <textarea rows="2" type="text" class="form-control mb-3" name="about_us_text3"
-                        placeholder="توضیح سوم بخش درباره ما">{{ $setting_about_us_text3 }}</textarea>
+                    <x-textarea key="about_us_text3" name="توضیح سوم بخش درباره ما" value="{{ $setting_about_us_text3 }}" />
                 </div>
             </div>
             <!-- Why Us? -->
@@ -89,9 +74,7 @@
                 <div class="col-md-12">
                     <h5>چرا ما؟</h5>
                     <hr>
-                    <label for="why_us_text">نوشته بخش چرا ما</label>
-                    <textarea rows="2" type="text" class="form-control mb-2" name="why_us_text" class="custom-file-input"
-                        placeholder="نوشته بخش چرا ما">{{ $setting_why_us_text }}</textarea>
+                    <x-textarea key="why_us_text" name="نوشته بخش چرا ما" value="{{ $setting_why_us_text }}" />
                 </div>
                 <div class="col-md-6 mb-2">
                     <label for="why_us_image">عکس بخش چرا ما</label>
@@ -99,68 +82,50 @@
                     <input type="file" name="why_us_image"/>
                 </div>
                 <div class="col-md-6 mb-2">
-                    <label for="why_us_imageSize">اندازه عکس بخش چرا ما</label>
-                    <input value="{{ $setting_why_us_imageSize }}" Placeholder="اندازه عکس بخش چرا ما" name="why_us_imageSize" class="form-control"/>
+                    <x-input key="why_us_imageSize" name="اندازه عکس بخش چرا ما" value="{{ $setting_why_us_imageSize }}" />
                 </div>
             </div>
             <!-- Services -->
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 mt-2">
                     <h5>خدمات</h5>
                     <hr>
                 </div>
                 <div class="col-md-6 mb-2">
-                    <label for="service_header">تیتر اول بخش خدمات</label>
-                    <input value="{{ $setting_service_header }}" Placeholder="تیتر اول بخش خدمات" name="service_header" class="form-control"/>
+                    <x-input key="service_header" name="تیتر اول بخش خدمات" value="{{ $setting_service_header }}" />
                 </div>
                 <div class="col-md-6 mb-2">
-                    <label for="service_text">توضیح اول بخش خدمات</label>
-                    <textarea Placeholder="توضیح اول بخش خدمات" name="service_text" class="form-control">{{ $setting_service_text }}</textarea>
+                    <x-textarea key="service_text" name="توضیح اول بخش خدمات" value="{{ $setting_service_text }}" />
                 </div>
                 <div class="col-md-6 mb-2">
-                    <label for="servie_header2">تیتر دوم بخش خدمات</label>
-                    <input value="{{ $setting_service_header2 }}" Placeholder="تیتر دوم بخش خدمات" name="service_header2" class="form-control"/>
+                    <x-input key="service_header2" name="تیتر دوم بخش خدمات" value="{{ $setting_about_us_header2 }}" />
                 </div>
                 <div class="col-md-6 mb-2">
-                    <label for="service_text2">توضیح دوم بخش خدمات</label>
-                    <textarea rows="2" type="text" class="form-control mb-3" name="service_text2"
-                        placeholder="توضیح دوم بخش خدمات">{{ $setting_service_text2 }}</textarea>
+                    <x-textarea key="service_text2" name="توضیح اول بخش خدمات" value="{{ $setting_service_text2 }}" />
                 </div>
                 <div class="col-md-6 mb-2">
-                    <label for="service_header3">تیتر سوم بخش خدمات</label>
-                    <input name="service_header3" type="text" value="{{ $setting_service_header3 }}" Placeholder="تیتر سوم بخش خدمات"/>
+                    <x-input key="service_header3" name="تیتر سوم بخش خدمات" value="{{ $setting_service_header3 }}" />
                 </div>
                 <div class="col-md-6 mb-2">
-                    <label for="service_text3">توضیح سوم بخش خدمات</label>
-                    <textarea rows="2" type="text" name="service_text3" class="form-control"
-                        placeholder="توضیح سوم بخش خدمات">{{ $setting_service_text3 }}</textarea>
+                    <x-textarea key="service_text3" rows="2" name="توضیح سوم بخش خدمات" value="{{ $setting_service_text3 }}" />
                 </div>
                 <div class="col-md-6 mb-2">
-                    <label for="service_header4">تیتر چهارم بخش درباره ما</label>
-                    <input value="{{ $setting_service_header4 }}" Placeholder="تیتر چهارم بخش خدمات" name="service_header4" class="form-control"/>
+                    <x-input key="service_header4" name="تیتر چهارم بخش خدمات" value="{{ $setting_service_header4 }}" />
                 </div>
                 <div class="col-md-6 mb-2">
-                    <label for="setvice_text4">توضیح چهارم بخش درباره ما</label>
-                    <textarea rows="2" type="text" class="form-control mb-3" name="service_text4"
-                        placeholder="توضیح چهارم بخش خدمات">{{ $setting_service_text4 }}</textarea>
+                    <x-textarea key="service_text4" name="توضیح چهارم بخش خدمات" value="{{ $setting_service_text4 }}" />
                 </div>
                 <div class="col-md-6 mb-2">
-                    <label for="setvice_header3">تیتر پنجم بخش خدمات</label>
-                    <input value="{{ $setting_service_header5 }}" Placeholder="تیتر پنجم بخش خدمات" name="service_header5" class="form-control"/>
+                    <x-input key="service_header5" name="تیتر پنجم بخش خدمات" value="{{ $setting_service_header5 }}" />
                 </div>
                 <div class="col-md-6 mb-2">
-                    <label for="service_text5">توضیح پنجم بخش خدمات</label>
-                    <textarea rows="2" type="text" class="form-control mb-3" name="service_text5"
-                        placeholder="توضیح پنجم بخش خدمات">{{ $setting_service_text5 }}</textarea>
+                    <x-input key="service_text5" name="توضیح پنجم بخش خدمات" value="{{ $setting_service_text5 }}" />
                 </div>
                 <div class="col-md-6 mb-2">
-                    <label for="service_header6">تیتر ششم بخش خدمات</label>
-                    <input name="service_header6" type="text" value="{{ $setting_service_header6 }}" Placeholder="تیتر ششم بخش خدمات"/>
+                    <x-input key="service_header6" name="تیتر ششم بخش خدمات" value="{{ $setting_service_header6 }}" />
                 </div>
                 <div class="col-md-6 mb-2">
-                    <label for="service_text6">توضیح ششم بخش درباره ما</label>
-                    <textarea rows="2" type="text" class="form-control" name="service_text6"
-                        placeholder="توضیح ششم بخش درباره ما">{{ $setting_service_text6 }}</textarea>
+                    <x-input key="service_text6" name="توضیح ششم بخش خدمات" value="{{ $setting_service_text6 }}" />
                 </div>
             </div>
             <!-- Contact Us -->
@@ -170,16 +135,13 @@
                     <hr>
                 </div>
                 <div class="col-md-12 mb-2">
-                    <label for="address">آدرس</label>
-                    <textarea Placeholder="آدرس" name="address" class="form-control">{{ $setting_address }}</textarea>
+                    <x-textarea key="address" name="آدرس" value="{{ $setting_address }}" />
                 </div>
                 <div class="col-md-6 mb-2">
-                    <label for="email">ایمیل</label>
-                    <input name="email" type="email" value="{{ $setting_email_footer }}" Placeholder="ایمیل"/>
+                    <x-input key="email" name="ایمیل" value="{{ $setting_email_footer }}" />
                 </div>
                 <div class="col-md-6 mb-2">
-                    <label for="phone_number">تلفن همراه</label>
-                    <input name="phone_number" type="text" value="{{ $setting_phone_number }}" Placeholder="تلفن همراه"/>
+                    <x-input key="phone_number" name="تلفن همراه" value="{{ $setting_phone_number }}" />
                 </div>
             </div>
             {{-- Submit button --}}
@@ -194,11 +156,12 @@
 @section('scripts')
     @parent
     <script>
-        // Insert Home Setting
+        // Insert home setting
         $('#homeSetting').on('submit', function(event) {
             event.preventDefault();
             var form_data = new FormData(this);
             form_data.append('file',form_data);
+
             $.ajax({
                 url: "{{ route('setting.storeSetting') }}",
                 method: "POST",
@@ -208,7 +171,7 @@
                 processData: false,
                 cache: false,
                 success: function(data) {
-                    $('#form_output').html(data.success);
+                    $('#form_output').html(data.message);
                     $('#homeSetting')[0].reset();
                 }
             })

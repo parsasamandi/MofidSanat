@@ -6,7 +6,7 @@
                 <div class="portfolio-info">
                     <h4 class="text-center">{{ $product->name }}</h4>
                     <a href="/images/{{ $product->media[0]->media_url }}" data-gall="portfolioGallery" class="venobox preview-link" title="{{ $product->name }}"><i class="bx bx-plus"></i></a>
-                    <a href="/product/eachProduct/{{ $product->id }}" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+                    <a href="/product/details/{{ $product->id }}" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
                 </div>
             @endif
         </div>

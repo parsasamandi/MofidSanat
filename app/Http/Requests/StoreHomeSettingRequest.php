@@ -24,8 +24,7 @@ class StoreHomeSettingRequest extends FormRequest
     public function rules()
     {
         return [
-            'about_us_imageSize' => 'Integer|between:1,12',
-            'why_us_imageSize' => 'Integer|between:1,12'
+
         ];
     }
 }

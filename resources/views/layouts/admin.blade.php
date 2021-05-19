@@ -91,11 +91,8 @@
                             {{-- Setting --}}
                             <x-admin.urlAddress text="تنظیمات صفحه اصلی" fontAwesome="null" route="{{ url('setting/homeSetting') }}" />
 
-                            {{-- Consultation --}}
-                            <x-admin.urlAddress text="تنظیمات صفحه اصلی" fontAwesome="null" route="{{ url('setting/homeSetting') }}" />
-
-                            {{-- Setting --}}
-                            <x-admin.urlAddress text="تنظیمات صفحه اصلی" fontAwesome="null" route="{{ url('setting/homeSetting') }}" />
+                            {{-- Product setting --}}
+                            <x-admin.urlAddress text="تنظیمات صفحه محصولات" fontAwesome="null" route="{{ url('setting/productSetting') }}" />
                         </ul>
                     </nav>
                 </div>

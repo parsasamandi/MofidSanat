@@ -84,11 +84,11 @@ class ProductController extends Controller
     }
 
     // Each Data for displaying
-    public function each($id) {
+    public function details($id) {
+
         $product = Product::find($id);
-        return view("/product/eachProduct",[
-            "product" => $product
-        ]);
+
+        return view("product.details",["product" => $product]);
     }
 
     // Get all products in products page
