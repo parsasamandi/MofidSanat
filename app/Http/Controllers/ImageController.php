@@ -36,14 +36,14 @@ class ImageController extends Controller
         foreach($request->get('products') as $product) {
             // If there were any picture
             if($request->hasFile('image')) {
-                
+
                 $image = $request->file('image');
                 $file = $image->getClientOriginalName();
                 $image->move(public_path('images'), $file);
 
                 Media::updateOrCreate(
                     ['id' => $request->get('id')],
-                    ['media_url' => $file, 'product_id' => $product, 'type' => 0]
+                    ['media_url' => $file, 'product_id' => $product, 'type' => Media::IMAGE]
                 );
             }
         }

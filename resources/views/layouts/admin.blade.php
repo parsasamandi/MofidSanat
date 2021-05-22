@@ -56,7 +56,7 @@
                             {{-- Admin --}}
                             <x-admin.urlAddress text="ادمین" fontAwesome="fa fa-users" route="{{ url('admin/list') }}" />
 
-                            {{-- Courses --}}
+                            {{-- Products --}}
                             <x-admin.urlAddressParent text="محصولات" fontAwesome="fa fa-shopping-cart">
                                 <x-slot name="content">
                                     {{-- List --}}
@@ -88,11 +88,18 @@
                                 </x-slot>
                             </x-admin.urlAddressParent>
 
-                            {{-- Setting --}}
-                            <x-admin.urlAddress text="تنظیمات صفحه اصلی" fontAwesome="null" route="{{ url('setting/homeSetting') }}" />
+                            {{-- Service --}}
+                            <x-admin.urlAddress text="خدمات" fontAwesome="fa fa-id-badge" route="{{ url('setting/homeSetting') }}" />
 
-                            {{-- Product setting --}}
-                            <x-admin.urlAddress text="تنظیمات صفحه محصولات" fontAwesome="null" route="{{ url('setting/productSetting') }}" />
+                            {{-- Settings--}}
+                            <x-admin.urlAddressParent text="تنظیمات" fontAwesome="fa fa-cogs">
+                                <x-slot name="content">
+                                    {{-- Home --}}
+                                    <x-admin.urlAddress text="تنظیمات صفحه اصلی" fontAwesome="null" route="{{ url('setting/homeSetting') }}" />
+                                    {{-- Product --}}
+                                    <x-admin.urlAddress text="تنظیمات صفحه محصولات" fontAwesome="null" route="{{ url('setting/productSetting') }}" />
+                                </x-slot>
+                            </x-admin.urlAddressParent>
                         </ul>
                     </nav>
                 </div>

@@ -35,22 +35,11 @@
       <h3>توضیحات محصول</h3>
       <ul>
         <li>
-          @if($product->Cat)
-            <strong>
-              دسته بندی اول:
-            </strong>
-            {{ $product->Cat->name }}
-          @else
-            دسته بندی برای این محصول وجود ندارد
-          @endif
+          {{ $product->category->name ?? 'دسته بندی برای این محصول وجود ندارد' }}
         </li>
         <li>
-          @if($product->SubCat)
-            <strong>دسته بندی دوم:</strong>
-            {{ $product->SubCat->name }}
-          @else
-            دسته بندی دومی برای این محصول وجود ندارد
-          @endif
+          <strong>دسته بندی دوم:</strong>
+          {{ $product->subcategory->name ?? 'دسته بندی دومی برای این محصول وجود ندارد' }}
         </li>
         <li>
           <strong>مدل:</strong>
@@ -60,12 +49,12 @@
           <strong>هزینه:</strong>
           {{ $product->price }} تومان
         </li>
-          <li>
-            <strong>شماره تماس:</strong> 
-            @foreach($product->phone as $phoneNumber)
-              {{ $phoneNumber->number }}/
-            @endforeach
-          </li>
+        <li>
+          <strong>شماره تماس:</strong> 
+          @foreach($product->phoneNumbers as $phoneNumber)
+            {{ $phoneNumber->number }}/
+          @endforeach
+        </li>
       </ul>
     </div>
   </div>

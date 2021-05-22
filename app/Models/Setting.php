@@ -20,13 +20,6 @@ class Setting extends Model
     protected $table = 'settings';
 
     /**
-     * The "type" of the auto-incrementing ID.
-     * 
-     * @var string
-     */
-    // protected $keyType = 'integer';
-
-    /**
      * @var array
      */
     protected $fillable = ['name', 'value'];

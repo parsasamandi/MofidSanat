@@ -21,9 +21,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Product extends Model
 {
+    // Visibility
     const VISIBLE = 0;
     const HIDDEN = 1;
-
+    
+    // Media
     const IMAGE = 0;
     const VIDEO = 1;
 

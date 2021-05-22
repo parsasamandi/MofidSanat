@@ -18,8 +18,6 @@ class HomeSettingController extends Controller
             'header_image',
             'header',
             'sub_header',
-            'header_button',
-            'about_us_headerText',
             'about_us_image',
             'about_us_imageSize',
             'about_us_header',
@@ -31,18 +29,6 @@ class HomeSettingController extends Controller
             'why_us_text',
             'why_us_image',
             'why_us_imageSize',
-            'service_header',
-            'service_text',
-            'service_header2',
-            'service_text2',
-            'service_header3',
-            'service_text3',
-            'service_header4',
-            'service_text4',
-            'service_header5',
-            'service_text5',
-            'service_header6',
-            'service_text6',
             'address',
             'email_footer',
             'phone_number'
@@ -52,7 +38,7 @@ class HomeSettingController extends Controller
 
         $vars = [];
         foreach($settings as $setting) {
-            $vars["setting_$setting->name"] = $setting->value;
+            $vars["$setting->name"] = $setting->value;
         }
 
         return view('setting.homeSetting', $vars);
@@ -66,12 +52,13 @@ class HomeSettingController extends Controller
         if($request->hasFile('header_image')) {
             $header_image = $request->file('header_image');
             $file = $header_image->getClientOriginalName();
-            $header_image->move(public_path('images'),$file);
+            $header_image->move(public_path('images'), $file);
 
             $home_setting1 = Setting::where('name', 'header_image')->first();
             $home_setting1->value = $file;
             $home_setting1->save();
         }
+
         // Main header
         $home_setting2 = Setting::where('name', 'header')->first();
         $home_setting2->value = $request->get('header');
@@ -79,15 +66,7 @@ class HomeSettingController extends Controller
         // Sub header
         $home_setting3 = Setting::where('name', 'sub_header')->first();
         $home_setting3->value = $request->get('sub_header');
-        $home_setting3->save();
-        // Header button
-        $home_setting4 = Setting::where('name', 'header_button')->first();
-        $home_setting4->value = $request->get('header_button');
-        $home_setting4->save();
-        // About-us text
-        $home_setting5 = Setting::where('name', 'about_us_headerText')->first();
-        $home_setting5->value = $request->get('about_us_headerText');
-        $home_setting5->save();
+        $home_setting3->save(); ;
         // About-us image
         if($request->hasFile('about_us_image')) {
             $about_us_image = $request->file('about_us_image');

@@ -49,7 +49,7 @@
 		<div class="hero-container" data-aos="zoom-in" data-aos-delay="100">
 			<h1>{{ $setting_header }}</h1>
 			<h2>{{ $setting_sub_header }}</h2>
-			<a href="#about" class="btn-get-started">{{ $setting_header_button }}</a>
+			<a href="#about" class="btn-get-started">چرا ما</a>
 		</div>
 	</section>
 
@@ -63,7 +63,6 @@
 					{{-- About Us Text --}}
 					<div class="col-md-{{ $colSize }} content order-lg-1 order-2">
 						<h2 class="title">درباره ما</h2>
-						<h3> {{ $setting_about_us_headerText }}</h3>
 						 {{-- About Us Box 1 --}}
 						 <x-home.aboutUs fontAwesome="fa fa-shopping-bag" :title="$setting_about_us_header" :description="$setting_about_us_text" />
 						 {{-- About Us Box 2 --}}
@@ -73,29 +72,6 @@
 					</div>
 					{{-- Image --}}
 					<div style="background: url(/images/{{ $setting_about_us_image }}) center top no-repeat;" class="col-md-{{ $setting_about_us_imageSize }} background" data-aos="fade-left" data-aos-delay="100"></div>
-				</div>
-			</div>
-		</section>
-
-		<!-- ======= Why Us Section ======= -->
-		<section id="facts">
-			<div class="container" data-aos="fade-up">
-				<div class="section-header">
-					<h3 class="section-title">چرا ما؟</h3>
-				</div>
-				<br>
-				<div class="row">
-					{{-- Image --}}
-					<div class="col-md-{{ $setting_why_us_imageSize }}">
-						<img class="img_responsive" src="/images/{{ $setting_why_us_image }}" alt="">
-					</div>
-					{{-- Text --}}
-					@php $colSize2 = 12 - $setting_why_us_imageSize @endphp
-					<div class="col-md-{{ $colSize2 }} mt-3">
-						<p class="description aboutUs_description">
-							{{ $setting_why_us_text }}
-						</p>
-					</div>
 				</div>
 			</div>
 		</section>
