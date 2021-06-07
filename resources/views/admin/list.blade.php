@@ -5,24 +5,39 @@
   {{-- Header --}}
   <x-header pageName="ادمین" buttonValue="افزودن ادمین">
     <x-slot name="table">
-      {!! $adminTable->table(['class' => 'table table-striped table-bordered w-100 nowrap text-center']) !!}
+      <x-table :table="$adminTable" />
     </x-slot>
   </x-header>
 
-
-  {{-- Insert Modal --}}
+  {{-- Insertion --}}
   <x-admin.insert size="modal-l" formId="adminForm">
     <x-slot name="content">
       {{-- Form --}}
-      @include('includes.form.admin')
+      <div class="row">
+        {{-- Name --}}
+        <x-input key="name" placeholder="نام"
+          class="col-md-12 mb-3" />
+        {{-- Email --}}
+        <x-input key="email" placeholder="ایمیل"  
+          class="col-md-12 mb-3"/>
+        {{-- Passwords --}}
+        <div class="col-md-12 mb-3">
+          <label for="password">رمز جدید:</label>
+          <input type="password" name="password" id="password" class="form-control" 
+            placeholder="رمز جدید" autocomplete="new-password">
+        </div>
+        <div class="col-md-12">
+          <label for="password-confirm">تکرار رمز جدید:</label>
+          <input type="password" name="password-confirm" id="password-confirm" class="form-control"  
+            placeholder="تکرار رمز جدید" autocomplete="new-password">
+        </div>
+      </div>
     </x-slot>
   </x-admin.insert>
 
-  {{-- Delete Modal --}}
-  <x-admin.delete title="آیا از حذف ادمین مطمئن هستید؟"/>
-
+  {{-- Delete  --}}
+  <x-admin.delete title="ادمین"/>
 @endsection
-
 
 @section('scripts')
   @parent
@@ -32,7 +47,7 @@
 
   <script>
     $(document).ready(function () {
-      // Admin DataTable And Action Object
+      // Admin datatable and action object
       let dt = window.LaravelDataTables['adminTable'];
       let action = new RequestHandler(dt,'#adminForm','admin');
 
@@ -42,30 +57,29 @@
       });
       // Insert
       action.insert();
+
       // Delete
-      window.showConfirmationModal = function showConfirmationModal(url) {
-        action.delete(url);
+      window.showConfirmationModal = function showConfirmationModal(id) {
+        action.delete(id);
       }
       // Edit
-      window.showEditModal = function showEditModal(url) {
-        edit(url);
+      window.showEditModal = function showEditModal(id) {
+        edit(id);
       }
-      function edit($url) {
+      function edit($id) {
         // Edit
         action.edit();
 
         $.ajax({
           url: "{{ url('admin/edit') }}",
           method: "get",
-          data: {id: $url},
+          data: {id: $id},
           success: function(data) {
-            $('#id').val($url);
-            $('#action').val('ویرایش');
-            $('#button_action').val('update');
+            action.editData($id);
             $('#name').val(data.name);
             $('#email').val(data.email);
-            $('#password').val('newPassword');
-            $('#password-confirm').val('newPassword');
+            $('#password').val('new_password');
+            $('#password-confirm').val('new_password');
           }
         })
       }

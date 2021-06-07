@@ -17,6 +17,7 @@ use App\Providers\EnglishConvertion;
 use Response;
 use File;
 use Redirect;
+use DB;
 
 class ProductController extends Controller
 {
@@ -44,26 +45,36 @@ class ProductController extends Controller
         // Id
         $id = $request->get('id');
 
-        $product = Product::updateOrCreate(
-            ['id' => $id],
-            ['name' => $request->get('name'), 'model' => $request->get('model'),'price' => $request->get('price'), 
-            'size' => $request->get('size'),'description' => $request->get('description'), 'category_id' => $request->get('categories'), 
-            'subcategory_id' => $this->subSet($request->get('subcategories'))]
-        );
+        DB::beginTransaction();
+        try {
 
-        // Status
-        $product->statuses()->updateOrCreate(
-            ['status_id' => $id],
-            ['status' => $request->get('status'), 'status_type' => Product::class]
-        );
+            $product = Product::updateOrCreate(
+                ['id' => $id],
+                ['name' => $request->get('name'), 'model' => $request->get('model'), 'price' => $request->get('price'), 
+                'size' => $request->get('size'), 'description' => $request->get('description'), 'category_id' => $request->get('categories'), 
+                'subcategory_id' => $this->subSet($request->get('subcategories'))
+            ]);
+    
+            // Status
+            $product->statuses()->updateOrCreate(
+                ['status_id' => $id],
+                ['status' => $request->get('status'), 'status_type' => Product::class]
+            );
+
+            DB::commit();
+
+        } catch(Exception $e) {
+            throw $e;
+            DB::rollBack();
+        }
 
         return $this->getAction($request->get('button_action'));
     }
 
 
-    // Product SubSet
+    // Product sub set
     public function subSet($request) {
-        // Category Or Sub Category
+        // Category Or subcategory
         switch($request) {
             case '':
                 return null;
@@ -73,17 +84,17 @@ class ProductController extends Controller
         }
     }
 
-    // Edit Data
+    // Edit
     public function edit(Action $action,Request $request) {   
         return $action->edit(Product::class,$request->get('id'));
     }
 
-    // Delete Each Product
+    // Delete
     public function delete(Action $action, $id) {
         return $action->delete(Product::class,$id);
     }
 
-    // Each Data for displaying
+    // Each data for displaying
     public function details($id) {
 
         $product = Product::find($id);

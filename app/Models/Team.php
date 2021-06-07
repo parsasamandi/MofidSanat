@@ -19,6 +19,15 @@ class Team extends Model
     /**
      * @var array
      */
-    protected $fillable = ['name', 'responsibility', 'linkedin_address', 'size', 'image'];
+    protected $fillable = ['name', 'responsibility', 'linkedin_address', 'size'];
+
+
+    /*
+     * Get all of the team member's image.
+     */
+    public function media()
+    {
+        return $this->morphMany('App\Models\Media', 'media');
+    }
 
 }

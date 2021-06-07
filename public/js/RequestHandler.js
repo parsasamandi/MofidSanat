@@ -1,8 +1,8 @@
 class RequestHandler {
     // Constructor
     constructor(dt,formId,url) {
-        window.dt = dt; // DataTable 
-        window.formId = formId; // Form Id
+        window.dt = dt; // Datatable 
+        window.formId = formId; // Form id
         window.url = url; // Url
     }
 
@@ -15,7 +15,7 @@ class RequestHandler {
         $(window.formId)[0].reset();
     }
 
-    // Insert
+    // Insertion
     insert() {
         // Store or Update
         $(window.formId).on('submit', function (event) {
@@ -61,6 +61,13 @@ class RequestHandler {
         $('#form_output').html('');
         $('#formModal').modal('show');
     }
+
+    // Edit data
+    editData(id) {
+        $('#id').val(id);
+        $('#button_action').val('update');
+        $('#action').val('ویرایش');
+    }
 }
 
 // Success
@@ -75,7 +82,7 @@ function success(data) {
 
 // Error
 function error(data) {
-    // Parse To Json
+    // Parse to json
     var data = JSON.parse(data.responseText);
     // Error
     error_html = '';

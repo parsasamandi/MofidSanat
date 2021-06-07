@@ -1,8 +1,7 @@
 <div class="row">
     {{-- Name --}}
-    <div class="col-md-12 mb-3">
-        <x-input key="name" name="نام" />
-    </div>
+    <x-input key="name" placeholder="نام" 
+        class="col-md-12 mb-3" />
     {{-- Status --}}
     <div class="col-md-12">
         <label for="status">وضعیت:</label>

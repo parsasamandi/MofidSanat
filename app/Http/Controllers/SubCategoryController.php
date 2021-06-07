@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Providers\SuccessMessages;
-use App\DataTables\SubCategoryDataTable;
-use App\Http\Requests\StoreSubCategoryRequest;
+use App\DataTables\SubcategoryDataTable;
+use App\Http\Requests\StoreSubcategoryRequest;
 use App\Providers\Action;
 use Illuminate\Http\Request;
 use App\Models\Category;
@@ -14,12 +14,12 @@ use Auth;
 use File;
 
 
-class SubCategoryController extends Controller
+class SubcategoryController extends Controller
 {
-    // get Category Data
+    // Get category
     public function list(Request $request) {
 
-        $datatable = new SubCategoryDataTable;
+        $datatable = new SubcategoryDataTable;
         $vars['subCategoryTable'] = $datatable->html();
 
         // Categories
@@ -29,12 +29,12 @@ class SubCategoryController extends Controller
     }
 
     // Render Datatable
-    public function subCategoryTable(SubCategoryDataTable $datatable) {
+    public function subCategoryTable(SubcategoryDataTable $datatable) {
         return $datatable->render('category.subCategoryList');
     }
 
-    // Storing or updating category
-    public function store(StoreSubCategoryRequest $request,SuccessMessages $message) {
+    // Store 
+    public function store(StoreSubcategoryRequest $request,SuccessMessages $message) {
 
         // Insert or update
         Subcategory::updateOrCreate(
@@ -45,12 +45,12 @@ class SubCategoryController extends Controller
         return $this->getAction($request->get('button_action'));
     }
 
-    // Edit Sub Catgory Data
+    // Edit
     public function edit(Action $action,Request $request) {
         return $action->edit(Subcategory::class,$request->get('id'));
     }
 
-    // Delete Each Category
+    // Delete
     public function delete(Action $action,$id) {
         return $action->delete(Subcategory::class,$id);
     }

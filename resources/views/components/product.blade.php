@@ -2,7 +2,7 @@
     @foreach($products as $product)
         <div class="col-md-{{ $product->size }} portfolio-item filter-app">
             @if(!empty($product->media[0]) and $product->media[0]->type == 0)
-                <img src="/images/{{ $product->media[0]->media_url}}" class="img-fluid full_image">
+                <img src="/images/{{ $product->media[0]->media_url }}" class="img-fluid full_image">
                 <div class="portfolio-info">
                     <h4 class="text-center">{{ $product->name }}</h4>
                     <a href="/images/{{ $product->media[0]->media_url }}" data-gall="portfolioGallery" class="venobox preview-link" title="{{ $product->name }}"><i class="bx bx-plus"></i></a>

@@ -24,15 +24,18 @@
 						<ul>
 							@foreach($categories as $category)
 								@if($category->subCategory->count())
-									<li class="menu-has-children"><a href="{{route('products', ['category_id' => $category->id])}}">{{ $category->name }}</a>
+									<li class="menu-has-children"><a href="{{ route('products', 
+										['category_id' => $category->id]) }}">{{ $category->name }}</a>
 										<ul>
 											@foreach($category->subcategory as $subcategory)
-												<li><a href="{{ route('products', ['subcategory_id' => $subcategory->id]) }}">{{ $subcategory->name }}</a></li>
+												<li><a href="{{ route('products', 
+												['subcategory_id' => $subcategory->id]) }}">{{ $subcategory->name }}</a></li>
 											@endforeach
 										</ul>
 									</li>
 								@else
-                                    <li><a href="{{route('products', ['category_id' => $category->id ])}}">{{ $category->name }}</a></li>
+                                    <li><a href="{{ route('products',
+									['category_id' => $category->id ]) }}">{{ $category->name }}</a></li>
 								@endif
 							@endforeach
 						</ul>
@@ -49,25 +52,25 @@
 		<div class="hero-container" data-aos="zoom-in" data-aos-delay="100">
 			<h1>{{ $setting_header }}</h1>
 			<h2>{{ $setting_sub_header }}</h2>
-			<a href="#about" class="btn-get-started">چرا ما</a>
+			<a href="#whyUs" class="btn-get-started">درباره ما</a>
 		</div>
 	</section>
 
 	<!-- ======= Main ======= -->
 	<main id="main">
-		<!-- ======= About Section ======= -->
-		<section id="about">
+		<!-- ======= Why Us Section ======= -->
+		<section id="whyUs">
 			<div class="container" data-aos="fade-up">
-				<div class="row about-container text-right">
+				<div class="row whyUs-container text-right">
 					@php $colSize = 12 - $setting_about_us_imageSize @endphp
-					{{-- About Us Text --}}
+					{{-- Why us Text --}}
 					<div class="col-md-{{ $colSize }} content order-lg-1 order-2">
 						<h2 class="title">درباره ما</h2>
-						 {{-- About Us Box 1 --}}
+						 {{-- Why us Box 1 --}}
 						 <x-home.aboutUs fontAwesome="fa fa-shopping-bag" :title="$setting_about_us_header" :description="$setting_about_us_text" />
-						 {{-- About Us Box 2 --}}
+						 {{-- Why us Box 2 --}}
 						 <x-home.aboutUs fontAwesome="fas fa-image" :title="$setting_about_us_header2" :description="$setting_about_us_text2" />
-						 {{-- About Us Box 3 --}}
+						 {{-- Why us Box 3 --}}
 						 <x-home.aboutUs fontAwesome="fas fa-chart-area" :title="$setting_about_us_header3" :description="$setting_about_us_text3" />
 					</div>
 					{{-- Image --}}
@@ -76,6 +79,30 @@
 			</div>
 		</section>
 
+		{{-- About us --}}
+		<section id="aboutUs">
+			<div class="container" data-aos="fade-up">
+				<div class="section-header">
+					<h3 class="section-title">چرا ما؟</h3>
+				</div>
+				<br>
+				<div class="row">
+					{{-- Image --}}
+					<div class="col-md-{{ $setting_why_us_imageSize }}">
+						<img class="img_responsive" src="/images/{{ $setting_why_us_image }}" alt="">
+					</div>
+					{{-- Text --}}
+					@php $colSize = 12 - $setting_why_us_imageSize @endphp
+
+					<div class="col-md-{{ $colSize }} mt-3">
+						<p class="description aboutUs_description">
+							{{ $setting_why_us_text }}
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		
 		<!-- ======= Services Section ======= -->
 		<section id="services">
 			<div class="container" data-aos="fade-up">
@@ -83,18 +110,16 @@
 					<h3 class="section-title services">خدمات</h3>
 				</div>
 				<div class="row">
-					{{-- Header And Text Service 1 --}}
-					<x-home.service fontAwesome="fa fa-desktop" :title="$setting_service_header" :description="$setting_service_text" />
-					{{-- Header And Text Service 2 --}}
-					<x-home.service fontAwesome="fas fa-chart-area" :title="$setting_service_header2" :description="$setting_service_text2" />
-					{{-- Header And Text Service 3 --}}
-					<x-home.service fontAwesome="fa fa-paper-plane" :title="$setting_service_header3" :description="$setting_service_text3" />
-					{{-- Header And Text Service 4 --}}
-					<x-home.service fontAwesome="fas fa-image" :title="$setting_service_header4" :description="$setting_service_text4" />
-					{{-- Header And Text Service 5 --}}
-					<x-home.service fontAwesome="fa fa-road" :title="$setting_service_header5" :description="$setting_service_text5" />
-					{{-- Header And Text Service 6 --}}
-					<x-home.service fontAwesome="fa fa-shopping-bag" :title="$setting_service_header6" :description="$setting_service_text6" />
+					{{-- Services --}}
+					@foreach($services as $service) 
+						<div class="col-lg-4 col-md-6" data-aos="zoom-in">
+							<div class="box">
+								<div class="icon"><a href=""><i class="{{ $service->font_awesome }}"></i></a></div>
+								<h4 class="title"><a href="">{{ $service->title }}</a></h4>
+								<p class="description">{{ $service->description }}</p>
+							</div>
+						</div>
+					@endforeach
 				</div>
 			</div>
 		</section>
@@ -115,7 +140,7 @@
 				<x-products page="home"/>
 			</div>
 			<div class="container product_button mt-2">
-				<a href="/product/products" class="btn btn-secondary d-block btn_style">مشاهده تمامی
+				<a href="{{ url('products') }}" class="btn btn-secondary d-block btn_style">مشاهده تمامی
 					محصولات <span class="fa fa-long-arrow-right"></span></a>
 			</div>
 		</section>

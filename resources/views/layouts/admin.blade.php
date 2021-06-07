@@ -16,28 +16,36 @@
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
         <!-- Navbar -->
-        <nav class="main-header navbar navbar-expand navbar-light border-bottom">
+        <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" rol="button" data-toggle="dropdown" aria-haspopup="true">
-                        <i class="fa fa-user"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <form method="POST" action="{{ url('logout') }}">
-                            @csrf
-                            {{-- Admin --}}
-                            <input type="hidden" name="admin" />
-                            {{-- Exit --}}
-                            <button class="dropdown-item text-danger" type="submit">خروج</button>
-                        </form>
-                    </div>
-                </li>
             </ul>
+
+            <!-- Search form -->
+            <form method="POST" class="form-inline ml-3" action="{{ url('logout') }}">
+                @csrf
+                <div class="input-group input-group-sm">
+
+                    <div class="input-group-append">
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle text-secondary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-user"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                {{-- Admin --}}
+                                <input type="hidden" name="admin" />
+                                {{-- Exit --}}
+                                <button class="dropdown-item text-danger" type="submit">خروج</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </nav>
+        
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary">
             <!-- Brand Logo -->
@@ -89,7 +97,7 @@
                             </x-admin.urlAddressParent>
 
                             {{-- Service --}}
-                            <x-admin.urlAddress text="خدمات" fontAwesome="fa fa-id-badge" route="{{ url('setting/homeSetting') }}" />
+                            <x-admin.urlAddress text="خدمات" fontAwesome="fa fa-id-badge" route="{{ url('service/list') }}" />
 
                             {{-- Settings--}}
                             <x-admin.urlAddressParent text="تنظیمات" fontAwesome="fa fa-cogs">

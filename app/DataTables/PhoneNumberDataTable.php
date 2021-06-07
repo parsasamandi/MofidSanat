@@ -94,14 +94,11 @@ class PhoneNumberDataTable extends DataTable
             Column::make('DT_RowIndex')
             ->title('#')
                 ->searchable(false)
-                ->orderable(false)
-                ->addClass('column-title'),
+                ->orderable(false),
             Column::make('number')
-            ->title('شماره تلفن')
-                ->addClass("column-title"),
+            ->title('شماره تلفن'),
             Column::make('product_id')
             ->title('محصول')
-                ->addClass('column-title')
                 ->orderable(false),
             Column::computed('action')
                 ->exportable(false)
@@ -109,7 +106,6 @@ class PhoneNumberDataTable extends DataTable
                 ->printable(false)
                 ->orderable(false)
                 ->title('حذف،ویرایش')
-                ->addClass('column-title')
         ];
     }
 

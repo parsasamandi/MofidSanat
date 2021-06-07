@@ -6,22 +6,25 @@ use Illuminate\View\Component;
 
 class textarea extends Component
 {
-    public $key;
-    public $name;
-    public $value; // Default: null
-    public $rows; // Default: 3
+    public $key; // Id, name
+    public $placeholder; // Label, placeholder
+    public $value; // Value | default: null
+    public $rows; // Rows | default: 3
+    public $class; // Class
     
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($key, $name, $rows = 3, $value = null)
+    public function __construct($key, $placeholder, 
+                                $rows = 3, $value = null, $class = null)
     {
         $this->key = $key;
-        $this->name = $name;
+        $this->placeholder = $placeholder;
         $this->value = $value;
         $this->rows = $rows;
+        $this->class = $class;
     }
 
     /**
@@ -32,9 +35,12 @@ class textarea extends Component
     public function render()
     {
         return <<<'blade'
-            <label for="{{ $key }}">{{ $name }}:</label>
-            <textarea name="{{ $key }}" id="{{ $key }}" rows="{{ $rows ?? 3 }}" class="form-control" 
-                placeholder="{{ $name }}">{{ $value ?? null }}</textarea>
+            <div class="{{ $class ?? null }}">
+                <label for="{{ $key }}">{{ $placeholder }}:</label>
+
+                <textarea name="{{ $key }}" id="{{ $key }}" rows="{{ $rows ?? 3 }}" class="form-control" 
+                    placeholder="{{ $placeholder }}">{{ $value ?? null }}</textarea>
+            </div>
         blade;
     }
 }

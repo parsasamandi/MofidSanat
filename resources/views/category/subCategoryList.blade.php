@@ -5,11 +5,11 @@
   {{-- Header --}}
   <x-header pageName="دسته بندی ۲" buttonValue="دسته بندی دوم">
     <x-slot name="table">
-      {!! $subCategoryTable->table(['class' => 'table table-bordered table-striped w-100 nowrap text-center'], false) !!}
+      <x-table :table="$subcategoryTable" />
     </x-slot>
   </x-header>
 
-  {{-- Insert Modal --}}
+  {{-- Insertion--}}
   <x-admin.insert size="xs" formId="subCategoryForm">
     <x-slot name="content">
       {{-- Form --}}
@@ -28,7 +28,7 @@
     </x-slot>
   </x-admin.insert>
 
-  {{-- Delete Modal --}}
+  {{-- Delete --}}
   <x-admin.delete title="آیا مایل به حذف دسته بندی دوم هستید؟" />
 
 @endsection
@@ -36,7 +36,7 @@
 @section('scripts')
 @parent
 
-  {!! $subCategoryTable->scripts() !!}
+  {!! $subcategoryTable->scripts() !!}
 
   <!-- DataTable data -->
   <script>

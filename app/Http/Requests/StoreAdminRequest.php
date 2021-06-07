@@ -9,16 +9,6 @@ use Illuminate\Http\Request;
 class StoreAdminRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
-
-    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -30,7 +20,7 @@ class StoreAdminRequest extends FormRequest
             'password' => 'required|min:6|',
             'password-confirm' => 'same:password',
             'phone_number' => 'nullable|numeric|digits:11',
-            'email' => 'email:rfc,dns|required|max:255|unique:users,email,' . $request->get('id')
+            'email' => 'email|required|max:255|unique:users,email,' . $request->get('id')
         ];
     }
 

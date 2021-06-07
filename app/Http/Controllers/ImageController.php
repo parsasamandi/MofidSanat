@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
-use App\Models\Media;
-use App\Models\Product;
 use App\DataTables\ImageDataTable;
 use App\DataTables\MediaDataTable;
 use App\Providers\SuccessMessages;
 use App\Http\Requests\StoreImageRequest;
 use App\Providers\Action;
+use App\Models\Media;
+use App\Models\Product;
 use Response;
-
 
 class ImageController extends Controller
 {
@@ -43,7 +42,7 @@ class ImageController extends Controller
 
                 Media::updateOrCreate(
                     ['id' => $request->get('id')],
-                    ['media_url' => $file, 'product_id' => $product, 'type' => Media::IMAGE]
+                    ['media_url' => $file, 'media_id' => $product, 'media_type' => Product::class, 'type' => Media::IMAGE]
                 );
             }
         }
@@ -53,11 +52,11 @@ class ImageController extends Controller
 
     // Edit
     public function edit(Action $action,Request $request) {
-        return $action->edit(Media::class,$requst->get('id'));
+        return $action->edit(Media::class, $request->get('id'));
     }
     
     // Delete
     public function delete(Action $action, $id) {
-        return $action->deleteWithImage(Media::class,$id,'media_url');
+        return $action->deleteWithImage(Media::class, $id, 'media_url');
     }
 }

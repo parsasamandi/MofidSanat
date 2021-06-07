@@ -1,20 +1,16 @@
 <div class="row">
     {{-- Name --}}
-    <div class="col-md-6 mb-3">
-      <x-input key="name" name="نام" />
-    </div>
+    <x-input key="name" placeholder="نام" 
+      class="col-md-6 mb-3" />
     {{-- Model --}}
-    <div class="col-md-6 mb-3">
-      <x-input key="model" name="مدل" />
-    </div>
+    <x-input key="model" placeholder="مدل" 
+      class="col-md-6 mb-3" />
     {{-- Price --}}
-    <div class="col-md-4 mb-3">
-      <x-input key="price" name="هزینه" />
-    </div>
+    <x-input key="price" placeholder="هزینه" 
+      class="col-md-4 mb-3" />
     {{-- Size --}}
-    <div class="col-md-4 mb-3">
-      <x-input key="size" name="اندازه(بین ۱ تا ۱۲ انتخاب کنید)" />
-    </div>
+    <x-input key="size" placeholder="اندازه(بین ۱ تا ۱۲ انتخاب کنید)" 
+      class="col-md-4 mb-3" />
     {{-- Status --}}
     <div class="col-md-4 mb-3">
       <label for="status">وضعیت:</label>
@@ -25,7 +21,7 @@
     </div> 
     {{-- Category --}}
     <div class="col-md-6 mb-3">
-      <label for="category_select">دسته بندی اول:</label>
+      <label for="categories">دسته بندی اول:</label>
       <select class="browser-default custom-select" name="categories" id="categories">
         @foreach($categories as $category)
           <option value="{{ $category->id }}"> {{ $category->name }}</option>
@@ -34,7 +30,7 @@
     </div>
     {{-- Sub Category --}}
     <div class="col-md-6 mb-3 ltr">
-      <label for="subCategory">دسته بندی دوم:</label>
+      <label for="subcategories">دسته بندی دوم:</label>
       <select class="browser-default custom-select" name="subcategories" id="subcategories">
         <option value="">دسته بندی دوم</option>
         @foreach($subcategories as $subcategory)

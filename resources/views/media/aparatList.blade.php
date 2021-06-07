@@ -6,11 +6,11 @@
     {{-- Header --}}
     <x-header pageName="ویدئو آپارات" buttonValue="ویدیئو آپارات">
         <x-slot name="table">
-            {!! $aparatTable->table(['class' => 'table table-bordered table-striped w-100 nowrap text-center'], false) !!}
+            <x-table :table="$aparatTable" />
         </x-slot>
     </x-header>
 
-    {{-- Insert Modal --}}
+    {{-- Insertion --}}
     <x-admin.insert size="modal-lg" formId="aparatForm">
         <x-slot name="content">
             {{-- Form --}}
@@ -18,9 +18,8 @@
         </x-slot>
     </x-admin.insert>
 
-    {{-- Delete Modal --}}
-    <x-admin.delete title="آیا از حذف لینک ویدئو آپارات مطمئن هستید؟" />
-
+    {{-- Delete --}}
+    <x-admin.delete title="ویدئو آپارات" />
 @endsection
 
 

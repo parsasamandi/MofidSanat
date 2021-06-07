@@ -1,4 +1,4 @@
-<!-- Modal Creation -->
+<!-- Modal creation -->
 <div id="formModal" class="modal fade bd-example-modal text-right" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog {{ $size }}">
     <div class="modal-content">
@@ -9,13 +9,13 @@
       <div class="modal-body text-right">
         {{-- Form --}}
         <form id="{{ $formId }}" class="form-horizontal" enctype="multipart/form-data">
-          {{csrf_field()}}
+
+          {{ csrf_field() }}
+
           {{-- Output --}}
           <span id="form_output"></span>
 
-          @if(isset($content))
-            {{ $content }}
-          @endif
+          {{ $content ?? null }}
 
           <br />
           {{-- Buttons --}}

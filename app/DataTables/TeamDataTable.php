@@ -99,27 +99,21 @@ class TeamDataTable extends DataTable
                 ->searchable(false)
                 ->orderable(false),
             Column::make('name')
-            ->title('نام')
-                ->addClass('column-title'),
+            ->title('نام'),
             Column::make('responsibility')
-            ->title('مسؤلیت')
-                ->addClass('column-title'),
+            ->title('مسؤلیت'),
             Column::make('linkedin_address')
-            ->title('آدرس لینکدین')
-                ->addClass('column-title'),
+            ->title('آدرس لینکدین'),
             Column::make('size')
-            ->title('اندازه')
-                ->addClass('column-title'),
+            ->title('اندازه'),
             Column::make('image')
-            ->title('تصویر')
-                ->addClass('column-title'),
+            ->title('تصویر'),
             Column::computed('action') // This Column is not in database
                 ->exportable(false)
                 ->searchable(false)
                 ->printable(false)
                 ->orderable(false)
                 ->title('حذف،ویرایش')
-                ->addClass('column-title')
         ];
     }
 

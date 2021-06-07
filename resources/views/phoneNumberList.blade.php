@@ -6,20 +6,28 @@
   {{-- Header --}}
   <x-header pageName="شماره تلفن" buttonValue="شماره تلفن">
     <x-slot name="table">
-      {!! $phoneNumberTable->table(['class' => 'table table-striped table-bordered w-100 nowrap text-center'], false) !!}
+      <x-table :table="$phoneNumberTable" />
     </x-slot>
   </x-header>
 
-  {{-- Insert Modal --}}
+  {{-- Insertion --}}
   <x-admin.insert size="modal-l" formId="phoneForm">
     <x-slot name="content">
       {{-- Form --}}
-      @include('includes.form.phoneNumber')
+      <div class="row">
+        <x-input key="number" placeholder="تلفن همراه" 
+          class="col-md-12 mb-3" />
+          
+        {{-- Product select box --}}
+        <div class="col-md-12">
+          @include('includes.form.productSelectBox')
+        </div>
+      </div>
     </x-slot>
   </x-admin.insert>
 
-  {{-- Delete Modal --}}
-  <x-admin.delete title="آیا مایل هستید که شماره تلفن خود را حذف کنید؟" />
+  {{-- Delete --}}
+  <x-admin.delete title="شماره تلفن" />
   
 @endsection
 
@@ -61,9 +69,7 @@
         method: 'get',
         data: { id: $url },
         success: function (data) {  
-          $('#id').val($url);
-          $('#button_action').val('update');
-          $('#action').val('ویرایش');
+          action.editData($url);
           $('#number').val(data.number);
           $('#products').val(data.product_id)
           $('#status').val(data.status).trigger('change');

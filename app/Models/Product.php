@@ -34,7 +34,7 @@ class Product extends Model
     /**
      * @var array
      */
-    protected $fillable = ['subcategory_id', 'category_id', 'name', 'model', 'price', 'desc', 'status', 'size'];
+    protected $fillable = ['subcategory_id', 'category_id', 'name', 'model', 'price', 'description', 'status', 'size'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -57,7 +57,7 @@ class Product extends Model
      */
     public function media()
     {
-        return $this->hasMany('App\Models\Media');
+        return $this->morphMany('App\Models\Media', 'media');
     }
 
     /**

@@ -6,12 +6,12 @@
     </ol>
 
     {{-- Button --}}
-    <button align="right" type="button" name="create_record" id="create_record"
+    <button type="button" id="create_record"
         class="btn btn-primary btn-sm">افزودن {{ $buttonValue }}</button>
     <hr>
     
     {{-- Responsive Table --}}
     <div class="table-responsive">
-        {{ $table }}
+        {{ $table ?? null }}
     </div>
 </div>

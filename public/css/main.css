@@ -649,47 +649,47 @@
 
   /* About Us Section
   --------------------------------*/
-  #about {
+  #whyUs {
     background: #F5F5F5;
     padding: 60px 0;
   }
 
-  #about .about-container .background {
+  #whyUs .whyUs-container .background {
     min-height: 300px;
     margin-bottom: 10px;
   }
 
-  #about .about-container .content {
+  #whyUs .whyUs-container .content {
     background: #F5F5F5;
   }
 
-  #about .about-container .title {
+  #whyUs .whyUs-container .title {
     color: #333;
     font-weight: 900;
     font-size: 32px;
   }
 
   @media (max-width: 768px) {
-    #about .about-container .title {
+    #whyUs .whyUs-container .title {
       padding-top: 15px;
     }
   }
 
-  #about .about-container p {
+  #whyUs .whyUs-container p {
     line-height: 26px;
   }
 
-  #about .about-container p:last-child {
+  #whyUs .whyUs-container p:last-child {
     margin-bottom: 0;
   }
 
-  #about .about-container .icon-box {
+  #whyUs .whyUs-container .icon-box {
     background: #f5f5f5;
     background-size: cover;
     padding: 0 0 30px 0;
   }
 
-  #about .about-container .icon-box .icon {
+  #whyUs .whyUs-container .icon-box .icon {
     float: left;
     background: #fff;
     width: 64px;
@@ -703,12 +703,12 @@
     border: 2px solid #2dc997;
   }
 
-  #about .about-container .icon-box .icon i {
+  #whyUs .whyUs-container .icon-box .icon i {
     color: #2dc997;
     font-size: 24px;
   }
 
-  #about .about-container .icon-box .title {
+  #whyUs .whyUs-container .icon-box .title {
     margin-left: 80px;
     font-weight: 500;
     margin-bottom: 5px;
@@ -716,11 +716,11 @@
     text-transform: uppercase;
   }
 
-  #about .about-container .icon-box .title a {
+  #whyUs .whyUs-container .icon-box .title a {
     color: #111;
   }
 
-  #about .about-container .icon-box .description {
+  #whyUs .whyUs-container .icon-box .description {
     margin-left: 80px;
     line-height: 24px;
     font-size: 14px;
@@ -729,18 +729,18 @@
 
   /* Facts Section
   --------------------------------*/
-  #facts {
-    background: #f5f5f5;
+  #aboutUs {
+    background: #ffff;
     padding: 50px 0 40px 0;
   }
 
-  #facts .counters span {
+  #aboutUs .counters span {
     font-size: 48px;
     display: block;
     color: #2dc997;
   }
 
-  #facts .counters p {
+  #aboutUs .counters p {
     padding: 0;
     margin: 0 0 20px 0;
     font-family: "Poppins", sans-serif;
@@ -750,7 +750,7 @@
   /* Services Section
   --------------------------------*/
   #services {
-    background-color: #FFFF;
+    background-color: #F5F5F5;
     background-size: cover;
     padding: 40px 0 10px 0;
   }
@@ -828,7 +828,7 @@
   /* Product Section
   --------------------------------*/
   #portfolio {
-    background: #F5F5F5;
+    background: #FFFF;
     padding: 45px 0;
   }
 
@@ -1075,7 +1075,7 @@
   /* Team Section
   --------------------------------*/
   #team {
-    background: #FFFF;
+    background: #F5F5F5;
     padding: 35px 0 35px 0;
     direction: rtl;
   }

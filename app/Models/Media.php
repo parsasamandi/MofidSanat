@@ -5,32 +5,30 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property int $media_id
- * @property int $product_id
+ * @property int $id
  * @property string $media_url
  * @property int $type
- * @property Product $product
+ * @property int $media_id
+ * @property string $media_type
  */
 class Media extends Model
 {
-    public $timestamps = false;
-    /**
-     * The table associated with the model.
-     * 
-     * @var string
-     */
-    protected $table = 'media';
+    const IMAGE = 0;
+    const VIDEO = 1;
 
+    public $timestamps = false;
+    
     /**
      * @var array
      */
-    protected $fillable = ['product_id', 'media_url', 'type'];
+    protected $fillable = ['media_url', 'type', 'media_id', 'media_type'];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return morph many
      */
-    public function product()
+    public function media()
     {
-        return $this->belongsTo('App\Models\Product');
+        return $this->morphTo();
     }
+
 }

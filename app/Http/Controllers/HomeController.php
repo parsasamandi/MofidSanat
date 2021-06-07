@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Team;
 use App\Models\Setting;
-use Illuminate\Http\Request;
+use App\Models\Service;
+
 
 class HomeController extends Controller
 {
@@ -28,18 +30,6 @@ class HomeController extends Controller
             'why_us_text',
             'why_us_image',
             'why_us_imageSize',
-            'service_header',
-            'service_text',
-            'service_header2',
-            'service_text2',
-            'service_header3',
-            'service_text3',
-            'service_header4',
-            'service_text4',
-            'service_header5',
-            'service_text5',
-            'service_header6',
-            'service_text6',
             'address',
             'email_footer',
             'phone_number'
@@ -56,6 +46,8 @@ class HomeController extends Controller
         $vars['categories'] = Category::select('name','id')->get();
         // Team
         $vars['teams'] = Team::select('name','responsibility','linkedin_address','image')->paginate(4);
+        // Services 
+        $vars['services'] = Service::select('title','description','font_awesome')->get();
 
         return view('home', $vars);
     }

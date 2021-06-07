@@ -26,11 +26,11 @@ class ImageDataTable extends DataTable
             ->editColumn('media_url', function(Media $media) {
                 return "<img src=/images/" . $media->media_url . " height='auto' width='50%' />";
             })
-            ->addColumn('product_id', function (Media $media) {
-                return $media->product->name;
+            ->editColumn('media_id', function (Media $media) {
+                return $media->media->  name;
             })
-            ->filterColumn('product_id', function($query,$keyword) {
-                $sql = "product_id in (select id from product where name like ?)";
+            ->filterColumn('media_id', function($query,$keyword) {
+                $sql = "media_id in (select id from media where name like ?)";
                 $query->whereRaw($sql, ["%{$keyword}%"]);
             })
             ->addColumn('action', function(Media $media){
@@ -54,7 +54,7 @@ class ImageDataTable extends DataTable
      */
     public function query(Media $model)
     {
-        return $model->where('type',0);
+        return $model->where('type', 0);
     }
 
     /**
@@ -91,15 +91,12 @@ class ImageDataTable extends DataTable
         return [
             Column::make('DT_RowIndex') // connect to 226 line columns
             ->title('#')
-                ->addClass('column-title')
                 ->searchable(false)
                 ->orderable(false),
             Column::make('media_url')
-            ->title('رسانه')
-                ->addClass('column-title'),
-            Column::make('product_id')
+            ->title('رسانه'),
+            Column::make('media_id')
             ->title('محصول مرتبط')
-                ->addClass('column-title')
                 ->orderable(false),
             Column::computed('action') // This column is not in database
                 ->exportable(false)
@@ -107,7 +104,6 @@ class ImageDataTable extends DataTable
                 ->printable(false)
                 ->orderable(false)
                 ->title('حذف،ویرایش')
-                ->addClass('column-title')
             ];
     }
 

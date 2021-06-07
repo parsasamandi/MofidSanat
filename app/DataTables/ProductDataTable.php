@@ -114,45 +114,34 @@ class ProductDataTable extends DataTable
         return [
             Column::make('DT_RowIndex') // connect to 226 line columns
             ->title('#')
-                ->addClass('column-title')
                 ->searchable(false)
                 ->orderable(false),
             Column::make('media') // This column is not in database
             ->title('ویدئو | عکس')
-                ->addClass('column-title')
                 ->orderable(false),
             Column::make('name')
-            ->title('نام')
-                ->addClass('column-title'),
+            ->title('نام'),
             Column::make('model')
-            ->title('مدل')
-                ->addClass('column-title'),
+            ->title('مدل'),
             Column::make('price')
-            ->title('هزینه')
-                ->addClass('column-title'),
+            ->title('هزینه'),
             Column::make('description')
-            ->title('توضیحات')
-                ->addClass('column-title'),
+            ->title('توضیحات'),
             Column::make('category_id')
-                ->title('دسته بندی اول')
-                    ->addClass('column-title')
-                    ->orderable(false),
+            ->title('دسته بندی اول')
+                ->orderable(false),
             Column::make('subcategory_id')
-            ->title('دسته بندی دوم')
-                ->addClass('column-title'),
+            ->title('دسته بندی دوم'),
             Column::make('status')
-            ->title('وضعیت')
-                ->addClass('column-title'),
+            ->title('وضعیت'),
             Column::make('size')
-            ->title('اندازه دوره (۱ تا ۱۲)')
-                ->addClass('column-title'),
+            ->title('اندازه دوره (۱ تا ۱۲)'),
             Column::computed('action') // This column is not in database
                 ->exportable(false)
                 ->searchable(false)
                 ->printable(false)
                 ->orderable(false)
                 ->title('حذف،ویرایش')
-                ->addClass('column-title')
         ];
     }
 

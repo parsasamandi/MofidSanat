@@ -13,7 +13,7 @@ use App\Providers\Action;
 
 class PhoneNumberController extends Controller
 {
-    // Get Phone number
+    // Get phone number
     public function list(Request $request) {
 
         $dataTable = new PhoneNumberDataTable;

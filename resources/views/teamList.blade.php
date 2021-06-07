@@ -5,41 +5,38 @@
   {{-- Header --}}
   <x-header pageName="تیم" buttonValue="افزودن عضو">
     <x-slot name="table">
-      {!! $teamTable->table(['class' => 'table table-bordered table-striped w-100 nowrap text-center'], false)!!}
+      <x-table :table="$teamTable" />
     </x-slot>
   </x-header>
 
-  {{-- Insert Modal --}}
+  {{-- Insertion --}}
   <x-admin.insert size="modal-l" formId="teamForm">
     <x-slot name="content">
-      {{-- Name --}}
-      <div class="col-md-12 mb-3">
-        <x-input key="name" name="نام" />
-      </div>
-      {{-- Responsibility --}}
-      <div class="col-md-12 mb-3">
-        <x-input key="responsibility" name="مسؤلیت" />
-      </div>
-      {{-- Linkedin address --}}
-      <div class="col-md-12 mb-3">
-        <x-input key="linkedin" name="آدرس لینکدین" />
-      </div>
-      {{-- Image --}}
-      <div class="col-md-12 mb-3">
-        <label for="image">عکس:</label>
-        <br>
-        <input type="file" name="image"/>
-      </div>
-      {{-- Size --}}
-      <div class="col-md-12">
-        <x-input key="suze" name="اندازه" />
+      <div class="row">
+        {{-- Name --}}
+        <x-input key="name" placeholder="نام" 
+          class="col-md-12 mb-3" />
+        {{-- Responsibility --}}
+        <x-input key="responsibility" placeholder="مسؤلیت" 
+          class="col-md-12 mb-3" />
+        {{-- Linkedin address --}}
+        <x-input key="linkedin" placeholder="آدرس لینکدین" 
+          class="col-md-12 mb-3"/>
+        {{-- Image --}}
+        <div class="col-md-12 mb-3">
+          <label for="image">عکس:</label>
+          <br>
+          <input type="file" name="image" />
+        </div>
+        {{-- Size --}}
+        <x-input key="size" placeholder="اندازه" class="col-md-12" />
       </div>
     </x-slot>
   </x-admin.insert>
 
-  {{-- Delete Modal --}}
-  <x-admin.delete title="آیا مایل به حذف عضو تیم هستید؟" />
-
+  {{-- Delete --}}
+  <x-admin.delete title="عضو تیم" />
+  
 @endsection
 
 @section('scripts')
@@ -79,9 +76,7 @@
           method: "get",
           data: {id: $url},
           success: function(data) {
-            $('#id').val($url);
-            $('#action').val('ویرایش');
-            $('#button_action').val('update');
+            action.editData($url);
             $('#name').val(data.name);
             $('#responsibility').val(data.responsibility);
             $('#linkedin').val(data.linkedin_address);

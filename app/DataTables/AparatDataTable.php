@@ -91,15 +91,12 @@ class AparatDataTable extends DataTable
         return [
             Column::make('DT_RowIndex') // connect to 226 line columns
             ->title('#')
-                ->addClass('column-title')
                 ->searchable(false)
                 ->orderable(false),
             Column::make('media_url')
-            ->title('رسانه')
-                ->addClass('column-title'),
+            ->title('رسانه'),
             Column::make('product_id')
             ->title('محصول مرتبط')
-                ->addClass('column-title')
                 ->orderable(false),
             Column::computed('action') // This column is not in database
                 ->exportable(false)
@@ -107,7 +104,6 @@ class AparatDataTable extends DataTable
                 ->printable(false)
                 ->orderable(false)
                 ->title('حذف،ویرایش')
-                ->addClass('column-title')
             ];
     }
 

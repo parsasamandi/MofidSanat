@@ -4,13 +4,13 @@
 @section('content')
 
   {{-- Header --}}
-  <x-header pageName="عکس" buttonValue="افزودن عکس">  
+  <x-header pageName="عکس" buttonValue="عکس">  
     <x-slot name="table">
-      {!! $imageTable->table(['class' => 'table table-bordered table-striped w-100 nowrap text-center']) !!}
+      <x-table :table="$imageTable" />
     </x-slot>
   </x-header>
 
-  {{-- Insert Modal --}}
+  {{-- Insertion --}}
   <x-admin.insert size="modal-lg" formId="imageForm">
     <x-slot name="content">
       {{-- Form --}}
@@ -18,8 +18,8 @@
     </x-slot>
   </x-admin.insert>
 
-  {{-- Delete Modal --}}
-  <x-admin.delete title="آیا مایل به حذف تصویر هستید؟"/>
+  {{-- Delete --}}
+  <x-admin.delete title="تصویر"/>
 
 @endsection
 
@@ -29,8 +29,21 @@
   {!! $imageTable->scripts() !!}
 
   <script>
-    $(document).ready(function () {
+    // Get media after selecting the picture
+    document.getElementById("image").onchange = function () {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        // get loaded data and render thumbnail.
+        var img = document.getElementById("picture");
+        img.src = e.target.result;
+        // Hidden input
+        document.getElementById("hidden_image").value = e.target.result;
+      };
+      // read the image file as a data URL.
+      reader.readAsDataURL(this.files[0]);
+    };
 
+    $(document).ready(function () {
       // ----------------------- Filepond  -----------------------
       // const inputElement = document.querySelector('input[type="file"]');
       // const pond = FilePond.create( inputElement, {
@@ -40,16 +53,25 @@
       //   allowDrop: true,
       // });
 
-      // Image DataTable
+      // Image Datatable
       let dt = window.LaravelDataTables['imageTable'];
       let action = new RequestHandler(dt,'#imageForm','image');
 
       // Record modal
       $('#create_record').click(function () {
+        // Select 2
+        $('#products').val('').trigger('change');
+        // Picture
+        $("#picture").attr("src", "");
+        $("#picture").attr("alt", "عکس خود را وارد نمایید");
+        // Hidden image
+        $('#hidden_image').val(null);
         action.modal();
       });
+
       // Insert
       action.insert();
+
       // Delete
       window.showConfirmationModal = function showConfirmationModal(url) {
         action.delete(url);
@@ -70,8 +92,7 @@
           method: "get",
           data: {id: $url},
           success: function(data) {
-            $('#id').val($url);
-            $('#button_action').val('update');
+            action.editData($url);
             $('#products').val(data.product_id).trigger('change');
           }
         })

@@ -97,14 +97,13 @@ class SubcategoryDataTable extends DataTable
         return [
             Column::make('DT_RowIndex')
             ->title('#')
-                ->addClass('column-title')
                 ->searchable(false)
                 ->orderable(false),
             Column::make('name')
             ->title('نام')
                 ->addClass('column-title'),
             Column::make('status')
-                ->title('وضعیت')
+            ->title('وضعیت')
                 ->orderable(false),
             Column::make('category_id')
             ->title('دسته بندی اول')
@@ -115,7 +114,6 @@ class SubcategoryDataTable extends DataTable
                 ->searchable(false)
                 ->printable(false)
                 ->orderable(false)
-                ->addClass('column-title')
         ];
     }
 

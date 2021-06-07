@@ -1,19 +1,20 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Models\Team;
-use App\DataTables\TeamDataTable;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
+use App\DataTables\TeamDataTable;
 use App\Providers\SuccessMessages;
 use App\Providers\Action;
 use App\Http\Requests\StoreTeamRequest;
+use App\Models\Team;
+use App\Models\Media;
+use DB;
 
 class TeamController extends Controller
 {
-    // Get Team
+    // Get team
     public function list(Request $request) {
         $dataTable = new TeamDataTable;
 
@@ -22,37 +23,48 @@ class TeamController extends Controller
         return view('teamList', $vars);
     }
 
-    // Render DataTable
+    // Render Datatable
     public function teamTable(TeamDataTable $datatable) {
         return $datatable->render('teamList');
     }
 
-    // Store Team
-    public function store(StoreTeamRequest $request,SuccessMessages $message) {
+    // Store
+    public function store(StoreTeamRequest $request, SuccessMessages $message, Action $action) {
 
-        // Insert or update
-        if($request->hasFile('image')) {
-            $image = $request->file('image');
-            $file = $image->getClientOriginalName();
-            $image->move(public_path('images'), $file);
-        
-            Team::updateOrCreate(
-                ['id' => $request->get('id')],
+        $id = $request->get('id');
+
+        DB::beginTransaction();
+        try {
+
+            $team = Team::updateOrCreate(
+                ['id' => $id],
                 ['name' => $request->get('name'), 'responsibility' => $request->get('responsibility'), 
-                'linkedin' => $request->get('linkedin'), 'image' => $file, 'size' => $request->get('size')]
+                'linkedin_address' => $request->get('linkedin'), 'size' => $request->get('size')]
             );
+
+            // Insert or update
+            if($request->hasFile('image')) {
+                // Team image
+                $action->image($request, $team->id, Team::class);
+            }
+            
+            DB::commit();
+
+        } catch (Exception $e) {
+            throw $e;
+            DB::rollBack();
         }
 
         return $this->getAction($request->get('button_action'));
     }
 
     // Edit 
-    public function edit(Action $action,Request $request) {
+    public function edit(Action $action, Request $request) {
         return $action->edit(Team::class, $request->get('id')); 
     }
 
     // Delete
-    public function delete(Action $action,$id) {
+    public function delete(Action $action, $id) {
         return $action->deleteWithImage(Team::class, $id, 'image');
     }
 }

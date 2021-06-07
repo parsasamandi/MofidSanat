@@ -1,11 +1,11 @@
 ]<div class="row">
   {{-- Name --}}
   <div class="col-md-12 mb-3">
-    <x-input key="name" name="نام" />
+    <x-input key="name" placeholder="نام" />
   </div>
   {{-- Email --}}
   <div class="col-md-12 mb-3">
-    <x-input key="email" name="ایمیل" />
+    <x-input key="email" placeholder="ایمیل" />
   </div>
   {{-- Passwords --}}
   <div class="col-md-12 mb-3">

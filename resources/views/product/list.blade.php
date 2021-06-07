@@ -1,16 +1,16 @@
 @extends('layouts.admin')
 @section('title','لیست محصولات')
 
-
 @section('content')
+
   {{-- Header --}}
   <x-header pageName="محصولات" buttonValue="محصول">
     <x-slot name="table">
-      {!! $productTable->table(['class' => 'table table-striped table-bordered w-100 nowrap text-center']) !!}
+      <x-table :table="$productTable" />
     </x-slot>
   </x-header>
 
-  {{-- Insert Modal --}}
+  {{-- Insertion --}}
   <x-admin.insert size="modal-xl" formId="productForm">
     <x-slot name="content">
       {{-- Form --}}
@@ -18,8 +18,8 @@
     </x-slot>
   </x-admin.insert>
 
-  {{-- Delete Modal --}}
-  <x-admin.delete title="آیا مایل هستید محصول خود را حذف کنید؟" />
+  {{-- Delete --}}
+  <x-admin.delete title="محصولات" />
 
   {{-- Images and videos --}}
   <div class="col-md-12 mt-3">
@@ -64,15 +64,13 @@
           method: 'get',
           data: { id: $url },
           success: function (data) { 
-            $('#id').val($url);
-            $('#button_action').val('update');
-            $('#action').val('ویرایش'); 
+            action.editData($url);
             $('#name').val(data.name);
             $('#model').val(data.model);
             $('#description').val(data.description);
             $('#price').val(data.price);
             $('#size').val(data.size);
-            $('#status').val(data.status).trigger('change');
+            $('#status').val(data.statuses.status).trigger('change');
             $('#categories').val(data.category_id).trigger('change');
             $('#subcategories').val(data.subcategory_id).trigger('change');
           }

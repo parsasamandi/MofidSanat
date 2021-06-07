@@ -98,15 +98,12 @@ class CategoryDataTable extends DataTable
         return [
             Column::make('DT_RowIndex')
             ->title('#')
-                ->addClass('column-title')
                 ->searchable(false)
                 ->orderable(false),
             Column::make('name')
-            ->title('نام')
-                ->addClass('column-title'),
+            ->title('نام'),
             Column::make('status')
             ->title('وضعیت')
-                ->addClass('column-title')
                 ->orderable(false),
             Column::computed('action') // This Column is not in database
                 ->exportable(false)
@@ -114,7 +111,6 @@ class CategoryDataTable extends DataTable
                 ->printable(false)
                 ->orderable(false)
                 ->title('حذف | ویرایش')
-                ->addClass('column-title')
         ];
     }
 

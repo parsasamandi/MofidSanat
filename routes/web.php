@@ -84,6 +84,14 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('edit', 'TeamController@edit');
         Route::get('delete/{id}', 'TeamController@delete');
     });
+    // Service
+    Route::group(['prefix' => 'service', 'as' => 'service.'], function () {
+        Route::get('list','ServiceController@list');
+        Route::get('table/list','ServiceController@serviceTable')->name('list.table');
+        Route::post('store','ServiceController@store');
+        Route::get('edit', 'ServiceController@edit');
+        Route::get('delete/{id}', 'ServiceController@delete');
+    });
     // Home setting
     Route::group(['prefix' => 'setting', 'as' => 'setting.'], function() {
         // Home setting

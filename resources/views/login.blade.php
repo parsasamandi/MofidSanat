@@ -4,7 +4,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         {{-- Authentication --}}
         <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
-        {{-- App Css --}}
+        {{-- App css --}}
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     </head>
     <body>

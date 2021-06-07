@@ -96,28 +96,22 @@ class AdminDataTable extends DataTable
         return [
             Column::make('DT_RowIndex')
             ->title('#')
-                ->addClass('column-title')
                 ->searchable(false)
                 ->orderable(false),
             Column::make('name')
-            ->title('نام')
-                ->addClass('column-title'),
+            ->title('نام'),
             Column::make('email')
-            ->title('ایمیل')
-                ->addClass('column-title'),
+            ->title('ایمیل'),
             Column::make('created_at')
-            ->title('ساخته شده در')
-                ->addClass('column-title'),
+            ->title('ساخته شده در'),
             Column::make('updated_at')
-            ->title('بروز شده در')
-                ->addClass('column-title'),
+            ->title('بروز شده در'),
             Column::computed('action') // This Column is not in database
                 ->exportable(false)
                 ->searchable(false)
                 ->printable(false)
                 ->orderable(false)
                 ->title('حذف،ویرایش')
-                ->addClass('column-title')
         ];
     }
 

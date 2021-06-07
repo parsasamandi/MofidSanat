@@ -6,11 +6,11 @@
     {{-- Header --}}
     <x-header pageName="دسته بندی ۱" buttonValue="دسته بندی">
         <x-slot name="table">
-            {!! $categoryTable->table(['class' => 'table table-bordered table-striped w-100 nowrap text-center'], false) !!}
+            <x-table :table="$categoryTable" />
         </x-slot>
     </x-header>
 
-    {{-- Insert Modal --}}
+    {{-- Insertion --}}
     <x-admin.insert size="modal-l" formId="categoryForm">
         <x-slot name="content">
             {{-- Form --}}
@@ -19,7 +19,7 @@
     </x-admin.insert>
 
     {{-- Delete --}}
-    <x-admin.delete title="آیا مایل هستید دسته بندی ۱ را حذف کنید؟" />
+    <x-admin.delete title="دسته بندی اول" />
 
 @endsection
 
