@@ -45,7 +45,7 @@ class HomeController extends Controller
         // Categories
         $vars['categories'] = Category::select('name','id')->get();
         // Team
-        $vars['teams'] = Team::select('name','responsibility','linkedin_address','image')->paginate(4);
+        $vars['teams'] = Team::paginate(4);
         // Services 
         $vars['services'] = Service::select('title','description','font_awesome')->get();
 

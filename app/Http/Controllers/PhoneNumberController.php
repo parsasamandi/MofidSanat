@@ -30,7 +30,7 @@ class PhoneNumberController extends Controller
     }
 
     // Store phone number
-    public function store(StorePhoneNumberRequest $request,SuccessMessages $message) {
+    public function store(StorePhoneNumberRequest $request) {
 
         // Insert or update
         PhoneNumber::updateOrCreate(
@@ -42,7 +42,7 @@ class PhoneNumberController extends Controller
     }
 
     // Edit
-    public function edit(Action $action,Request $request) {
+    public function edit(Action $action, Request $request) {
         return $action->edit(PhoneNumber::class, $request->get('id'));
     }
 

@@ -24,7 +24,7 @@
                 </li>
             </ul>
 
-            <!-- Search form -->
+            {{-- Logout --}}
             <form method="POST" class="form-inline ml-3" action="{{ url('logout') }}">
                 @csrf
                 <div class="input-group input-group-sm">

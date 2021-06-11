@@ -16,6 +16,7 @@ class TeamController extends Controller
 {
     // Get team
     public function list(Request $request) {
+        
         $dataTable = new TeamDataTable;
 
         $vars['teamTable'] = $dataTable->html();
@@ -29,7 +30,7 @@ class TeamController extends Controller
     }
 
     // Store
-    public function store(StoreTeamRequest $request, SuccessMessages $message, Action $action) {
+    public function store(StoreTeamRequest $request,Action $action) {
 
         $id = $request->get('id');
 
@@ -65,6 +66,6 @@ class TeamController extends Controller
 
     // Delete
     public function delete(Action $action, $id) {
-        return $action->deleteWithImage(Team::class, $id, 'image');
+        return $action->deleteWithImage(Team::class, $id);
     }
 }

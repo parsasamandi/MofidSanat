@@ -11,6 +11,12 @@ use Yajra\DataTables\Services\DataTable;
 
 class AparatDataTable extends DataTable
 {
+    public $dataTable;
+
+    public function __construct() {
+        $this->dataTable = new GeneralDataTable();
+    }
+    
     /**
      * Build DataTable class.
      *
@@ -64,23 +70,9 @@ class AparatDataTable extends DataTable
      */
     public function html()
     {
-        return $this->builder()
-            ->setTableId('aparatTable')
-            ->columns($this->getColumns())
-            ->minifiedAjax(route('aparat.list.table'))
-            ->columnDefs(
-                [
-                    ["className" => 'dt-center text-center', "target" => '_all'],
-                ]
-            )
-            ->searching(true)
-            ->info(false)
-            ->responsive(true)
-            ->dom('PBCfrtip')
-            ->orderBy(1)
-            ->language(asset('js/persian.json'));
+        return $this->dataTable->html($this->builder(), 
+                $this->getColumns(), 'aparat');
     }
-
     /**
      * Get columns.
      *

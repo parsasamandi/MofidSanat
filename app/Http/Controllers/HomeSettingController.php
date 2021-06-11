@@ -46,7 +46,7 @@ class HomeSettingController extends Controller
     }
 
     // Store Setting Data
-    public function store(StoreHomeSettingRequest $request,EnglishConvertion $englishConvertion,SuccessMessages $message) {
+    public function store(StoreHomeSettingRequest $request,EnglishConvertion $englishConvertion) {
         
         // Header image
         if($request->hasFile('header_image')) {

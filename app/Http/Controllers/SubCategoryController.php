@@ -34,7 +34,7 @@ class SubcategoryController extends Controller
     }
 
     // Store 
-    public function store(StoreSubcategoryRequest $request,SuccessMessages $message) {
+    public function store(StoreSubcategoryRequest $request) {
 
         // Insert or update
         Subcategory::updateOrCreate(

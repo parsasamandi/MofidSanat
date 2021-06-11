@@ -11,6 +11,12 @@ use Yajra\DataTables\Services\DataTable;
 
 class ServiceDataTable extends DataTable
 {
+    public $dataTable;
+
+    public function __construct() {
+        $this->dataTable = new GeneralDataTable();
+    }
+    
     /**
      * Build DataTable class.
      *
@@ -58,22 +64,8 @@ class ServiceDataTable extends DataTable
      */
     public function html()
     {
-        return $this->builder()
-                ->setTableId('serviceTable')
-                ->minifiedAjax(route('service.list.table'))
-                ->columns($this->getColumns())
-                ->lengthMenu([10,25,50,100])
-                ->columnDefs(
-                    [
-                        ["className" => 'dt-center text-center', "target" => '_all'],
-                    ]
-                )
-                ->searching(true)
-                ->info(false)
-                ->responsive(true)
-                ->dom('PBCfrtip')
-                ->orderBy(1)
-                ->language(asset('js/persian.json'));
+        return $this->dataTable->html($this->builder(), 
+                $this->getColumns(), 'service');
     }
 
     /**

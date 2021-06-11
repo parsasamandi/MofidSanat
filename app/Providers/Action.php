@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Providers;
+use Symfony\Component\HttpFoundation\Response;
 use App\Models\Media;
 use File;
 
@@ -43,24 +44,30 @@ class Action {
      * 
      * @return json
      */
-    public function deleteWithImage($id) {
+    public function deleteWithImage($model, $id) {
 
-        $modelImage = Media::find($id);
+        $modelImage = $model::find($id);
         if($modelImage) {
-            File::delete(public_path("images/" . $modelImage->url)); 
+            // Media
+            $media = Media::where('media_id', $id)->first();
 
-            $modelImage->delete();
+            $imageDelete = public_path("images/" . $media->media_url);
+            if($imageDelete) {
+                File::delete($imageDelete); 
+            }
+
+            return $modelImage->delete();
+
         } else {
             return $this->failedResponse();
         }
-        return $this->successfulResponse();
     }
 
     // Image
     public function image($request, $media_id, $class) {
 
         $imageUploader = Media::where('media_id', $media_id)->where('media_type', $class)->first();
-        // // Update
+        // Update
         if(!$imageUploader) {
             // Insert
             $imageUploader = new Media();
@@ -87,12 +94,12 @@ class Action {
 
     // Response with error
     public function failedResponse() {
-        return response()->json(['error' => 'ٔداده ای یافت نشد'], Response::HTTP_NOT_FOUND);
+        return response()->json(['error' => 'No data was found'], Response::HTTP_NOT_FOUND);
     }
 
     // Response with success
     public function successfulResponse() {
-        return response()->json(['success' => 'با موفقیت حذف شد'], Response::HTTP_OK);
+        return response()->json(['success' => 'Deleted successfully'], Response::HTTP_OK);
     }
 }
 

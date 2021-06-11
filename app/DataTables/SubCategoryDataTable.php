@@ -11,6 +11,12 @@ use Yajra\DataTables\Services\DataTable;
 
 class SubcategoryDataTable extends DataTable
 {
+    public $dataTable;
+
+    public function __construct() {
+        $this->dataTable = new GeneralDataTable();
+    }
+    
     /**
      * Build DataTable class.
      *
@@ -68,23 +74,8 @@ class SubcategoryDataTable extends DataTable
      */
     public function html()
     {
-        return $this->builder()
-            ->setTableId('subcategoryTable')
-            ->columns($this->getColumns())
-            ->minifiedAjax(route('subcategory.list.table'))
-            ->dom('Bfrtip')
-            ->orderBy(1)
-            ->columnDefs(
-                [
-                    ["className" => 'dt-center text-center', "target" => '_all'],
-                ]
-            )
-            ->searching(true)
-            ->info(false)
-            ->responsive(true)
-            ->dom('PBCfrtip')
-            ->orderBy(1)
-            ->language(asset('js/persian.json'));
+        return $this->dataTable->html($this->builder(), 
+                $this->getColumns(), 'subcategory');
     }
 
     /**

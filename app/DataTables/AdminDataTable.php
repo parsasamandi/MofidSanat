@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\User;
+use App\Datatables\GeneralDataTable;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
@@ -15,6 +16,12 @@ use Carbon\Carbon;
 
 class AdminDataTable extends DataTable
 {
+    public $dataTable;
+
+    public function __construct() {
+        $this->dataTable = new GeneralDataTable();
+    }
+    
     /**
      * Build DataTable class.
      *
@@ -66,24 +73,8 @@ class AdminDataTable extends DataTable
      */
     public function html()
     {
-        return $this->builder()
-            ->setTableId('adminTable')
-            ->minifiedAjax(route('admin.list.table'))
-            ->columns($this->getColumns())
-            ->columnDefs(
-                [
-                    ["className" => 'dt-center text-center', "target" => '_all'],
-                ]
-            )
-            ->searching(true)
-            // ->lengthMenu([10,25,40])a
-            ->info(false)
-            ->ordering(true)
-            ->responsive(true)
-            ->pageLength(8)
-            ->dom('PBCfrtip')
-            ->orderBy(1)
-            ->language(asset('js/persian.json'));
+        return $this->dataTable->html($this->builder(), 
+                $this->getColumns(), 'admin');
     }
 
     /**

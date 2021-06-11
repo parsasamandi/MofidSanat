@@ -17,6 +17,12 @@ use Illuminate\Support\Facades\URL;
 
 class ProductDataTable extends DataTable
 {
+    public $dataTable;
+
+    public function __construct() {
+        $this->dataTable = new GeneralDataTable();
+    }
+    
     /**
      * Build DataTable class.
      *
@@ -33,9 +39,8 @@ class ProductDataTable extends DataTable
                 foreach($product->media as $media) {
                     if($media->type === MEDIA::IMAGE) 
                         return "<img src=/images/" . $media->media_url . " height='auto' width='50%' />";
-                    else if($media->type === MEDIA::VIDEO) {
-                        return '<iframe src="' . $media->media_url . '"  width="50%" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>';
-                    }
+                    else if($media->type === MEDIA::VIDEO) 
+                        return '<iframe src="' . $media->media_url . '"width="50%" allowFullScreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>';
                 } 
             })
             ->addColumn('category_id', function(Product $product) {
@@ -87,23 +92,10 @@ class ProductDataTable extends DataTable
      */
     public function html()
     {
-        return $this->builder()
-            ->setTableId('productTable')
-            ->minifiedAjax(route('product.list.table'))
-            ->columns($this->getColumns())
-            ->lengthMenu([10,25,50,100])
-            ->columnDefs(
-                [
-                    ["className" => 'dt-center text-center', "target" => '_all'],
-                ]
-            )
-            ->searching(true)
-            ->info(false)
-            ->responsive(true)
-            ->dom('PBCfrtip')
-            ->orderBy(1)
-            ->language(asset('js/persian.json'));
+        return $this->dataTable->html($this->builder(), 
+                $this->getColumns(), 'product');
     }
+
     /**
      * Get columns.
      *

@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\URL;
 
 class PhoneNumberDataTable extends DataTable
 {
+    public $dataTable;
+
+    public function __construct() {
+        $this->dataTable = new GeneralDataTable();
+    }
+    
     /**
      * Build DataTable class.
      *
@@ -63,24 +69,8 @@ class PhoneNumberDataTable extends DataTable
      */
     public function html()
     {
-        return $this->builder()
-            ->setTableId('phoneNumberTable')
-            ->columns($this->getColumns())
-            ->minifiedAjax(route('phoneNumber.list.table'))
-            ->lengthMenu([10,25,50,100])
-            ->columnDefs(
-                [
-                    ["className" => 'dt-center text-center', "target" => '_all'],
-                ]
-            )
-            ->searching(true)
-            ->info(false)
-            ->responsive(true)
-            ->dom('PBCfrtip')
-            ->orderBy(1)
-            ->language(asset('js/persian.json'));
-            
-
+        return $this->dataTable->html($this->builder(), 
+                $this->getColumns(), 'phoneNumber');
     }
 
     /**

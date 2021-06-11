@@ -26,7 +26,7 @@ class ProductSettingController extends Controller
     }
 
     // Store product setting
-    public function store(Request $request, SuccessMessages $message) {
+    public function store(Request $request) {
 
         // Header image
         if($request->hasFile('header_image')) {

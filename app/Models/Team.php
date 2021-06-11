@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use ShiftOneLabs\LaravelCascadeDeletes\CascadesDeletes;
 
 /**
  * @property int $id
@@ -14,6 +15,12 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Team extends Model
 {
+    /**
+     * Cascade On Delete.
+     */
+    use CascadesDeletes;
+    protected $cascadeDeletes = ['media'];
+
     public $timestamps = false;
 
     /**
@@ -27,7 +34,7 @@ class Team extends Model
      */
     public function media()
     {
-        return $this->morphMany('App\Models\Media', 'media');
+        return $this->morphOne('App\Models\Media', 'media');
     }
 
 }

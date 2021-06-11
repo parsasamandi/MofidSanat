@@ -153,12 +153,12 @@
 				</div>
 				<div class="row">
 					@foreach($teams as $team)
-						<div class="col-md-3">
+						<div class="col-md-{{ $team->size }}">
 							<div class="member" data-aos="fade-up" data-aos-delay="100">
-								<div class="pic"><img src="/images/{{ $team->image }}" alt=""></div>
+								<div class="pic"><img src="/images/{{ $team->media->media_url }}" alt=""></div>
 								<h4>{{ $team->name }}</h4>
 								<span>{{ $team->responsibility }}</span>
-								@if(!empty($team->linkedin_address))
+								@if(isset($team->linkedin_address))
 									<div class="social">
 										<a href="{{ $team->linkedin_address }}"><i class="fa fa-linkedin"></i></a>
 									</div>

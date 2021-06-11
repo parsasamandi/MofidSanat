@@ -17,6 +17,7 @@ class ImageController extends Controller
 {
     // DataTable To Blade
     public function list(Request $request) {
+        
         $dataTable = new ImageDataTable;
 
         $vars['imageTable'] = $dataTable->html();
@@ -30,7 +31,7 @@ class ImageController extends Controller
     }
 
     // Store image
-    public function store(StoreImageRequest $request,SuccessMessages $message) {
+    public function store(StoreImageRequest $request) {
 
         foreach($request->get('products') as $product) {
             // If there were any picture

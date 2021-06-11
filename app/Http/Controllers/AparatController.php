@@ -27,7 +27,7 @@ class AparatController extends Controller
     }
 
     // Insert
-    public function store(StoreAparatRequest $request,SuccessMessages $message) {
+    public function store(StoreAparatRequest $request) {
 
         foreach($request->get('products') as $product) {
             Media::updateOrCreate(

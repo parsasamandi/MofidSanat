@@ -11,6 +11,12 @@ use Yajra\DataTables\Services\DataTable;
 
 class ImageDataTable extends DataTable
 {
+    public $dataTable;
+
+    public function __construct() {
+        $this->dataTable = new GeneralDataTable();
+    }
+    
     /**
      * Build DataTable class.
      *
@@ -24,7 +30,7 @@ class ImageDataTable extends DataTable
             ->addIndexColumn()
             ->rawColumns(['action','media_url']) 
             ->editColumn('media_url', function(Media $media) {
-                return "<img src=/images/" . $media->media_url . " height='auto' width='50%' />";
+                return "<img src=/images/" . $media->media_url . "height='auto' width='50%'/>";
             })
             ->editColumn('media_id', function (Media $media) {
                 return $media->media->  name;
@@ -57,6 +63,7 @@ class ImageDataTable extends DataTable
         return $model->where('type', 0);
     }
 
+
     /**
      * Optional method if you want to use html builder.
      *
@@ -64,21 +71,8 @@ class ImageDataTable extends DataTable
      */
     public function html()
     {
-        return $this->builder()
-            ->setTableId('imageTable')
-            ->columns($this->getColumns())
-            ->minifiedAjax(route('image.list.table'))
-            ->columnDefs(
-                [
-                    ["className" => 'dt-center text-center', "target" => '_all'],
-                ]
-            )
-            ->searching(true)
-            ->info(false)
-            ->responsive(true)
-            ->dom('PBCfrtip')
-            ->orderBy(1)
-            ->language(asset('js/persian.json'));
+        return $this->dataTable->html($this->builder(), 
+                $this->getColumns(), 'image');
     }
 
     /**

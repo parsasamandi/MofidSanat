@@ -62,13 +62,13 @@ class CategoryController extends Controller
     }
 
     // Edit
-    public function edit(Action $action,Request $request) {
-        return $action->edit(Category::class,$request->get('id'));
+    public function edit(Action $action, Request $request) {
+        return $action->edit(Category::class, $request->get('id'));
     }
 
     // Delete
-    public function delete(Action $action,$id) {
-        return $action->delete(Category::class,$id);
+    public function delete(Action $action, $id) {
+        return $action->delete(Category::class, $id);
     }
 
     // Subcategories to be filled based on categories(ajax)

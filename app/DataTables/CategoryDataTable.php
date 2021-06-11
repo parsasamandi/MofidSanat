@@ -12,6 +12,12 @@ use Yajra\DataTables\Services\DataTable;
 
 class CategoryDataTable extends DataTable
 {
+    public $dataTable;
+
+    public function __construct() {
+        $this->dataTable = new GeneralDataTable();
+    }
+    
     /**
      * Build DataTable class.
      *
@@ -68,24 +74,8 @@ class CategoryDataTable extends DataTable
      */
     public function html()
     {
-        return $this->builder()
-                ->setTableId('categoryTable')
-                ->minifiedAjax(route('category.list.table'))
-                ->columns($this->getColumns())
-                ->columnDefs([["className" => 'dt-center text-center', "target" => '_all']])
-                ->searching(true)
-                // ->lengthMenu([10,25,40])
-                ->info(false)
-                ->ordering(true)
-                ->responsive(true)
-                ->pageLength(8)
-                ->dom('PBCfrtip')
-                ->buttons(
-                    Button::make('print'),
-                    Button::make('copy')
-                )
-                ->orderBy(1)
-                ->language(asset('js/persian.json'));
+        return $this->dataTable->html($this->builder(), 
+                $this->getColumns(), 'category');
     }
 
     /**

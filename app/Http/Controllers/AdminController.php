@@ -17,7 +17,6 @@ use File;
 use Session;
 use DB;
 
-
 class AdminController extends Controller
 {
 
@@ -37,13 +36,13 @@ class AdminController extends Controller
         return view('admin.list', $vars);
     }
 
-    // Get admin
+    // Get 
     public function adminTable(AdminDataTable $dataTable) {
         return $dataTable->render('admin.list');
     }
 
-    // Store Admin
-    public function store(StoreAdminRequest $request,SuccessMessages $message) {
+    // Store
+    public function store(StoreAdminRequest $request) {
 
         // Insert or update
         $password = Hash::make($request->get('password'));
@@ -57,12 +56,12 @@ class AdminController extends Controller
     }
     
     // Edit 
-    public function edit(Action $action,Request $request) {
-        return $action->edit(User::class,$request->get('id'));
+    public function edit(Action $action, Request $request) {
+        return $action->edit(User::class, $request->get('id'));
     }
 
     // Delete
     public function delete(Action $action, $id) {
-        return $action->delete(User::class,$id);
+        return $action->delete(User::class, $id);
     }
 }

@@ -11,6 +11,12 @@ use Yajra\DataTables\Services\DataTable;
 
 class TeamDataTable extends DataTable
 {
+    public $dataTable;
+
+    public function __construct() {
+        $this->dataTable = new GeneralDataTable();
+    }
+    
     /**
      * Build DataTable class.
      *
@@ -31,8 +37,8 @@ class TeamDataTable extends DataTable
             ->editColumn('size', function(Team $team){
                 return $team->size;
             })
-            ->editColumn('image', function(Team $team){
-                return "<img src=/images/" . $team->image . " height='auto' width='100px' />";
+            ->addColumn('image', function(Team $team){
+                return "<img src=/images/" . optional($team)->media->media_url . " height='auto' width='100px' />";
             })
             ->addColumn('action', function (Team $team){
                 return <<<ATAG
@@ -65,24 +71,8 @@ class TeamDataTable extends DataTable
      */
     public function html()
     {
-        return $this->builder()
-            ->setTableId('teamTable')
-            ->minifiedAjax(route('team.list.table'))
-            ->columns($this->getColumns())
-            ->columnDefs(
-                [
-                    ["className" => 'dt-center text-center', "target" => '_all'],
-                ]
-            )
-            ->searching(true)
-            ->lengthMenu([10,25,40])
-            ->info(false)
-            ->ordering(true)
-            ->responsive(true)
-            ->pageLength(8)
-            ->dom('PBCfrtip')
-            ->orderBy(1)
-            ->language(asset('js/persian.json'));
+        return $this->dataTable->html($this->builder(), 
+                $this->getColumns(), 'team');
     }
 
     /**
