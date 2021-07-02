@@ -3,11 +3,8 @@
 namespace App\DataTables;
 
 use App\Models\PhoneNumber;
-use App\DataTables\PhoneNumberDataTable;
-use Yajra\DataTables\Html\Button;
+use App\Datatables\GeneralDataTable;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Support\Facades\URL;
 
@@ -35,19 +32,10 @@ class PhoneNumberDataTable extends DataTable
                 return $phoneNumber->product->name;
             })
             ->filterColumn('product_id', function ($query,$keyword) {
-                $sql = "product_id in (select id from product where name = ?)";
-                $query->whereRaw($sql, ["%{$keyword}%"]);
+                return $this->dataTable->filterProductCol($query, $keyword);
             })
             ->addColumn('action', function(PhoneNumber $phoneNumber) {
-                return <<<ATAG
-                            <a onclick="showConfirmationModal('{$phoneNumber->id}')">
-                                <i class="fa fa-trash text-danger" aria-hidden="true"></i>
-                            </a>
-                            &nbsp;
-                            <a onclick="showEditModal('{$phoneNumber->id}')">
-                                <i class="fa fa-edit text-danger" aria-hidden="true"></i>
-                            </a>
-                        ATAG;
+                return $this->dataTable->setAction($phoneNumber->id); 
             });
     }
 
@@ -70,7 +58,7 @@ class PhoneNumberDataTable extends DataTable
     public function html()
     {
         return $this->dataTable->html($this->builder(), 
-                $this->getColumns(), 'phoneNumber');
+                $this->getColumns(), 'product');
     }
 
     /**
@@ -81,31 +69,13 @@ class PhoneNumberDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('DT_RowIndex')
-            ->title('#')
-                ->searchable(false)
-                ->orderable(false),
+            $this->dataTable->getIndexCol(),
             Column::make('number')
             ->title('شماره تلفن'),
             Column::make('product_id')
             ->title('محصول')
                 ->orderable(false),
-            Column::computed('action')
-                ->exportable(false)
-                ->searchable(false)
-                ->printable(false)
-                ->orderable(false)
-                ->title('حذف،ویرایش')
+            $this->dataTable->setActionCol()
         ];
-    }
-
-    /**
-     * Get filename for export.
-     *
-     * @return string
-     */
-    protected function filename()
-    {
-        return 'PhoneNumber_' . date('YmdHis');
     }
 }

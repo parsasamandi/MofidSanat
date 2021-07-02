@@ -7,7 +7,7 @@ class RequestHandler {
     }
 
     // modal
-    modal() {
+    openInsertionModal() {
         $('#formModal').modal('show');
         $('#button_action').val('insert');
         $('#action').val('تایید');
@@ -15,14 +15,14 @@ class RequestHandler {
         $(window.formId)[0].reset();
     }
 
-    // Insertion
+    // Insert
     insert() {
         // Store or Update
         $(window.formId).on('submit', function (event) {
             event.preventDefault();
             // Form Data
             var form_data = new FormData(this);
-            form_data.append('file',form_data);
+            form_data.append('file', form_data);
 
             $.ajax({
                 url: "/" + window.url + "/store",
@@ -43,8 +43,8 @@ class RequestHandler {
 
     // Delete
     delete(id) {
-        $('#confirmationModal').modal('show');
-        $('#ok_button').click(function () {
+        $('#confirmationModal').modal('show'); // Confirm
+        $('#deleteSubmission').click(function () {
             $.ajax({
                 url: "/" + window.url + "/delete/" + id,
                 method: "get",
@@ -56,14 +56,14 @@ class RequestHandler {
         });
     }
 
-    // Edit
-    edit() {
+    // Default edit data
+    reloadModal() {
         $('#form_output').html('');
         $('#formModal').modal('show');
     }
 
-    // Edit data
-    editData(id) {
+    // Edit on success
+    editOnSuccess(id) {
         $('#id').val(id);
         $('#button_action').val('update');
         $('#action').val('ویرایش');
@@ -73,16 +73,15 @@ class RequestHandler {
 // Success
 function success(data) {
     $('#form_output').html(data.message);
-    $('#button_action').val('insert');
     $(window.formId)[0].reset();
-    if(window.dt != null)
+    if(window.dt != null) {
         window.dt.draw(false);
+    }
 }
-
 
 // Error
 function error(data) {
-    // Parse to json
+    // Parse To Json
     var data = JSON.parse(data.responseText);
     // Error
     error_html = '';

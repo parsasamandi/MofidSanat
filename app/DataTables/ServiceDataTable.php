@@ -5,8 +5,6 @@ namespace App\DataTables;
 use App\Models\Service;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class ServiceDataTable extends DataTable
@@ -33,15 +31,7 @@ class ServiceDataTable extends DataTable
             return '<i class="'.$service->font_awesome.'"></i>';
         })
         ->addColumn('action', function (Service $service){
-            return <<<ATAG
-                        <a onclick="showConfirmationModal('{$service->id}')">
-                            <i class="fa fa-trash text-danger" aria-hidden="true"></i>
-                        </a>
-                        &nbsp;
-                        <a onclick="showEditModal('{$service->id}')">
-                            <i class="fa fa-edit text-danger" aria-hidden="true"></i>
-                        </a>
-                    ATAG;
+            return $this->dataTable->setAction($service->id);
         });
             
     }
@@ -76,32 +66,14 @@ class ServiceDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('DT_RowIndex')
-            ->title('#')
-                ->searchable(false)
-                ->orderable(false),
+            $this->dataTable->getIndexCol(),
             Column::make('title')
             ->title('تیتر'),
             Column::make('description')
             ->title('توضیحات'),
             Column::make('font_awesome')
             ->title('آیکن'),
-            Column::computed('action') // This column is not in database
-            ->title('حذف،ویرایش')
-                ->exportable(false)
-                ->searchable(false)
-                ->printable(false)
-                ->orderable(false)
+            $this->dataTable->setActionCol()
         ];
-    }
-
-    /**
-     * Get filename for export.
-     *
-     * @return string
-     */
-    protected function filename()
-    {
-        return 'Service_' . date('YmdHis');
     }
 }

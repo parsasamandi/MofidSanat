@@ -3,10 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Team;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class TeamDataTable extends DataTable
@@ -29,27 +26,14 @@ class TeamDataTable extends DataTable
             ->eloquent($query)
             ->addIndexColumn()
             ->rawColumns(['action','image','linkedin_address'])
-            ->editColumn('linkedin_address', function(Team $team){
-                return <<<ATAG
-                            <a href="$team->linkedin_address">باز کردن آدرس</a>
-                        ATAG;  
-            })
-            ->editColumn('size', function(Team $team){
-                return $team->size;
+            ->editColumn('linkedin_address', function(Team $team) {
+                return "<a href='{$team->linkedin_address}'>باز کردن آدرس</a>";  
             })
             ->addColumn('image', function(Team $team){
-                return "<img src=/images/" . optional($team)->media->media_url . " height='auto' width='100px' />";
+                return "<img src=/images/" . optional($team)->media->media_url . " class='dataTableImage' />";
             })
             ->addColumn('action', function (Team $team){
-                return <<<ATAG
-                            <a onclick="showConfirmationModal('{$team->id}')">
-                                <i class="fa fa-trash text-danger" aria-hidden="true"></i>
-                            </a>
-                            &nbsp;
-                            <a onclick="showEditModal('{$team->id}')">
-                                <i class="fa fa-edit text-danger" aria-hidden="true"></i>
-                            </a>
-                        ATAG;
+                return $this->dataTable->setAction($team->id); 
             });
     }
 
@@ -83,11 +67,7 @@ class TeamDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('DT_RowIndex')
-            ->title('#')
-                ->addClass('column-title')
-                ->searchable(false)
-                ->orderable(false),
+            $this->dataTable->getIndexCol(),
             Column::make('name')
             ->title('نام'),
             Column::make('responsibility')
@@ -98,22 +78,7 @@ class TeamDataTable extends DataTable
             ->title('اندازه'),
             Column::make('image')
             ->title('تصویر'),
-            Column::computed('action') // This Column is not in database
-                ->exportable(false)
-                ->searchable(false)
-                ->printable(false)
-                ->orderable(false)
-                ->title('حذف،ویرایش')
+            $this->dataTable->setActionCol()
         ];
-    }
-
-    /**
-     * Get filename for export.
-     *
-     * @return string
-     */
-    protected function filename()
-    {
-        return 'Team_' . date('YmdHis');
     }
 }

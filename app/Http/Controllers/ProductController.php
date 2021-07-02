@@ -42,11 +42,11 @@ class ProductController extends Controller
 
     // Store product
     public function store(StoreProductRequest $request) {
-        // Id
-        $id = $request->get('id');
+        
+        DB::transaction(function() use($request) {
 
-        DB::beginTransaction();
-        try {
+            // Id
+            $id = $request->get('id');
 
             $product = Product::updateOrCreate(
                 ['id' => $id],
@@ -61,12 +61,7 @@ class ProductController extends Controller
                 ['status' => $request->get('status'), 'status_type' => Product::class]
             );
 
-            DB::commit();
-
-        } catch(Exception $e) {
-            throw $e;
-            DB::rollBack();
-        }
+        });
 
         return $this->getAction($request->get('button_action'));
     }

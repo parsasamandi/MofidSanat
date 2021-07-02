@@ -17,6 +17,13 @@ class Media extends Model
     const VIDEO = 1;
 
     public $timestamps = false;
+
+    /**
+     * The table associated with the model.
+     * 
+     * @var string
+     */
+    protected $table = 'media';
     
     /**
      * @var array

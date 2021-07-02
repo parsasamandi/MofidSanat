@@ -4,11 +4,8 @@ namespace App\DataTables;
 
 use App\Models\User;
 use App\Datatables\GeneralDataTable;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\Html\Editor\Fields;
-use Yajra\DataTables\Html\Editor\Editor;
 use Illuminate\Support\Facades\URL;
 use Morilog\Jalali\Jalalian;
 use Carbon\Carbon;
@@ -36,21 +33,13 @@ class AdminDataTable extends DataTable
             ->rawColumns(['action'])
             ->editColumn('created_at', function(User $user){
                 date_default_timezone_set('Asia/Tehran');
-                return Jalalian::forge($user->created_at)->format('%A, %d %B %y');
+                return Jalalian::forge($user->created_at);
             })
             ->editColumn('updated_at', function(User $user){
-                return Jalalian::forge($user->updated_at)->format('%A, %d %B %y');
+                return Jalalian::forge($user->updated_at);
             })
             ->addColumn('action', function (User $user){
-                return <<<ATAG
-                            <a onclick="showConfirmationModal('{$user->id}')">
-                                <i class="fa fa-trash text-danger" aria-hidden="true"></i>
-                            </a>
-                            &nbsp;
-                            <a onclick="showEditModal('{$user->id}')">
-                                <i class="fa fa-edit text-danger" aria-hidden="true"></i>
-                            </a>
-                        ATAG;
+                return $this->dataTable->setAction($user->id);
             });
     }
     
@@ -76,6 +65,7 @@ class AdminDataTable extends DataTable
         return $this->dataTable->html($this->builder(), 
                 $this->getColumns(), 'admin');
     }
+    
 
     /**
      * Get columns.
@@ -85,10 +75,7 @@ class AdminDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('DT_RowIndex')
-            ->title('#')
-                ->searchable(false)
-                ->orderable(false),
+            $this->dataTable->getIndexCol(),
             Column::make('name')
             ->title('نام'),
             Column::make('email')
@@ -97,23 +84,8 @@ class AdminDataTable extends DataTable
             ->title('ساخته شده در'),
             Column::make('updated_at')
             ->title('بروز شده در'),
-            Column::computed('action') // This Column is not in database
-                ->exportable(false)
-                ->searchable(false)
-                ->printable(false)
-                ->orderable(false)
-                ->title('حذف،ویرایش')
+            $this->dataTable->setActionCol()
         ];
-    }
-
-    /**
-     * Get filename for export.
-     *
-     * @return string
-     */
-    protected function filename()
-    {
-        return 'Admin_' . date('YmdHis');
     }
 }
 

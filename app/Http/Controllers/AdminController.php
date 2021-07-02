@@ -1,24 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\DataTables\AdminDataTable;
 use App\Http\Requests\StoreAdminRequest;
 use App\Providers\Action;
-use App\Providers\SuccessMessages;
 use App\Models\Category;
 use App\Models\User;
-use File;
-use Session;
-use DB;
+
 
 class AdminController extends Controller
 {
+    public $action;
+
+    public function __construct() {
+        $this->action = new Action();
+    }
 
     // Admin home
     public function admin() {
@@ -56,12 +55,12 @@ class AdminController extends Controller
     }
     
     // Edit 
-    public function edit(Action $action, Request $request) {
-        return $action->edit(User::class, $request->get('id'));
+    public function edit(Request $request) {
+        return $this->action->edit(User::class, $request->get('id'));
     }
 
     // Delete
-    public function delete(Action $action, $id) {
-        return $action->delete(User::class, $id);
+    public function delete($id) {
+        return $this->action->delete(User::class, $id);
     }
 }

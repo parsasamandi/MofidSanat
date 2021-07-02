@@ -34,10 +34,9 @@ class CategoryController extends Controller
     // Store
     public function store(StoreCategoryRequest $request) {
 
-        $id = $request->get('id');
+        DB::transaction(function() use($request) {
 
-        DB::beginTransaction();
-        try {
+            $id = $request->get('id');
 
             // Insert or update
             $category = Category::updateOrCreate(
@@ -51,12 +50,7 @@ class CategoryController extends Controller
                 ['status' => $request->get('status'), 'status_type' => Category::class]
             );
 
-            DB::commit();
-
-        } catch(Exception $e) {
-            throw $e;
-            DB::rollBack();
-        }
+        });
 
         return $this->getAction($request->get('button_action'));
     }

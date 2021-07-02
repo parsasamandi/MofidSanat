@@ -3,10 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Subcetegory;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
 class SubcategoryDataTable extends DataTable
@@ -33,26 +30,16 @@ class SubcategoryDataTable extends DataTable
                 return $subcategory->name;   
             })
             ->editColumn('status', function (Subcategory $subcategory) {
-                if($subcategory->statuses->status == Status::ACTIVE) return 'موجود';
-                else if($subcategory->statuses->status == Status::INACTIVE) return 'ناموجود';
+                return $this->dataTable->setStatusCol($category->statuses->status);
             })
             ->addColumn('category_id', function (Subcategory $subcategory) {
                 return optional($subcategory->category)->name;
             })
             ->filterColumn('category_id', function($query, $keyword) {
-                $sql = "category_id in (select id from cat where name like ?)";
-                $query->whereRaw($sql, ["%{$keyword}%"]);
+                return $this->dataTable->filterCategoryCol($query, $keyword); 
             })
             ->addColumn('action', function (Subcategory $subcategory) {
-                return <<<ATAG
-                            <a onclick="showConfirmationModal('{$subcategory->id}')">
-                                <i class="fa fa-trash text-danger" aria-hidden="true"></i>
-                            </a>
-                            &nbsp;
-                            <a onclick="showEditModal('{$subcategory->id}')">
-                                <i class="fa fa-edit text-danger" aria-hidden="true"></i>
-                            </a>
-                        ATAG;      
+                return $this->dataTable->setAction($subcategory->id);    
             });
     }
 
@@ -86,35 +73,15 @@ class SubcategoryDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('DT_RowIndex')
-            ->title('#')
-                ->searchable(false)
-                ->orderable(false),
+            $this->dataTable->getIndexCol(),
             Column::make('name')
-            ->title('نام')
-                ->addClass('column-title'),
+            ->title('نام'),
             Column::make('status')
             ->title('وضعیت')
                 ->orderable(false),
             Column::make('category_id')
-            ->title('دسته بندی اول')
-                ->addClass('column-title'),
-            Column::computed('action') // This column is not in database
-            ->title('حذف،ویرایش')
-                ->exportable(false)
-                ->searchable(false)
-                ->printable(false)
-                ->orderable(false)
+            ->title('دسته بندی اول'),
+            $this->dataTable->setActionCol()
         ];
-    }
-
-    /**
-     * Get filename for export.
-     *
-     * @return string
-     */
-    protected function filename()
-    {
-        return 'Subcategory_' . date('YmdHis');
     }
 }

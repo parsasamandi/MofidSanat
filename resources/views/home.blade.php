@@ -52,7 +52,7 @@
 		<div class="hero-container" data-aos="zoom-in" data-aos-delay="100">
 			<h1>{{ $setting_header }}</h1>
 			<h2>{{ $setting_sub_header }}</h2>
-			<a href="#whyUs" class="btn-get-started">درباره ما</a>
+			<a href="#whyUs" class="btn-get-started">چرا ما</a>
 		</div>
 	</section>
 
@@ -65,7 +65,7 @@
 					@php $colSize = 12 - $setting_about_us_imageSize @endphp
 					{{-- Why us Text --}}
 					<div class="col-md-{{ $colSize }} content order-lg-1 order-2">
-						<h2 class="title">درباره ما</h2>
+						<h2 class="title">چرا ما</h2>
 						 {{-- Why us Box 1 --}}
 						 <x-home.aboutUs fontAwesome="fa fa-shopping-bag" :title="$setting_about_us_header" :description="$setting_about_us_text" />
 						 {{-- Why us Box 2 --}}
@@ -83,7 +83,7 @@
 		<section id="aboutUs">
 			<div class="container" data-aos="fade-up">
 				<div class="section-header">
-					<h3 class="section-title">چرا ما؟</h3>
+					<h3 class="section-title">درباره ما؟</h3>
 				</div>
 				<br>
 				<div class="row">

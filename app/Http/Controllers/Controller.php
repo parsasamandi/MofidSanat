@@ -23,7 +23,7 @@ class Controller extends BaseController
             $success_output = $this->getUpdateMessage();
         }
         
-        return response()->json(['success' => true, 'message' => $success_output], Response::HTTP_CREATED);
+        return response()->json(['success' => true, 'message' => $success_output], Response::HTTP_CREATED); 
     }
 
     // Get success message

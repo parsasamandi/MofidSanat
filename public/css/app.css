@@ -25890,6 +25890,11 @@ select {
   margin-bottom: 2em;
 }
 
+.dataTableImage {
+  height: auto;
+  width: 50%;
+}
+
 /*------------------------------------ contacts-list ------------------------------------*/
 
 .contacts-list-img {

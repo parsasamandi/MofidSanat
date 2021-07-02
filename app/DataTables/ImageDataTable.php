@@ -5,9 +5,9 @@ namespace App\DataTables;
 use App\Models\Media;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use App\Datatables\GeneralDataTable;
+
 
 class ImageDataTable extends DataTable
 {
@@ -28,27 +28,19 @@ class ImageDataTable extends DataTable
         return datatables()
             ->eloquent($query)
             ->addIndexColumn()
-            ->rawColumns(['action','media_url']) 
+            ->rawColumns(['action', 'media_url']) 
             ->editColumn('media_url', function(Media $media) {
-                return "<img src=/images/" . $media->media_url . "height='auto' width='50%'/>";
+                return "<img src=/images/" . $media->media_url . " class='dataTableImage' />";
             })
             ->editColumn('media_id', function (Media $media) {
-                return $media->media->  name;
+                return $media->media->name;
             })
             ->filterColumn('media_id', function($query,$keyword) {
-                $sql = "media_id in (select id from media where name like ?)";
-                $query->whereRaw($sql, ["%{$keyword}%"]);
+                return $this->dataTable->filterColumn($squery, 
+                            'media_id in (select id from media where name like ?)', $keyword);
             })
             ->addColumn('action', function(Media $media){
-                return <<<ATAG
-                            <a onclick="showConfirmationModal('{$media->id}')">
-                                <i class="fa fa-trash text-danger" aria-hidden="true"></i>
-                            </a>
-                            &nbsp;
-                            <a onclick="showEditModal('{$media->id}')">
-                                <i class="fa fa-edit text-danger" aria-hidden="true"></i>
-                            </a>
-                        ATAG;
+                return $this->dataTable->setAction($media->id); 
             });
     }
 
@@ -60,7 +52,7 @@ class ImageDataTable extends DataTable
      */
     public function query(Media $model)
     {
-        return $model->where('type', 0);
+        return $model->where('type', $model::IMAGE);
     }
 
 
@@ -83,31 +75,13 @@ class ImageDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('DT_RowIndex') // connect to 226 line columns
-            ->title('#')
-                ->searchable(false)
-                ->orderable(false),
+            $this->dataTable->getIndexCol(),
             Column::make('media_url')
             ->title('رسانه'),
             Column::make('media_id')
             ->title('محصول مرتبط')
                 ->orderable(false),
-            Column::computed('action') // This column is not in database
-                ->exportable(false)
-                ->searchable(false)
-                ->printable(false)
-                ->orderable(false)
-                ->title('حذف،ویرایش')
-            ];
-    }
-
-    /**
-     * Get filename for export.
-     *
-     * @return string
-     */
-    protected function filename()
-    {
-        return 'Image_' . date('YmdHis');
+            $this->dataTable->setActionCol()
+        ];
     }
 }

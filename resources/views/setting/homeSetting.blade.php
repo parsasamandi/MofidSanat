@@ -25,46 +25,47 @@
     <!-- Why Us -->
     <div class="row">
         <div class="col-md-12 mt-2">
-            <h5>درباره ما</h5>
+            <h5>چرا ما</h5>
             <hr>
         </div>
 
-        {{-- About us image --}}
+        {{-- Image --}}
         <div class="col-md-6 mb-3">
             <label for="about_us_image">تصویر درباره ما</label>
             <br>
             <input type="file" name="about_us_image" />
         </div>
 
-        {{-- About us image size --}}
+        {{-- Size --}}
         <x-input key="about_us_imageSize" placeholder="اندازه عکس بخش درباره ما" 
             value="{{ $about_us_imageSize }}" class="col-md-6 mb-3" />
 
-        {{-- About us header --}}
+        {{-- Header --}}
         <x-input key="about_us_header" placeholder="تیتر اول بخش درباره ما"
             value="{{ $about_us_header }}" class="col-md-6 mb-3" />
 
-        {{-- About us text --}}
+        {{-- Text --}}
         <x-textarea key="about_us_text" placeholder="توضیح بخش اول درباره ما" 
             value="{{ $about_us_text }}" class="col-md-6 mb-2" />
 
-        {{-- About us header 2 --}}
+        {{-- Second header --}}
         <x-input key="about_us_header2" placeholder="تیتر دوم بخش درباره ما" 
             value="{{ $about_us_header2 }}" class="col-md-6 mb-2" />
 
-        {{-- About us text 2 --}}
+        {{-- Second text --}}
         <x-textarea key="about_us_text2" placeholder="توضیح دوم بخش درباره ما" 
             value="{{ $about_us_text2 }}" class="col-md-6 mb-2" />
 
-        {{-- About us header 3 --}}
+        {{-- Third about us header --}}
         <x-input key="about_us_header3" placeholder="تیتر سوم بخش درباره ما" 
             value="{{ $about_us_header3 }}" class="col-md-6 mb-2" />
 
-        {{-- About us text 3 --}}
+        {{-- Third about us text --}}
         <x-textarea key="about_us_text3" placeholder="توضیح سوم بخش درباره ما" 
             value="{{ $about_us_text3 }}" class="col-md-6 mb-2" />
     </div>
-    <!-- Why us? -->
+
+    {{-- Why us? --}}
     <div class="row">
         <div class="col-md-12 mt-2">
             <h5>چرا ما</h5>

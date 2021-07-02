@@ -15,7 +15,7 @@ use Response;
 
 class ImageController extends Controller
 {
-    // DataTable To Blade
+    // DataTable to blade
     public function list(Request $request) {
         
         $dataTable = new ImageDataTable;

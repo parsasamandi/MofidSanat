@@ -33,7 +33,7 @@
     document.getElementById("image").onchange = function () {
       var reader = new FileReader();
       reader.onload = function (e) {
-        // get loaded data and render thumbnail.
+        // get the loaded data and render thumbnail.
         var img = document.getElementById("picture");
         img.src = e.target.result;
         // Hidden input

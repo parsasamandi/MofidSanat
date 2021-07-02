@@ -4,11 +4,9 @@ namespace App\DataTables;
 
 use App\Models\Category;
 use App\Models\Status;
-use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
-use Yajra\DataTables\Html\Editor\Editor;
-use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use App\Datatables\GeneralDataTable;
 
 class CategoryDataTable extends DataTable
 {
@@ -31,28 +29,13 @@ class CategoryDataTable extends DataTable
             ->addIndexColumn()
             ->rawColumns(['action'])
             ->addColumn('status', function (Category $category) {
-                if($category->statuses->status == Status::ACTIVE) return "موجود";
-                else if($category->statuses->status == Status::INACTIVE) return 'ناموجود';
+                return $this->dataTable->setStatusCol($category->statuses->status);
             })
             ->filterColumn('status', function ($query, $keyword) {
-                switch($keyword) {
-                    case 'موجود': $keyword = 0; 
-                        break;
-                    case 'ناموجود': $keyword = 1;
-                }
-                $sql = 'id in (select status_id from status where status like ?)';
-                $query->whereRaw($sql, ["%{$keyword}%"]);
+                return $this->dataTable->filterStatusCol($query, $keyword);
             })
             ->addColumn('action', function (Category $category){
-                return <<<ATAG
-                            <a onclick="showConfirmationModal('{$category->id}')">
-                                <i class="fa fa-trash text-danger" aria-hidden="true"></i>
-                            </a>
-                            &nbsp;
-                            <a onclick="showEditModal('{$category->id}')">
-                                <i class="fa fa-edit text-danger" aria-hidden="true"></i>
-                            </a>
-                        ATAG;
+                return $this->dataTable->setAction($category->id); 
             });
     }
 
@@ -76,7 +59,7 @@ class CategoryDataTable extends DataTable
     {
         return $this->dataTable->html($this->builder(), 
                 $this->getColumns(), 'category');
-    }
+    }    
 
     /**
      * Get columns.
@@ -86,31 +69,13 @@ class CategoryDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('DT_RowIndex')
-            ->title('#')
-                ->searchable(false)
-                ->orderable(false),
+            $this->dataTable->getIndexCol(),
             Column::make('name')
             ->title('نام'),
             Column::make('status')
             ->title('وضعیت')
                 ->orderable(false),
-            Column::computed('action') // This Column is not in database
-                ->exportable(false)
-                ->searchable(false)
-                ->printable(false)
-                ->orderable(false)
-                ->title('حذف | ویرایش')
+            $this->dataTable->setActionCol()
         ];
-    }
-
-    /**
-     * Get filename for export.
-     *
-     * @return string
-     */
-    protected function filename()
-    {
-        return 'Category_' . date('YmdHis');
     }
 }

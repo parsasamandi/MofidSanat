@@ -30,12 +30,11 @@ class TeamController extends Controller
     }
 
     // Store
-    public function store(StoreTeamRequest $request,Action $action) {
+    public function store(StoreTeamRequest $request, Action $action) {
 
-        $id = $request->get('id');
-
-        DB::beginTransaction();
-        try {
+        DB::transaction(function() use($request) {
+            // Id
+            $id = $request->get('id');
 
             $team = Team::updateOrCreate(
                 ['id' => $id],
@@ -48,13 +47,7 @@ class TeamController extends Controller
                 // Team image
                 $action->image($request, $team->id, Team::class);
             }
-            
-            DB::commit();
-
-        } catch (Exception $e) {
-            throw $e;
-            DB::rollBack();
-        }
+        });
 
         return $this->getAction($request->get('button_action'));
     }

@@ -9,6 +9,7 @@ use App\Providers\SuccessMessages;
 use App\Http\Requests\StoreAparatRequest;
 use App\Providers\Action;
 use App\Models\Media;
+use App\Models\Product;
 
 class AparatController extends Controller
 {
@@ -32,7 +33,7 @@ class AparatController extends Controller
         foreach($request->get('products') as $product) {
             Media::updateOrCreate(
                 ['id' => $request->get('id')],
-                ['media_url' => $request->get('aparat_url'), 'product_id' => $product, 'type' => 1]
+                ['media_url' => $request->get('aparat_url'), 'media_id' => $product, 'media_type' => Product::class, 'type' => Media::VIDEO]
             );
         }
 
@@ -40,12 +41,12 @@ class AparatController extends Controller
     }
 
     // Delete
-    public function delete(Action $action, $id) {
+    public function delete($id) {
         return $action->delete(Media::class,$id);
     }
 
     // Edit
-    public function edit(Action $action,Request $request) {
+    public function edit(Request $request) {
         return $action->edit(Media::class,$request->get('id'));
     }
 }
