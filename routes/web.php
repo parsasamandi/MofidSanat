@@ -12,6 +12,7 @@ use App\Http\Controllers\CategoryController;
 |
 */
 
+
 Route::group(['middleware' => 'auth'], function () {
     // Logout
     Route::post('/logout', 'Auth\LoginController@logout');
