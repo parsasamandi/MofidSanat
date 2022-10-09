@@ -17,3 +17,7 @@ Thank you for considering contributing to the Laravel framework! The contributio
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Copyright
+
+THe original theme and Admin panel are copyrighted by <a href="https://bootstrapmade.com/">BootstrapMade</a> and <a href="https://github.com/badranawad/adminlte-rtl">AdminLTE</a> respectively.
